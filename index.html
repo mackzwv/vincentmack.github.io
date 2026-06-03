@@ -1276,6 +1276,21 @@
 
       var PCOL = { journal:'#7c3aed', policy:'#d97706', opeds:'#059669', practitioner:'#0891b2' };
 
+      // ── Employment sub-lane assignment (handles overlapping bars) ──
+      var empSorted = EMPLOYMENT.slice().sort(function(a, b) { return a.start - b.start; });
+      var empTracks  = []; // empTracks[t] = latest end date in that track
+      var empTrackOf = {};
+      empSorted.forEach(function(e) {
+        var placed = false;
+        for (var t = 0; t < empTracks.length; t++) {
+          if (empTracks[t] <= e.start) {
+            empTracks[t] = e.end; empTrackOf[e.id] = t; placed = true; break;
+          }
+        }
+        if (!placed) { empTrackOf[e.id] = empTracks.length; empTracks.push(e.end); }
+      });
+      var numEmpTracks = Math.max(1, empTracks.length);
+
       var M      = { top: 28, right: 24, bottom: 44, left: 118 };
       var LANE_H = 80;
       var BAR_H  = 28;
@@ -1388,10 +1403,17 @@
         });
         eBars.exit().remove();
 
-        // Employment bars
+        // Employment bars — with sub-lane stacking for overlapping roles
+        var empSlotH = LANE_H / numEmpTracks;
+        var empBarH  = Math.min(BAR_H, Math.floor(empSlotH - 8));
+        function empBarY(d) {
+          var t = empTrackOf[d.id] !== undefined ? empTrackOf[d.id] : 0;
+          return LANE_H + t * empSlotH + (empSlotH - empBarH) / 2;
+        }
         var mBars  = empG.selectAll('.emp-bar').data(EMPLOYMENT, function(d) { return d.id; });
         var mEnter = mBars.enter().append('g').attr('class', 'emp-bar');
-        mEnter.append('rect').attr('rx', 4).attr('height', BAR_H).attr('y', barY(1))
+        mEnter.append('rect').attr('rx', 4).attr('height', empBarH)
+          .attr('y', empBarY)
           .attr('fill', function(d) { return d.present ? 'url(#grad-present)' : '#0891b2'; })
           .on('mouseover', function(e, d) {
             d3.select(this).attr('fill', d.present ? 'url(#grad-present)' : '#0e7490');
@@ -1401,7 +1423,7 @@
           .on('mouseout', function(e, d) { d3.select(this).attr('fill', d.present ? 'url(#grad-present)' : '#0891b2'); hideTlTip(); });
         mEnter.append('text')
           .style('font','500 9.5px/1 Inter,sans-serif').style('fill','rgba(255,255,255,.92)').style('pointer-events','none')
-          .attr('y', barY(1) + BAR_H / 2).attr('dy', '.35em');
+          .attr('y', function(d) { return empBarY(d) + empBarH / 2; }).attr('dy', '.35em');
         var mAll = empG.selectAll('.emp-bar');
         mAll.select('rect').attr('x', function(d) { return xs(d.start); })
           .attr('width', function(d) { return Math.max(2, xs(d.end) - xs(d.start)); });
