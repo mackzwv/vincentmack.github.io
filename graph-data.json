@@ -71,6 +71,41 @@
       "desc": "The US-Launched Trade War: Its Wide-Ranging Impact. RSIS Commentary, July 2018. Analyses global supply chain disruptions and unintended consequences of US tariff policy."
     },
     {
+      "id": "megacity",
+      "type": "paper",
+      "r": 14,
+      "label": "Megacities &\nDigital Age\n(2017)",
+      "desc": "Can the World's Megacities Survive the Digital Age? The Conversation, 2017. Argues digitisation and crowdsourcing will undermine the economic foundations of megacities."
+    },
+    {
+      "id": "island",
+      "type": "paper",
+      "r": 14,
+      "label": "Island Nations\n& Rising Seas\n(2017)",
+      "desc": "Can We Save Low-Lying Island Nations from Rising Seas? The Conversation, 2017. Proposes large-scale land reclamation strategies to preserve threatened small island states."
+    },
+    {
+      "id": "brichal",
+      "type": "paper",
+      "r": 14,
+      "label": "Four Challenges\nBelt & Road\n(2018)",
+      "desc": "The Four Challenges of the Belt and Road. China-US Focus, June 2018. Analyses governance, financing, sustainability, and geopolitical risks of the BRI."
+    },
+    {
+      "id": "sleep",
+      "type": "paper",
+      "r": 14,
+      "label": "Global Sleep\nDeficit\n(2019)",
+      "desc": "How the Global Sleep Deficit is Bankrupting Humanity. AsiaGlobal Online, July 2019. Argues sleep deprivation is a major public health and economic crisis requiring urgent policy intervention."
+    },
+    {
+      "id": "sgrid",
+      "type": "paper",
+      "r": 14,
+      "label": "Smart Renewable\nPower Grid\n(2019)",
+      "desc": "A Global Smart Renewable Power Grid: A Radical Proposal. AsiaGlobal Online, December 2019. Proposes an intercontinental smart grid to achieve >90% global renewable energy coverage."
+    },
+    {
       "id": "food",
       "type": "project",
       "r": 26,
@@ -142,39 +177,184 @@
     }
   ],
   "links": [
-    { "source": "neuro", "target": "diss" },
-    { "source": "neuro", "target": "jmis1" },
-    { "source": "neuro", "target": "cd" },
-    { "source": "neuro", "target": "netw" },
-    { "source": "creat", "target": "diss" },
-    { "source": "creat", "target": "jmis1" },
-    { "source": "creat", "target": "icis22" },
-    { "source": "creat", "target": "icis20" },
-    { "source": "creat", "target": "crowdsrc" },
-    { "source": "sysdy", "target": "food" },
-    { "source": "sysdy", "target": "japfa" },
-    { "source": "sysdy", "target": "simul" },
-    { "source": "sysdy", "target": "nyp" },
-    { "source": "icis20", "target": "icis22", "prog": true },
-    { "source": "icis22", "target": "jmis1", "prog": true },
-    { "source": "diss", "target": "cd" },
-    { "source": "diss", "target": "crowdsrc" },
-    { "source": "diss", "target": "netw" },
-    { "source": "icis20", "target": "crowdsrc" },
-    { "source": "icis22", "target": "crowdsrc" },
-    { "source": "food", "target": "simul" },
-    { "source": "japfa", "target": "simul" },
-    { "source": "spatial", "target": "geo" },
-    { "source": "bri", "target": "policy" },
-    { "source": "rsis", "target": "bri" },
-    { "source": "rsis", "target": "spatial" },
-    { "source": "rsis", "target": "policy" },
-    { "source": "rsis", "target": "tradewar" },
-    { "source": "tradewar", "target": "policy" },
-    { "source": "netw", "target": "jmis1" },
-    { "source": "cd", "target": "jmis1" },
-    { "source": "netw", "target": "diss" },
-    { "source": "policy", "target": "rsis" }
+    {
+      "source": "neuro",
+      "target": "diss"
+    },
+    {
+      "source": "neuro",
+      "target": "jmis1"
+    },
+    {
+      "source": "neuro",
+      "target": "cd"
+    },
+    {
+      "source": "neuro",
+      "target": "netw"
+    },
+    {
+      "source": "creat",
+      "target": "diss"
+    },
+    {
+      "source": "creat",
+      "target": "jmis1"
+    },
+    {
+      "source": "creat",
+      "target": "icis22"
+    },
+    {
+      "source": "creat",
+      "target": "icis20"
+    },
+    {
+      "source": "creat",
+      "target": "crowdsrc"
+    },
+    {
+      "source": "sysdy",
+      "target": "food"
+    },
+    {
+      "source": "sysdy",
+      "target": "japfa"
+    },
+    {
+      "source": "sysdy",
+      "target": "simul"
+    },
+    {
+      "source": "sysdy",
+      "target": "nyp"
+    },
+    {
+      "source": "icis20",
+      "target": "icis22",
+      "prog": true
+    },
+    {
+      "source": "icis22",
+      "target": "jmis1",
+      "prog": true
+    },
+    {
+      "source": "diss",
+      "target": "cd"
+    },
+    {
+      "source": "diss",
+      "target": "crowdsrc"
+    },
+    {
+      "source": "diss",
+      "target": "netw"
+    },
+    {
+      "source": "icis20",
+      "target": "crowdsrc"
+    },
+    {
+      "source": "icis22",
+      "target": "crowdsrc"
+    },
+    {
+      "source": "food",
+      "target": "simul"
+    },
+    {
+      "source": "japfa",
+      "target": "simul"
+    },
+    {
+      "source": "spatial",
+      "target": "geo"
+    },
+    {
+      "source": "bri",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "bri"
+    },
+    {
+      "source": "rsis",
+      "target": "spatial"
+    },
+    {
+      "source": "rsis",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "tradewar"
+    },
+    {
+      "source": "tradewar",
+      "target": "policy"
+    },
+    {
+      "source": "netw",
+      "target": "jmis1"
+    },
+    {
+      "source": "cd",
+      "target": "jmis1"
+    },
+    {
+      "source": "netw",
+      "target": "diss"
+    },
+    {
+      "source": "policy",
+      "target": "rsis"
+    },
+    {
+      "source": "rsis",
+      "target": "megacity"
+    },
+    {
+      "source": "megacity",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "island"
+    },
+    {
+      "source": "island",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "brichal"
+    },
+    {
+      "source": "brichal",
+      "target": "bri"
+    },
+    {
+      "source": "brichal",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "sleep"
+    },
+    {
+      "source": "sleep",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "sgrid"
+    },
+    {
+      "source": "sgrid",
+      "target": "policy"
+    }
   ],
   "publications": [
     {
