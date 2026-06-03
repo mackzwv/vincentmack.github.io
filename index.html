@@ -756,10 +756,10 @@
       <a class="nav-tab active" href="#" data-tab="research"     role="tab" aria-selected="true"  aria-controls="research">Research</a>
       <a class="nav-tab"        href="#" data-tab="publications" role="tab" aria-selected="false" aria-controls="publications">Publications</a>
       <a class="nav-tab"        href="#" data-tab="network"      role="tab" aria-selected="false" aria-controls="network">Knowledge Graph</a>
+      <a class="nav-tab"        href="#" data-tab="semantic"     role="tab" aria-selected="false" aria-controls="semantic">Semantic Map</a>
       <a class="nav-tab"        href="#" data-tab="teaching"     role="tab" aria-selected="false" aria-controls="teaching">Teaching</a>
       <a class="nav-tab"        href="#" data-tab="experience"   role="tab" aria-selected="false" aria-controls="experience">Experience</a>
       <a class="nav-tab"        href="#" data-tab="cv"           role="tab" aria-selected="false" aria-controls="cv">CV</a>
-      <a class="nav-tab"        href="#" data-tab="semantic"     role="tab" aria-selected="false" aria-controls="semantic">Semantic Map</a>
     </div>
   </div>
   <main>
@@ -1344,6 +1344,18 @@
       return SEM_GROUP_COLORS[group] || '#94a3b8';
     }
 
+    function semShortTitle(title) {
+      // Keep first 4–5 meaningful words, cap at 24 chars
+      var words = title.replace(/['"''""‘’“”]/g, '').split(/\s+/);
+      var out = '';
+      for (var i = 0; i < words.length; i++) {
+        var candidate = out ? out + ' ' + words[i] : words[i];
+        if (candidate.length > 24) break;
+        out = candidate;
+      }
+      return out.length < title.length ? out + '…' : out;
+    }
+
     function semConceptLabel(data, id) {
       for (var i = 0; i < data.concepts.length; i++) {
         if (data.concepts[i].id === id) {
@@ -1517,18 +1529,54 @@
       var ttType  = document.getElementById('tt-type');
       var ttDesc  = document.getElementById('tt-desc');
 
-      var circles = dotsG.selectAll('circle').data(pts, function (d) { return d.paper.id; });
+      // Each paper = <g class="sem-pt"> containing: highlight rect, circle, label text
+      var grps = dotsG.selectAll('.sem-pt').data(pts, function (d) { return d.paper.id; });
 
-      // ENTER: add new circles with handlers, invisible at current position
-      var entered = circles.enter()
-        .append('circle')
+      // ENTER: build group structure
+      var entered = grps.enter()
+        .append('g')
+        .attr('class', 'sem-pt')
+        .attr('transform', function (d) {
+          return 'translate(' + xScale(d.x) + ',' + yScale(d.y) + ')';
+        })
+        .style('cursor', function (d) { return d.paper.url ? 'pointer' : 'default'; });
+
+      // Highlight rect behind label (hidden until hover)
+      entered.append('rect')
+        .attr('class', 'sem-label-bg')
+        .attr('x', 10).attr('y', -17)
+        .attr('height', 14).attr('rx', 3)
+        .attr('fill', '#fef08a')   // yellow highlight
+        .attr('opacity', 0)
+        .each(function (d) {
+          var short = semShortTitle(d.paper.title);
+          d3.select(this).attr('width', short.length * 5.6 + 8);
+        });
+
+      // Dot
+      entered.append('circle')
         .attr('r', 7)
         .attr('fill', function (d) { return semGroupColor(d.paper.group); })
-        .attr('stroke', 'white').attr('stroke-width', 1.5).attr('opacity', 0)
-        .attr('cx', function (d) { return xScale(d.x); })
-        .attr('cy', function (d) { return yScale(d.y); })
-        .style('cursor', function (d) { return d.paper.url ? 'pointer' : 'default'; })
+        .attr('stroke', 'white').attr('stroke-width', 1.5)
+        .attr('opacity', 0);
+
+      // Label text
+      entered.append('text')
+        .attr('class', 'sem-label')
+        .attr('x', 10).attr('y', -6)
+        .style('font-size', '9.5px')
+        .style('font-family', "'Inter', sans-serif")
+        .style('fill', '#1e293b')
+        .style('pointer-events', 'none')
+        .text(function (d) { return semShortTitle(d.paper.title); });
+
+      // Hover: highlight label + brighten dot + tooltip
+      entered
         .on('mouseover', function (event, d) {
+          var sel = d3.select(this);
+          sel.select('.sem-label-bg').attr('opacity', 1);
+          sel.select('.sem-label').style('font-weight', '600').style('fill', '#0f172a');
+          sel.select('circle').attr('r', 9).attr('stroke-width', 2.5);
           var sims = d.paper.concept_sims || {};
           var entries = Object.keys(sims).map(function (k) { return [k, sims[k]]; });
           entries.sort(function (a, b) { return b[1] - a[1]; });
@@ -1547,20 +1595,33 @@
           tooltip.style.left = Math.min(event.clientX + 14, window.innerWidth - 260) + 'px';
           tooltip.style.top  = (event.clientY - 10) + 'px';
         })
-        .on('mouseout', function () { tooltip.classList.remove('visible'); })
+        .on('mouseout', function () {
+          var sel = d3.select(this);
+          sel.select('.sem-label-bg').attr('opacity', 0);
+          sel.select('.sem-label').style('font-weight', '400').style('fill', '#1e293b');
+          sel.select('circle').attr('r', 7).attr('stroke-width', 1.5);
+          tooltip.classList.remove('visible');
+        })
         .on('click', function (event, d) {
           if (d.paper.url) window.open(d.paper.url, '_blank', 'noopener');
         });
 
-      // ENTER + UPDATE: animate all circles to final position
-      entered.merge(circles)
+      // ENTER + UPDATE: animate position, update colors on update
+      entered.merge(grps)
         .transition().duration(500).ease(d3.easeCubicInOut)
-        .attr('cx', function (d) { return xScale(d.x); })
-        .attr('cy', function (d) { return yScale(d.y); })
-        .attr('fill', function (d) { return semGroupColor(d.paper.group); })
-        .attr('opacity', 0.88);
+        .attr('transform', function (d) {
+          return 'translate(' + xScale(d.x) + ',' + yScale(d.y) + ')';
+        });
 
-      circles.exit().transition().duration(300).attr('opacity', 0).remove();
+      // Update dot fill for re-renders (e.g. if group data changed)
+      grps.select('circle')
+        .attr('fill', function (d) { return semGroupColor(d.paper.group); });
+
+      // Fade in entering circles
+      entered.select('circle')
+        .transition().duration(400).attr('opacity', 0.88);
+
+      grps.exit().transition().duration(300).attr('opacity', 0).remove();
     }
   </script>
 </body>
