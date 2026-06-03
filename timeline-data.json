@@ -1,0 +1,272 @@
+{
+  "_meta": {
+    "last_updated": "2026-06-04",
+    "note": "Edit this file to update the career timeline. Dates are ISO 8601 (YYYY-MM-DD). Set present:true on the current job and extend its end date generously so the bar fades out at the right edge."
+  },
+
+  "education": [
+    {
+      "id": "nus",
+      "label": "BSocSci Sociology",
+      "short": "NUS",
+      "org": "National University of Singapore",
+      "start": "2006-08-01",
+      "end": "2010-05-01",
+      "detail": "Second Upper Honours · Dean's List AY07/08 & AY08/09\nThesis: The Discursive Construction of Political Apathy in Singapore"
+    },
+    {
+      "id": "ntu",
+      "label": "MSc International Political Economy",
+      "short": "MSc IPE / NTU",
+      "org": "Nanyang Technological University",
+      "start": "2014-08-01",
+      "end": "2015-05-01",
+      "detail": "GPA 4.93 / 5.00\nDissertation: Political Economic Determinants of Labour Protests (A+)"
+    },
+    {
+      "id": "mitb",
+      "label": "MITB (Analytics)",
+      "short": "MITB / SMU",
+      "org": "Singapore Management University",
+      "start": "2017-01-01",
+      "end": "2017-12-01",
+      "detail": "GPA 3.80 / 4.00\nCapstone: Spatial-Temporal Conflict Analysis (A)"
+    },
+    {
+      "id": "phd",
+      "label": "PhD Information Systems",
+      "short": "PhD / SMU",
+      "org": "Singapore Management University",
+      "start": "2019-08-01",
+      "end": "2024-08-01",
+      "detail": "GPA 3.30 / 4.00 · A*STAR ACIS Scholar\nDissertation: Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation"
+    }
+  ],
+
+  "employment": [
+    {
+      "id": "mcys",
+      "label": "Policy Officer",
+      "short": "MCYS",
+      "org": "Ministry of Community Development, Youth and Sports (MCYS)",
+      "start": "2010-07-01",
+      "end": "2012-12-01",
+      "detail": "Elderly & Disability Policy Division\n\nElderly Policy Officer (Jan 2011 – Dec 2012): Coordinated National Budget 2012 and Secretariat for Inter-Ministerial Committee for Ageing; implemented the Foreign Domestic Worker Grant; developed national proficiency standards for Eldercare Workers with WDA.\n\nPolicy Research Assistant (Jul 2010 – Dec 2010): Managed the $3M Silver Community Test Bed Programme and Caregiver Training Grant; developed statistical projections of elderly care needs for national policy planning."
+    },
+    {
+      "id": "insead",
+      "label": "Research Assistant",
+      "short": "INSEAD",
+      "org": "INSEAD Singapore",
+      "start": "2013-01-01",
+      "end": "2014-05-01",
+      "detail": "Designed and conducted field and lab experiments, data collection, and spreadsheet data encoding."
+    },
+    {
+      "id": "tp",
+      "label": "Adjunct Lecturer",
+      "short": "TP",
+      "org": "Temasek Polytechnic",
+      "start": "2013-10-01",
+      "end": "2014-05-01",
+      "detail": "Adjunct Lecturer — taught Introduction to Sociology and Applied Social Research."
+    },
+    {
+      "id": "rsis",
+      "label": "Associate Research Fellow",
+      "short": "RSIS / NTU",
+      "org": "S. Rajaratnam School of International Studies, NTU",
+      "start": "2015-06-01",
+      "end": "2019-08-01",
+      "detail": "FIT Hub (Jul 2017 – Aug 2019): Foresight and policy research on international trade, disruptive technologies, and regional health and energy strategies; high-impact publications and ASEAN-level initiatives.\n\nNTS Studies (Jun 2015 – Jun 2017): Developed a system dynamics model of food security for Singapore's Inter-Ministerial Committee on Food Security; editor and team lead for the monthly NTS Bulletin."
+    },
+    {
+      "id": "blended",
+      "label": "AI / ML Consultant",
+      "short": "Blended Concept",
+      "org": "Blended Concept",
+      "start": "2023-11-01",
+      "end": "2024-08-01",
+      "detail": "Artificial Intelligence & Machine Learning Consultant. Designed data collection and ML analysis pipelines for TiggieKids — Advancing Personalised Learning For Every Child."
+    },
+    {
+      "id": "nyp",
+      "label": "Lecturer, School of IT",
+      "short": "Nanyang Poly",
+      "org": "Nanyang Polytechnic",
+      "start": "2024-09-01",
+      "end": "2027-06-01",
+      "present": true,
+      "detail": "Lecturer, School of Information Technology (Current)\nData analytics, AI, application development, data management — PET and CET learners. Curriculum development, internship mentoring, and FYP supervision.\nMember, IRB for Teaching & Learning Research."
+    }
+  ],
+
+  "publications": [
+    {
+      "id": "smartcity",
+      "type": "policy",
+      "date": "2017-01-14",
+      "label": "Smart City-Ready",
+      "venue": "RSIS Commentary (CO17014)",
+      "full": "Science, Technology and Human Security: Getting Singapore Smart City-Ready",
+      "url": "https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/"
+    },
+    {
+      "id": "labour",
+      "type": "policy",
+      "date": "2017-08-28",
+      "label": "Labour Migration in ASEAN",
+      "venue": "RSIS Commentary",
+      "full": "How Emerging Global Trends May Affect Labour Migration in ASEAN",
+      "url": "https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/"
+    },
+    {
+      "id": "megacity",
+      "type": "opeds",
+      "date": "2017-09-15",
+      "label": "Megacities & Digital Age",
+      "venue": "The Conversation",
+      "full": "Can the World's Megacities Survive the Digital Age?",
+      "url": "https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257"
+    },
+    {
+      "id": "island",
+      "type": "opeds",
+      "date": "2017-10-10",
+      "label": "Island Nations & Rising Seas",
+      "venue": "The Conversation",
+      "full": "Can We Save Low-Lying Island Nations from Rising Seas?",
+      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232"
+    },
+    {
+      "id": "amr",
+      "type": "policy",
+      "date": "2018-01-25",
+      "label": "AMR Superbug",
+      "venue": "RSIS Commentary (CO18022)",
+      "full": "Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/"
+    },
+    {
+      "id": "shared",
+      "type": "policy",
+      "date": "2018-03-22",
+      "label": "Shared Economy",
+      "venue": "RSIS Commentary (CO18081)",
+      "full": "Shared Economy Business: Fixing Its \"Genetic Disorder\"",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/"
+    },
+    {
+      "id": "brichal",
+      "type": "opeds",
+      "date": "2018-06-25",
+      "label": "Four Challenges of BRI",
+      "venue": "China-US Focus",
+      "full": "The Four Challenges of the Belt and Road",
+      "url": "https://www.chinausfocus.com/finance-economy/the-four-challenges-of-the-belt-and-road"
+    },
+    {
+      "id": "tradewar",
+      "type": "policy",
+      "date": "2018-07-12",
+      "label": "US Trade War",
+      "venue": "RSIS Commentary (CO18114)",
+      "full": "The US-Launched Trade War: Its Wide-Ranging Impact",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/"
+    },
+    {
+      "id": "3dprint",
+      "type": "policy",
+      "date": "2018-08-02",
+      "label": "3D Printing vs Gun Control",
+      "venue": "RSIS Commentary (CO18152)",
+      "full": "3D Printing vs Gun Control: Navigating the Paradox",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/"
+    },
+    {
+      "id": "bri",
+      "type": "journal",
+      "date": "2018-09-01",
+      "label": "Belt & Road Initiative",
+      "venue": "Global Asia 13(3)",
+      "full": "‘Chinese Dream,’ Global Ambition: Beijing’s Belt and Road Initiative",
+      "url": "https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei"
+    },
+    {
+      "id": "spatial",
+      "type": "journal",
+      "date": "2018-11-06",
+      "label": "Space & Violence",
+      "venue": "ACM SIGSPATIAL 2018",
+      "full": "Is There Space for Violence: A Data-driven Approach to Spatial-Temporal Conflict"
+    },
+    {
+      "id": "digital",
+      "type": "policy",
+      "date": "2019-01-15",
+      "label": "\"Digital Hurricane\" ASEAN",
+      "venue": "RSIS Policy Paper",
+      "full": "A Prolegomenary on the Digital Economy: “Digital Hurricane” Hits ASEAN"
+    },
+    {
+      "id": "sleep",
+      "type": "opeds",
+      "date": "2019-07-18",
+      "label": "Global Sleep Deficit",
+      "venue": "AsiaGlobal Online",
+      "full": "How the Global Sleep Deficit is Bankrupting Humanity",
+      "url": "https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity"
+    },
+    {
+      "id": "sgrid",
+      "type": "opeds",
+      "date": "2019-12-05",
+      "label": "Global Smart Grid",
+      "venue": "AsiaGlobal Online",
+      "full": "A Global Smart Renewable Power Grid: A Radical Proposal",
+      "url": "https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal"
+    },
+    {
+      "id": "icis20",
+      "type": "journal",
+      "date": "2020-12-13",
+      "label": "Semantic & Network Evol.",
+      "venue": "ICIS 2020",
+      "full": "Semantic and Network Evolution in Crowdsourced Idea Refinement"
+    },
+    {
+      "id": "icis22",
+      "type": "journal",
+      "date": "2022-12-11",
+      "label": "Citation Network Embed.",
+      "venue": "ICIS 2022",
+      "full": "Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement"
+    },
+    {
+      "id": "diss",
+      "type": "journal",
+      "date": "2024-08-01",
+      "label": "PhD Dissertation",
+      "venue": "SMU",
+      "full": "Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation",
+      "url": "https://ink.library.smu.edu.sg/etd_coll/615/"
+    },
+    {
+      "id": "jmis",
+      "type": "journal",
+      "date": "2025-01-15",
+      "label": "New Idea Success (review)",
+      "venue": "JMIS",
+      "full": "New Idea Success in Online Platforms: A Knowledge Recombination Perspective"
+    },
+    {
+      "id": "aisp",
+      "type": "practitioner",
+      "date": "2025-04-01",
+      "label": "AI & Combinatorial Systems",
+      "venue": "AiSP Newsletter",
+      "full": "Harnessing AI for Creative Ideation & Combinatorial Systems",
+      "url": "https://www.aisp.sg/document/newsletter/AISP%20Newsletter%202025/AiSP_Newsletter_2025%20April_v1.pdf"
+    }
+  ]
+}
