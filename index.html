@@ -695,6 +695,38 @@
       outline-offset: 2px
     }
 
+    /* ── SUBTABS ── */
+    .viz-intro { font-size: clamp(13px,1.8vw,14.5px); color: var(--muted); margin-bottom: 18px; max-width: 760px }
+    .subtab-bar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 4px }
+    .subtab-btn { background: none; border: none; padding: 7px 18px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; color: var(--muted); border-radius: 7px; transition: background .15s, color .15s; white-space: nowrap }
+    .subtab-btn.active { background: var(--accent); color: #fff }
+    .subtab-btn:hover:not(.active) { background: var(--tag-bg); color: var(--accent) }
+    .subtab-pane { display: none }
+    .subtab-pane.active { display: block; animation: fadeUp .22s ease }
+    .subtab-desc { font-size: 12.5px; color: var(--muted); margin-bottom: 14px }
+
+    /* ── TIMELINE ── */
+    #tl-chart-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; user-select: none; cursor: grab }
+    #tl-chart-wrap:active { cursor: grabbing }
+    #tl-chart-svg { display: block; width: 100% }
+    #tl-chart-svg .domain, #tl-chart-svg .tick line { stroke: var(--border) }
+    #tl-chart-svg .tick text { font: 400 11px 'Inter',sans-serif; fill: var(--muted) }
+    .tl-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 4px }
+    .tl-l-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted) }
+    .tl-l-rect { width: 13px; height: 9px; border-radius: 2px; flex-shrink: 0 }
+    .tl-l-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0 }
+    #tl-tooltip {
+      position: fixed; background: rgba(15,35,68,.96); backdrop-filter: blur(4px);
+      color: #fff; padding: 10px 14px; border-radius: 9px; font-size: 12px;
+      max-width: 300px; pointer-events: none; opacity: 0; transition: opacity .15s;
+      z-index: 300; line-height: 1.55; box-shadow: 0 8px 24px rgba(0,0,0,.25)
+    }
+    #tl-tooltip.vis { opacity: 1 }
+    #tl-tooltip .tlt-title  { font-weight: 600; font-size: 12.5px; margin-bottom: 3px }
+    #tl-tooltip .tlt-org    { color: #93c5fd; font-size: 11px; margin-bottom: 2px }
+    #tl-tooltip .tlt-dates  { color: #94a3b8; font-size: 11px; margin-bottom: 4px }
+    #tl-tooltip .tlt-detail { color: #cbd5e1; font-size: 11.5px }
+
     /* ── SEMANTIC MAP ── */
     .sem-intro { font-size: clamp(13px,1.8vw,14.5px); color: var(--muted); margin-bottom: 20px; max-width: 720px }
     #sem-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 14px }
@@ -755,8 +787,7 @@
     <div class="nav-inner" role="tablist" aria-label="Page sections">
       <a class="nav-tab active" href="#" data-tab="research"     role="tab" aria-selected="true"  aria-controls="research">Research</a>
       <a class="nav-tab"        href="#" data-tab="publications" role="tab" aria-selected="false" aria-controls="publications">Publications</a>
-      <a class="nav-tab"        href="#" data-tab="network"      role="tab" aria-selected="false" aria-controls="network">Knowledge Graph</a>
-      <a class="nav-tab"        href="#" data-tab="semantic"     role="tab" aria-selected="false" aria-controls="semantic">Semantic Map</a>
+      <a class="nav-tab"        href="#" data-tab="visualizations" role="tab" aria-selected="false" aria-controls="visualizations">Visualizations</a>
       <a class="nav-tab"        href="#" data-tab="teaching"     role="tab" aria-selected="false" aria-controls="teaching">Teaching</a>
       <a class="nav-tab"        href="#" data-tab="experience"   role="tab" aria-selected="false" aria-controls="experience">Experience</a>
       <a class="nav-tab"        href="#" data-tab="cv"           role="tab" aria-selected="false" aria-controls="cv">CV</a>
@@ -838,27 +869,71 @@
       <div id="pub-list"></div>
     </section>
 
-    <section id="network" class="tab-pane" role="tabpanel">
-      <div class="sec">Knowledge Graph of My Research</div>
-      <p class="kg-intro">This knowledge graph maps the conceptual structure of my research portfolio. Each node
-        represents a <strong style="color:var(--navy)">research area</strong> (navy), <strong
-          style="color:#7c3aed">publication</strong> (purple), <strong style="color:var(--teal)">applied
-          deployment</strong> (teal), or <strong style="color:#d97706">core methodology</strong> (amber). Edges trace
-        intellectual and methodological relationships; dashed arrows mark the evolution of ideas from conference papers
-        into journal submissions. Drag nodes to reorganise the layout. Tap or hover a node to read about the work it
-        represents.</p>
-      <div id="graph-wrap">
-        <svg id="graph-svg" aria-label="Interactive research knowledge graph"></svg>
+    <section id="visualizations" class="tab-pane" role="tabpanel">
+      <div class="sec">Research &amp; Career Visualizations</div>
+      <p class="viz-intro">Three interactive lenses on the same body of work — a chronological career view, a concept map of how ideas connect, and a semantic scatter of papers by meaning.</p>
+
+      <div class="subtab-bar" role="tablist" aria-label="Visualization type">
+        <button class="subtab-btn active" data-subtab="tl-pane"  role="tab" aria-selected="true"  type="button">Career Timeline</button>
+        <button class="subtab-btn"        data-subtab="kg-pane"  role="tab" aria-selected="false" type="button">Knowledge Graph</button>
+        <button class="subtab-btn"        data-subtab="sm-pane"  role="tab" aria-selected="false" type="button">Semantic Map</button>
       </div>
-      <div class="graph-legend">
-        <div class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Research Area</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Publication</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#0891b2"></span>Applied Project</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Methodology / Concept</div>
+
+      <!-- ── Career Timeline ── -->
+      <div id="tl-pane" class="subtab-pane active">
+        <p class="subtab-desc">Chronological view of education, employment, and all 19 publications. Scroll to zoom in on any period; drag to pan; double-click to reset.</p>
+        <div id="tl-chart-wrap"><svg id="tl-chart-svg"></svg></div>
+        <div class="tl-legend">
+          <div class="tl-l-item"><div class="tl-l-rect" style="background:#2563eb"></div>Education</div>
+          <div class="tl-l-item"><div class="tl-l-rect" style="background:#0891b2"></div>Employment</div>
+          <div class="tl-l-item"><div class="tl-l-dot"  style="background:#7c3aed"></div>Journal / Conference</div>
+          <div class="tl-l-item"><div class="tl-l-dot"  style="background:#d97706"></div>Policy &amp; Commentary</div>
+          <div class="tl-l-item"><div class="tl-l-dot"  style="background:#059669"></div>Op-Ed / Practitioner</div>
+          <div class="tl-l-item">
+            <svg width="13" height="13" style="flex-shrink:0"><line x1="6.5" y1="0" x2="6.5" y2="13" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+            Today
+          </div>
+        </div>
+        <p class="graph-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; drag to pan &nbsp;&middot;&nbsp; double-click to reset &nbsp;&middot;&nbsp; click publications to open</p>
       </div>
-      <p class="graph-hint">Drag to move &nbsp;&middot;&nbsp; Scroll to zoom &nbsp;&middot;&nbsp; Tap a node to
-        highlight connections</p>
-    </section>
+
+      <!-- ── Knowledge Graph ── -->
+      <div id="kg-pane" class="subtab-pane">
+        <p class="subtab-desc">Concept map of my research portfolio — nodes are areas, papers, projects, and methods; edges trace intellectual relationships.</p>
+        <p class="kg-intro">Each node represents a <strong style="color:var(--navy)">research area</strong> (navy), <strong style="color:#7c3aed">publication</strong> (purple), <strong style="color:var(--teal)">applied deployment</strong> (teal), or <strong style="color:#d97706">core methodology</strong> (amber). Dashed arrows mark idea evolution from conference papers to journal submissions.</p>
+        <div id="graph-wrap">
+          <svg id="graph-svg" aria-label="Interactive research knowledge graph"></svg>
+        </div>
+        <div class="graph-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>Research Area</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span>Publication</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#0891b2"></span>Applied Project</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Methodology / Concept</div>
+        </div>
+        <p class="graph-hint">Drag to move &nbsp;&middot;&nbsp; Scroll to zoom &nbsp;&middot;&nbsp; Tap a node to highlight connections</p>
+      </div>
+
+      <!-- ── Semantic Map ── -->
+      <div id="sm-pane" class="subtab-pane">
+        <p class="subtab-desc">Embedding-based scatter of my papers by semantic similarity. Switch to <strong>Concept Pair</strong> mode to project onto any two research axes. Requires running <code style="font-family:var(--mono);background:var(--tag-bg);color:var(--tag-fg);padding:1px 4px;border-radius:3px">embed_pipeline.py</code> first.</p>
+        <p class="sem-intro">Each dot is a paper — position reflects semantic similarity, so papers on related topics cluster together. Switch to <strong>Concept Pair</strong> mode to project papers onto any two research axes (x = similarity to concept A, y = concept B).</p>
+        <div id="sem-controls">
+          <div class="sem-mode-toggle" role="group" aria-label="Visualisation mode">
+            <button class="sem-btn active" data-mode="umap" type="button">UMAP Layout</button>
+            <button class="sem-btn" data-mode="concept" type="button">Concept Pair</button>
+          </div>
+          <div id="sem-concept-selects" style="display:none" aria-label="Concept axis selectors">
+            <label for="sem-cx">X axis:&nbsp;<select id="sem-cx" aria-label="X-axis concept"></select></label>
+            <label for="sem-cy">Y axis:&nbsp;<select id="sem-cy" aria-label="Y-axis concept"></select></label>
+          </div>
+        </div>
+        <div id="sem-legend" aria-label="Legend" role="list"></div>
+        <div id="sem-wrap">
+          <svg id="sem-svg" role="img" aria-label="Semantic research map scatter plot"></svg>
+        </div>
+      </div>
+
+    </section><!-- /visualizations -->
 
     <section id="teaching" class="tab-pane" role="tabpanel">
       <div class="sec">Nanyang Polytechnic &mdash; Continuing Education &amp; Training (CET)</div>
@@ -989,30 +1064,18 @@
       </div>
     </section>
 
-    <section id="semantic" class="tab-pane" role="tabpanel">
-      <div class="sec">Semantic Map</div>
-      <p class="sem-intro">An embedding-based map of my research. Each dot is a paper — position reflects semantic similarity, so papers on related topics cluster together. Switch to <strong>Concept Pair</strong> mode to project papers onto any two research axes (x-axis = similarity to concept A, y-axis = concept B).</p>
-      <div id="sem-controls">
-        <div class="sem-mode-toggle" role="group" aria-label="Visualisation mode">
-          <button class="sem-btn active" data-mode="umap" type="button">UMAP Layout</button>
-          <button class="sem-btn" data-mode="concept" type="button">Concept Pair</button>
-        </div>
-        <div id="sem-concept-selects" style="display:none" aria-label="Concept axis selectors">
-          <label for="sem-cx">X axis:&nbsp;<select id="sem-cx" aria-label="X-axis concept"></select></label>
-          <label for="sem-cy">Y axis:&nbsp;<select id="sem-cy" aria-label="Y-axis concept"></select></label>
-        </div>
-      </div>
-      <div id="sem-legend" aria-label="Legend" role="list"></div>
-      <div id="sem-wrap">
-        <svg id="sem-svg" role="img" aria-label="Semantic research map scatter plot"></svg>
-      </div>
-    </section>
   </main>
 
   <div id="g-tooltip" role="tooltip">
     <div id="tt-title" class="tt-title"></div>
     <div id="tt-type" class="tt-type"></div>
     <div id="tt-desc" class="tt-desc"></div>
+  </div>
+  <div id="tl-tooltip">
+    <div class="tlt-title"></div>
+    <div class="tlt-org"></div>
+    <div class="tlt-dates"></div>
+    <div class="tlt-detail"></div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
   <script>
@@ -1021,6 +1084,7 @@
     var panes = document.querySelectorAll('.tab-pane');
     var graphBuilt = false;
     var semanticBuilt = false;
+    var timelineBuilt = false;
     function activateTab(tab) {
       for (var i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove('active');
@@ -1031,13 +1095,14 @@
       tab.setAttribute('aria-selected', 'true');
       var target = document.getElementById(tab.getAttribute('data-tab'));
       if (target) target.classList.add('active');
-      if (tab.getAttribute('data-tab') === 'network' && !graphBuilt) {
-        graphBuilt = true;
-        setTimeout(buildGraph, 60);
-      }
-      if (tab.getAttribute('data-tab') === 'semantic' && !semanticBuilt) {
-        semanticBuilt = true;
-        setTimeout(buildSemanticMap, 60);
+      if (tab.getAttribute('data-tab') === 'visualizations') {
+        var activeSubBtn = document.querySelector('.subtab-btn.active');
+        if (activeSubBtn) {
+          var st = activeSubBtn.getAttribute('data-subtab');
+          if (st === 'tl-pane' && !timelineBuilt) { timelineBuilt = true; setTimeout(buildTimeline, 80); }
+          else if (st === 'kg-pane' && !graphBuilt) { graphBuilt = true; setTimeout(buildGraph, 60); }
+          else if (st === 'sm-pane' && !semanticBuilt) { semanticBuilt = true; setTimeout(buildSemanticMap, 60); }
+        }
       }
     }
     for (var k = 0; k < tabs.length; k++) {
@@ -1045,6 +1110,28 @@
         e.preventDefault();
         activateTab(this);
       });
+    }
+
+    // ── SUBTAB SWITCHING ──
+    var subtabBtns = document.querySelectorAll('.subtab-btn');
+    function activateSubtab(btn) {
+      for (var i = 0; i < subtabBtns.length; i++) {
+        subtabBtns[i].classList.remove('active');
+        subtabBtns[i].setAttribute('aria-selected', 'false');
+      }
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      var stTarget = btn.getAttribute('data-subtab');
+      var spanes = document.querySelectorAll('.subtab-pane');
+      for (var j = 0; j < spanes.length; j++) spanes[j].classList.remove('active');
+      var spane = document.getElementById(stTarget);
+      if (spane) spane.classList.add('active');
+      if (stTarget === 'tl-pane' && !timelineBuilt) { timelineBuilt = true; setTimeout(buildTimeline, 80); }
+      else if (stTarget === 'kg-pane' && !graphBuilt) { graphBuilt = true; setTimeout(buildGraph, 60); }
+      else if (stTarget === 'sm-pane' && !semanticBuilt) { semanticBuilt = true; setTimeout(buildSemanticMap, 60); }
+    }
+    for (var s = 0; s < subtabBtns.length; s++) {
+      subtabBtns[s].addEventListener('click', function() { activateSubtab(this); });
     }
 
     // ── HEADER CANVAS ANIMATION ──
@@ -1157,6 +1244,346 @@
       .catch(function() {
         // fetch unavailable (file:// etc.) — fallback already rendered above
       });
+
+    // ── CAREER TIMELINE ──
+    function buildTimeline() {
+      var tlWrap = document.getElementById('tl-chart-wrap');
+      if (!tlWrap) return;
+
+      var D   = function(s) { return new Date(s); };
+      var fmt = d3.timeFormat('%b %Y');
+      var TODAY = new Date();
+
+      var EDUCATION = [
+        { id:'nus',  label:'BSocSci Sociology',                   short:'NUS',
+          org:'National University of Singapore',
+          start:D('2006-08-01'), end:D('2010-05-01'),
+          detail:'Second Upper Honours · Dean\'s List AY07/08 & AY08/09\nThesis: The Discursive Construction of Political Apathy in Singapore' },
+        { id:'ntu',  label:'MSc International Political Economy', short:'MSc IPE / NTU',
+          org:'Nanyang Technological University',
+          start:D('2014-08-01'), end:D('2015-05-01'),
+          detail:'GPA 4.93 / 5.00\nDissertation: Political Economic Determinants of Labour Protests (A+)' },
+        { id:'mitb', label:'MITB (Analytics)',                    short:'MITB / SMU',
+          org:'Singapore Management University',
+          start:D('2017-01-01'), end:D('2017-12-01'),
+          detail:'GPA 3.80 / 4.00\nCapstone: Spatial-Temporal Conflict Analysis (A)' },
+        { id:'phd',  label:'PhD Information Systems',             short:'PhD / SMU',
+          org:'Singapore Management University',
+          start:D('2019-08-01'), end:D('2024-08-01'),
+          detail:'GPA 3.30 / 4.00 · A*STAR ACIS Scholar\nDissertation: Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation' }
+      ];
+
+      var EMPLOYMENT = [
+        { id:'insead',  label:'Research Assistant',        short:'INSEAD',
+          org:'INSEAD Singapore',
+          start:D('2013-01-01'), end:D('2014-05-01'),
+          detail:'Research Assistant, INSEAD Singapore' },
+        { id:'tp',      label:'Adjunct Lecturer',          short:'TP',
+          org:'Temasek Polytechnic',
+          start:D('2013-10-01'), end:D('2014-05-01'),
+          detail:'Adjunct Lecturer, Temasek Polytechnic' },
+        { id:'rsis',    label:'Associate Research Fellow', short:'RSIS / NTU',
+          org:'S. Rajaratnam School of International Studies, NTU',
+          start:D('2015-06-01'), end:D('2019-08-01'),
+          detail:'Horizon scanning on emerging tech, digital economy,\nand regional security policy. 12+ publications.' },
+        { id:'blended', label:'AI / ML Consultant',        short:'Blended Concept',
+          org:'Blended Concept',
+          start:D('2023-11-01'), end:D('2024-08-01'),
+          detail:'Artificial Intelligence & Machine Learning Consultant' },
+        { id:'nyp',     label:'Lecturer, School of IT',    short:'Nanyang Poly',
+          org:'Nanyang Polytechnic',
+          start:D('2024-09-01'), end:D('2027-01-01'), present:true,
+          detail:'Lecturer, School of Information Technology\n(Current)' }
+      ];
+
+      var PCOL = { journal:'#7c3aed', policy:'#d97706', opeds:'#059669', practitioner:'#0891b2' };
+
+      var PUBLICATIONS = [
+        { id:'smartcity', type:'policy',       date:D('2017-01-14'),
+          label:'Smart City-Ready',           venue:'RSIS Commentary (CO17014)',
+          full:'Science, Technology and Human Security: Getting Singapore Smart City-Ready',
+          url:'https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/' },
+        { id:'labour',    type:'policy',       date:D('2017-08-28'),
+          label:'Labour Migration in ASEAN',  venue:'RSIS Commentary',
+          full:'How Emerging Global Trends May Affect Labour Migration in ASEAN',
+          url:'https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/' },
+        { id:'megacity',  type:'opeds',        date:D('2017-09-15'),
+          label:'Megacities & Digital Age',   venue:'The Conversation',
+          full:'Can the World\'s Megacities Survive the Digital Age?',
+          url:'https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257' },
+        { id:'island',    type:'opeds',        date:D('2017-10-10'),
+          label:'Island Nations & Rising Seas', venue:'The Conversation',
+          full:'Can We Save Low-Lying Island Nations from Rising Seas?',
+          url:'https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232' },
+        { id:'amr',       type:'policy',       date:D('2018-01-25'),
+          label:'AMR Superbug',               venue:'RSIS Commentary (CO18022)',
+          full:'Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action',
+          url:'https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/' },
+        { id:'shared',    type:'policy',       date:D('2018-03-22'),
+          label:'Shared Economy',             venue:'RSIS Commentary (CO18081)',
+          full:'Shared Economy Business: Fixing Its "Genetic Disorder"',
+          url:'https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/' },
+        { id:'brichal',   type:'opeds',        date:D('2018-06-25'),
+          label:'Four Challenges of BRI',     venue:'China-US Focus',
+          full:'The Four Challenges of the Belt and Road',
+          url:'https://www.chinausfocus.com/finance-economy/the-four-challenges-of-the-belt-and-road' },
+        { id:'tradewar',  type:'policy',       date:D('2018-07-12'),
+          label:'US Trade War',               venue:'RSIS Commentary (CO18114)',
+          full:'The US-Launched Trade War: Its Wide-Ranging Impact',
+          url:'https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/' },
+        { id:'3dprint',   type:'policy',       date:D('2018-08-02'),
+          label:'3D Printing vs Gun Control', venue:'RSIS Commentary (CO18152)',
+          full:'3D Printing vs Gun Control: Navigating the Paradox',
+          url:'https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/' },
+        { id:'bri',       type:'journal',      date:D('2018-09-01'),
+          label:'Belt & Road Initiative',     venue:'Global Asia 13(3)',
+          full:'‘Chinese Dream,’ Global Ambition: Beijing’s Belt and Road Initiative',
+          url:'https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei' },
+        { id:'spatial',   type:'journal',      date:D('2018-11-06'),
+          label:'Space & Violence',           venue:'ACM SIGSPATIAL 2018',
+          full:'Is There Space for Violence: A Data-driven Approach to Spatial-Temporal Conflict' },
+        { id:'digital',   type:'policy',       date:D('2019-01-15'),
+          label:'"Digital Hurricane" ASEAN',  venue:'RSIS Policy Paper',
+          full:'A Prolegomenary on the Digital Economy: “Digital Hurricane” Hits ASEAN' },
+        { id:'sleep',     type:'opeds',        date:D('2019-07-18'),
+          label:'Global Sleep Deficit',       venue:'AsiaGlobal Online',
+          full:'How the Global Sleep Deficit is Bankrupting Humanity',
+          url:'https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity' },
+        { id:'sgrid',     type:'opeds',        date:D('2019-12-05'),
+          label:'Global Smart Grid',          venue:'AsiaGlobal Online',
+          full:'A Global Smart Renewable Power Grid: A Radical Proposal',
+          url:'https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal' },
+        { id:'icis20',    type:'journal',      date:D('2020-12-13'),
+          label:'Semantic & Network Evol.',   venue:'ICIS 2020',
+          full:'Semantic and Network Evolution in Crowdsourced Idea Refinement' },
+        { id:'icis22',    type:'journal',      date:D('2022-12-11'),
+          label:'Citation Network Embed.',    venue:'ICIS 2022',
+          full:'Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement' },
+        { id:'diss',      type:'journal',      date:D('2024-08-01'),
+          label:'PhD Dissertation',           venue:'SMU',
+          full:'Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation',
+          url:'https://ink.library.smu.edu.sg/etd_coll/615/' },
+        { id:'jmis',      type:'journal',      date:D('2025-01-15'),
+          label:'New Idea Success (review)',  venue:'JMIS',
+          full:'New Idea Success in Online Platforms: A Knowledge Recombination Perspective' },
+        { id:'aisp',      type:'practitioner', date:D('2025-04-01'),
+          label:'AI & Combinatorial Systems', venue:'AiSP Newsletter',
+          full:'Harnessing AI for Creative Ideation & Combinatorial Systems',
+          url:'https://www.aisp.sg/document/newsletter/AISP%20Newsletter%202025/AiSP_Newsletter_2025%20April_v1.pdf' }
+      ];
+
+      var M      = { top: 28, right: 24, bottom: 44, left: 118 };
+      var LANE_H = 80;
+      var BAR_H  = 28;
+      var DOT_R  = 5.5;
+      var LANES  = ['Education', 'Employment', 'Publications'];
+      var SVG_H  = M.top + LANE_H * 3 + M.bottom;
+
+      var svg = d3.select('#tl-chart-svg').attr('height', SVG_H);
+      var iW  = function() { return tlWrap.clientWidth - M.left - M.right; };
+
+      var xBase = d3.scaleTime()
+        .domain([D('2005-06-01'), D('2027-03-01')])
+        .range([0, iW()]);
+
+      var defs = svg.append('defs');
+      var clip = defs.append('clipPath').attr('id', 'tl-clip')
+        .append('rect').attr('y', -M.top).attr('height', LANE_H * 3 + M.top + 8);
+
+      defs.append('linearGradient').attr('id', 'grad-present')
+        .attr('x1','0%').attr('y1','0%').attr('x2','100%').attr('y2','0%')
+        .call(function(gr) {
+          gr.append('stop').attr('offset','0%').attr('stop-color','#0891b2');
+          gr.append('stop').attr('offset','85%').attr('stop-color','#0891b2');
+          gr.append('stop').attr('offset','100%').attr('stop-color','#0891b2').attr('stop-opacity',0);
+        });
+
+      var g = svg.append('g').attr('transform', 'translate(' + M.left + ',' + M.top + ')');
+
+      LANES.forEach(function(_, i) {
+        g.append('rect').attr('class', 'lane-bg')
+          .attr('x', 0).attr('y', i * LANE_H).attr('height', LANE_H)
+          .attr('fill', i % 2 === 0 ? '#f8fafc' : '#fff')
+          .attr('stroke', '#e2e8f0').attr('stroke-width', .5);
+      });
+      g.append('line').attr('class', 'tl-border')
+        .attr('x1', 0).attr('y1', 0).attr('stroke', '#e2e8f0').attr('stroke-width', .5);
+
+      LANES.forEach(function(name, i) {
+        g.append('text')
+          .attr('x', -10).attr('y', i * LANE_H + LANE_H / 2)
+          .attr('dy', '.35em').attr('text-anchor', 'end')
+          .style('font', '600 10.5px/1 Inter,sans-serif')
+          .style('letter-spacing', '.06em').style('fill', 'var(--muted)')
+          .style('text-transform', 'uppercase').text(name);
+      });
+
+      var todayG = g.append('g').attr('class', 'today-g');
+      todayG.append('line').attr('y1', -6).attr('y2', LANE_H * 3 + 4)
+        .attr('stroke', '#e11d48').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3').attr('opacity', .7);
+      todayG.append('text').attr('y', -10).attr('text-anchor', 'middle')
+        .attr('font-size', 10).attr('font-weight', 600).attr('fill', '#e11d48').text('Today');
+
+      var cg   = g.append('g').attr('clip-path', 'url(#tl-clip)');
+      var eduG = cg.append('g');
+      var empG = cg.append('g');
+      var pubG = cg.append('g');
+      var axisG = g.append('g').attr('transform', 'translate(0,' + (LANE_H * 3) + ')');
+
+      var tip       = document.getElementById('tl-tooltip');
+      var tipTitle  = tip.querySelector('.tlt-title');
+      var tipOrg    = tip.querySelector('.tlt-org');
+      var tipDates  = tip.querySelector('.tlt-dates');
+      var tipDetail = tip.querySelector('.tlt-detail');
+
+      function showTlTip(e, title, org, dates, detail) {
+        tipTitle.textContent  = title;
+        tipOrg.textContent    = org;
+        tipDates.textContent  = dates;
+        tipDetail.textContent = detail;
+        tip.classList.add('vis');
+        posTlTip(e);
+      }
+      function posTlTip(e) {
+        tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 310) + 'px';
+        tip.style.top  = Math.max(e.clientY - 10, 10) + 'px';
+      }
+      function hideTlTip() { tip.classList.remove('vis'); }
+
+      function draw(xs) {
+        var w    = iW();
+        var barY = function(i) { return i * LANE_H + (LANE_H - BAR_H) / 2; };
+
+        g.selectAll('.lane-bg').attr('width', w);
+        g.select('.tl-border').attr('x2', w);
+        defs.select('#tl-clip rect').attr('width', w);
+        todayG.attr('transform', 'translate(' + xs(TODAY) + ',0)');
+
+        // Education bars
+        var eBars  = eduG.selectAll('.edu-bar').data(EDUCATION, function(d) { return d.id; });
+        var eEnter = eBars.enter().append('g').attr('class', 'edu-bar');
+        eEnter.append('rect').attr('rx', 4).attr('height', BAR_H).attr('y', barY(0))
+          .attr('fill', '#2563eb')
+          .on('mouseover', function(e, d) {
+            d3.select(this).attr('fill', '#1d4ed8');
+            showTlTip(e, d.label, d.org, fmt(d.start) + ' – ' + fmt(d.end), d.detail);
+          })
+          .on('mousemove', posTlTip)
+          .on('mouseout', function() { d3.select(this).attr('fill', '#2563eb'); hideTlTip(); });
+        eEnter.append('text')
+          .style('font','500 9.5px/1 Inter,sans-serif').style('fill','rgba(255,255,255,.92)').style('pointer-events','none')
+          .attr('y', barY(0) + BAR_H / 2).attr('dy', '.35em').attr('x', 6);
+        var eAll = eduG.selectAll('.edu-bar');
+        eAll.select('rect').attr('x', function(d) { return xs(d.start); })
+          .attr('width', function(d) { return Math.max(2, xs(d.end) - xs(d.start)); });
+        eAll.select('text').attr('x', function(d) { return xs(d.start) + 8; }).text(function(d) {
+          var bw = xs(d.end) - xs(d.start);
+          if (bw > 90) return d.short;
+          if (bw > 40) return d.id==='nus'?'NUS':d.id==='phd'?'PhD':d.id==='ntu'?'NTU':'SMU';
+          return '';
+        });
+        eBars.exit().remove();
+
+        // Employment bars
+        var mBars  = empG.selectAll('.emp-bar').data(EMPLOYMENT, function(d) { return d.id; });
+        var mEnter = mBars.enter().append('g').attr('class', 'emp-bar');
+        mEnter.append('rect').attr('rx', 4).attr('height', BAR_H).attr('y', barY(1))
+          .attr('fill', function(d) { return d.present ? 'url(#grad-present)' : '#0891b2'; })
+          .on('mouseover', function(e, d) {
+            d3.select(this).attr('fill', d.present ? 'url(#grad-present)' : '#0e7490');
+            showTlTip(e, d.label, d.org, fmt(d.start) + ' – ' + (d.present ? 'Present' : fmt(d.end)), d.detail);
+          })
+          .on('mousemove', posTlTip)
+          .on('mouseout', function(e, d) { d3.select(this).attr('fill', d.present ? 'url(#grad-present)' : '#0891b2'); hideTlTip(); });
+        mEnter.append('text')
+          .style('font','500 9.5px/1 Inter,sans-serif').style('fill','rgba(255,255,255,.92)').style('pointer-events','none')
+          .attr('y', barY(1) + BAR_H / 2).attr('dy', '.35em');
+        var mAll = empG.selectAll('.emp-bar');
+        mAll.select('rect').attr('x', function(d) { return xs(d.start); })
+          .attr('width', function(d) { return Math.max(2, xs(d.end) - xs(d.start)); });
+        mAll.select('text').attr('x', function(d) { return xs(d.start) + 8; }).text(function(d) {
+          var bw = xs(d.end) - xs(d.start);
+          var lbl = { insead:'INSEAD', tp:'TP', rsis:'RSIS / NTU', blended:'Blended', nyp:'NYP' };
+          return bw > 40 ? (lbl[d.id] || d.short) : '';
+        });
+        mBars.exit().remove();
+
+        // Publication lollipops
+        var PUB_BASELINE = LANE_H * 3 - 12;
+        var PUB_TOP_MIN  = LANE_H * 2 + 10;
+        var DOT_SPACING  = DOT_R * 2.8;
+        var sorted = PUBLICATIONS.slice().sort(function(a,b) { return a.date - b.date; });
+        var stacks = [];
+        sorted.forEach(function(p) {
+          var px = xs(p.date), placed = false;
+          for (var si = 0; si < stacks.length; si++) {
+            if (Math.abs(xs(stacks[si][stacks[si].length-1].date) - px) < DOT_R * 2.2) {
+              stacks[si].push(p); placed = true; break;
+            }
+          }
+          if (!placed) stacks.push([p]);
+        });
+        function stackOf(p) {
+          for (var si = 0; si < stacks.length; si++) {
+            var idx = stacks[si].indexOf(p); if (idx >= 0) return idx;
+          }
+          return 0;
+        }
+        function dotCY(p) { return Math.max(PUB_TOP_MIN + DOT_R, PUB_BASELINE - stackOf(p) * DOT_SPACING); }
+
+        var pubs   = pubG.selectAll('.pub-dot').data(PUBLICATIONS, function(d) { return d.id; });
+        var pEnter = pubs.enter().append('g').attr('class','pub-dot')
+          .style('cursor', function(d) { return d.url ? 'pointer' : 'default'; });
+        pEnter.append('line').attr('stroke-width', 1).attr('opacity', .45);
+        pEnter.append('circle').attr('r', DOT_R).attr('stroke','white').attr('stroke-width',1.5)
+          .on('mouseover', function(e, d) {
+            d3.select(this).attr('r', DOT_R + 2.5).attr('stroke-width', 2);
+            var dateStr = fmt(d.date) + (d.type==='journal' && d.date > TODAY ? ' (submitted)' : '');
+            showTlTip(e, d.full, d.venue, dateStr, d.url ? '↗ Click to open' : '');
+          })
+          .on('mousemove', posTlTip)
+          .on('mouseout', function() { d3.select(this).attr('r', DOT_R).attr('stroke-width', 1.5); hideTlTip(); })
+          .on('click', function(e, d) { if (d.url) window.open(d.url, '_blank', 'noopener'); });
+        pubG.selectAll('.pub-dot').each(function(d) {
+          var cx = xs(d.date), cy = dotCY(d);
+          d3.select(this).select('line')
+            .attr('x1',cx).attr('y1',PUB_BASELINE).attr('x2',cx).attr('y2',cy+DOT_R)
+            .attr('stroke', PCOL[d.type] || '#94a3b8');
+          d3.select(this).select('circle').attr('cx',cx).attr('cy',cy)
+            .attr('fill', PCOL[d.type] || '#94a3b8');
+        });
+        pubs.exit().remove();
+
+        // Time axis
+        var span = xs.domain()[1] - xs.domain()[0];
+        var years = span / (365.25*24*3600*1000);
+        var tickFn = years > 10 ? d3.timeYear.every(2) : d3.timeYear.every(1);
+        axisG.call(d3.axisBottom(xs).ticks(tickFn).tickFormat(d3.timeFormat('%Y')));
+        axisG.selectAll('text').style('font','400 11px Inter,sans-serif').attr('fill','#64748b');
+        axisG.select('.domain').attr('stroke','#e2e8f0');
+        axisG.selectAll('.tick line').attr('stroke','#e2e8f0').attr('y2',6);
+      }
+
+      var tlCurrentXform = d3.zoomIdentity;
+      var zoom = d3.zoom().scaleExtent([0.4, 30])
+        .on('zoom', function(e) {
+          tlCurrentXform = e.transform;
+          draw(e.transform.rescaleX(xBase));
+        });
+      svg.call(zoom);
+      svg.on('dblclick.zoom', null);
+      svg.on('dblclick', function() {
+        svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+      });
+
+      function tlResize() {
+        svg.attr('width', tlWrap.clientWidth);
+        xBase.range([0, iW()]);
+        draw(tlCurrentXform.rescaleX(xBase));
+      }
+      window.addEventListener('resize', tlResize);
+      requestAnimationFrame(tlResize);
+    }
 
     // ── D3 KNOWLEDGE GRAPH ──
     function buildGraph() {
