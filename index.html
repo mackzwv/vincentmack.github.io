@@ -694,6 +694,27 @@
       outline: 2px solid var(--accent);
       outline-offset: 2px
     }
+
+    /* ── SEMANTIC MAP ── */
+    .sem-intro { font-size: clamp(13px,1.8vw,14.5px); color: var(--muted); margin-bottom: 20px; max-width: 720px }
+    #sem-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 14px }
+    .sem-mode-toggle { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden }
+    .sem-btn { background: none; border: none; padding: 7px 16px; font-size: 13px; font-family: inherit; cursor: pointer; color: var(--muted); transition: background .15s, color .15s }
+    .sem-btn.active { background: var(--accent); color: #fff }
+    .sem-btn:hover:not(.active) { background: var(--tag-bg); color: var(--accent) }
+    #sem-concept-selects { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center }
+    #sem-concept-selects label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px }
+    #sem-concept-selects select { font-size: 13px; font-family: inherit; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; background: var(--surface); color: var(--text); cursor: pointer; max-width: 200px }
+    #sem-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 14px }
+    .sem-legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted) }
+    .sem-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0 }
+    #sem-wrap { width: 100%; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 10px }
+    #sem-svg { width: 100%; display: block }
+    #sem-svg .domain, #sem-svg .tick line { stroke: var(--border) }
+    #sem-svg .tick text { fill: var(--muted); font-size: 11px; font-family: 'Inter', sans-serif }
+    .sem-empty { text-align: center; padding: clamp(40px,8vw,80px) 24px; color: var(--muted) }
+    .sem-empty code { font-family: var(--mono); background: var(--tag-bg); color: var(--tag-fg); padding: 1px 5px; border-radius: 3px }
+    .sem-empty pre { font-family: var(--mono); font-size: 12px; background: var(--tag-bg); color: var(--text); padding: 14px 18px; border-radius: 8px; display: inline-block; text-align: left; margin-top: 14px; border: 1px solid var(--border) }
   </style>
 </head>
 
@@ -738,6 +759,7 @@
       <a class="nav-tab"        href="#" data-tab="teaching"     role="tab" aria-selected="false" aria-controls="teaching">Teaching</a>
       <a class="nav-tab"        href="#" data-tab="experience"   role="tab" aria-selected="false" aria-controls="experience">Experience</a>
       <a class="nav-tab"        href="#" data-tab="cv"           role="tab" aria-selected="false" aria-controls="cv">CV</a>
+      <a class="nav-tab"        href="#" data-tab="semantic"     role="tab" aria-selected="false" aria-controls="semantic">Semantic Map</a>
     </div>
   </div>
   <main>
@@ -966,6 +988,25 @@
         </a>
       </div>
     </section>
+
+    <section id="semantic" class="tab-pane" role="tabpanel">
+      <div class="sec">Semantic Map</div>
+      <p class="sem-intro">An embedding-based map of my research. Each dot is a paper — position reflects semantic similarity, so papers on related topics cluster together. Switch to <strong>Concept Pair</strong> mode to project papers onto any two research axes (x-axis = similarity to concept A, y-axis = concept B).</p>
+      <div id="sem-controls">
+        <div class="sem-mode-toggle" role="group" aria-label="Visualisation mode">
+          <button class="sem-btn active" data-mode="umap" type="button">UMAP Layout</button>
+          <button class="sem-btn" data-mode="concept" type="button">Concept Pair</button>
+        </div>
+        <div id="sem-concept-selects" style="display:none" aria-label="Concept axis selectors">
+          <label for="sem-cx">X axis:&nbsp;<select id="sem-cx" aria-label="X-axis concept"></select></label>
+          <label for="sem-cy">Y axis:&nbsp;<select id="sem-cy" aria-label="Y-axis concept"></select></label>
+        </div>
+      </div>
+      <div id="sem-legend" aria-label="Legend" role="list"></div>
+      <div id="sem-wrap">
+        <svg id="sem-svg" role="img" aria-label="Semantic research map scatter plot"></svg>
+      </div>
+    </section>
   </main>
 
   <div id="g-tooltip" role="tooltip">
@@ -979,6 +1020,7 @@
     var tabs = document.querySelectorAll('.nav-tab');
     var panes = document.querySelectorAll('.tab-pane');
     var graphBuilt = false;
+    var semanticBuilt = false;
     function activateTab(tab) {
       for (var i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove('active');
@@ -992,6 +1034,10 @@
       if (tab.getAttribute('data-tab') === 'network' && !graphBuilt) {
         graphBuilt = true;
         setTimeout(buildGraph, 60);
+      }
+      if (tab.getAttribute('data-tab') === 'semantic' && !semanticBuilt) {
+        semanticBuilt = true;
+        setTimeout(buildSemanticMap, 60);
       }
     }
     for (var k = 0; k < tabs.length; k++) {
@@ -1263,6 +1309,258 @@
           .attr('x2', function (d) { return d.target.x; }).attr('y2', function (d) { return d.target.y; });
         node.attr('transform', function (d) { return 'translate(' + d.x + ',' + d.y + ')'; });
       });
+    }
+
+    // ── SEMANTIC MAP ──────────────────────────────────────────────────────────
+    // Inline fallback: null until embed_pipeline.py is run and embeddings.json is generated
+    var FALLBACK_EMBEDDINGS = null;
+
+    var semData = null;
+    var semMode = 'umap';
+    var semSvgReady = false;
+    var semSvgSel, semGSel;
+    var SEM_M = { top: 28, right: 24, bottom: 56, left: 52 };
+
+    var SEM_GROUP_COLORS = {
+      'Doctoral Dissertation':                     '#d97706',
+      'Journal Articles — Published':         '#059669',
+      'Journal Articles — Work in Progress':  '#059669',
+      'Refereed Conference Proceedings':           '#2563eb',
+      'Policy Papers & Commentaries (RSIS, NTU)': '#7c3aed',
+      'Commentaries & Op-Eds (External)':         '#9333ea',
+      'Practitioner Publications':                 '#0891b2'
+    };
+
+    var SEM_LEGEND_ITEMS = [
+      { label: 'Dissertation',        color: '#d97706' },
+      { label: 'Journal',             color: '#059669' },
+      { label: 'Conference',          color: '#2563eb' },
+      { label: 'Policy / RSIS',       color: '#7c3aed' },
+      { label: 'External Op-Ed',      color: '#9333ea' },
+      { label: 'Practitioner',        color: '#0891b2' }
+    ];
+
+    function semGroupColor(group) {
+      return SEM_GROUP_COLORS[group] || '#94a3b8';
+    }
+
+    function semConceptLabel(data, id) {
+      for (var i = 0; i < data.concepts.length; i++) {
+        if (data.concepts[i].id === id) {
+          var lbl = data.concepts[i].label;
+          return lbl.length > 28 ? lbl.slice(0, 27) + '…' : lbl;
+        }
+      }
+      return id;
+    }
+
+    function buildSemanticLegend() {
+      var el = document.getElementById('sem-legend');
+      if (!el) return;
+      var html = '';
+      for (var i = 0; i < SEM_LEGEND_ITEMS.length; i++) {
+        html += '<div class="sem-legend-item" role="listitem">'
+          + '<span class="sem-legend-dot" style="background:' + SEM_LEGEND_ITEMS[i].color + '"></span>'
+          + escH(SEM_LEGEND_ITEMS[i].label) + '</div>';
+      }
+      el.innerHTML = html;
+    }
+
+    function buildSemanticMap() {
+      fetch('embeddings.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          semData = data;
+          initSemControls(data);
+          renderSemScatter(data, 'umap', null, null);
+        })
+        .catch(function () {
+          if (FALLBACK_EMBEDDINGS) {
+            semData = FALLBACK_EMBEDDINGS;
+            initSemControls(FALLBACK_EMBEDDINGS);
+            renderSemScatter(FALLBACK_EMBEDDINGS, 'umap', null, null);
+          } else {
+            showSemEmpty();
+          }
+        });
+      buildSemanticLegend();
+    }
+
+    function showSemEmpty() {
+      var wrap = document.getElementById('sem-wrap');
+      wrap.innerHTML = '<div class="sem-empty">'
+        + '<div style="font-size:2em;margin-bottom:14px">&#128202;</div>'
+        + '<p style="font-weight:600;color:var(--text);margin-bottom:8px">No embedding data found.</p>'
+        + '<p style="font-size:13px">Run <code>embed_pipeline.py</code> to generate semantic embeddings,<br>'
+        + 'then place <code>embeddings.json</code> in the website root alongside <code>graph-data.json</code>.</p>'
+        + '<pre>pip install sentence-transformers umap-learn pdfplumber requests beautifulsoup4\n'
+        + 'python embed_pipeline.py\n'
+        + '# then deploy embeddings.json with the site</pre>'
+        + '</div>';
+    }
+
+    function initSemControls(data) {
+      var cx = document.getElementById('sem-cx');
+      var cy = document.getElementById('sem-cy');
+      if (!cx || !cy) return;
+      cx.innerHTML = '';
+      cy.innerHTML = '';
+      var concepts = data.concepts;
+      for (var i = 0; i < concepts.length; i++) {
+        var o1 = document.createElement('option');
+        o1.value = concepts[i].id;
+        o1.textContent = concepts[i].label;
+        cx.appendChild(o1);
+        var o2 = document.createElement('option');
+        o2.value = concepts[i].id;
+        o2.textContent = concepts[i].label;
+        cy.appendChild(o2);
+      }
+      if (concepts.length > 1) cy.selectedIndex = 1;
+
+      var btns = document.querySelectorAll('.sem-btn');
+      for (var b = 0; b < btns.length; b++) {
+        btns[b].addEventListener('click', function () {
+          for (var x = 0; x < btns.length; x++) btns[x].classList.remove('active');
+          this.classList.add('active');
+          semMode = this.getAttribute('data-mode');
+          document.getElementById('sem-concept-selects').style.display =
+            semMode === 'concept' ? 'flex' : 'none';
+          updateSemScatter();
+        });
+      }
+      cx.addEventListener('change', updateSemScatter);
+      cy.addEventListener('change', updateSemScatter);
+    }
+
+    function updateSemScatter() {
+      if (!semData) return;
+      var cxId = document.getElementById('sem-cx').value;
+      var cyId = document.getElementById('sem-cy').value;
+      renderSemScatter(semData, semMode, cxId, cyId);
+    }
+
+    function renderSemScatter(data, mode, cxId, cyId) {
+      var wrap = document.getElementById('sem-wrap');
+      if (!wrap) return;
+      var W = wrap.clientWidth || 720;
+      var H = Math.max(400, Math.min(560, window.innerHeight * 0.6));
+      var iW = W - SEM_M.left - SEM_M.right;
+      var iH = H - SEM_M.top - SEM_M.bottom;
+
+      var papers = data.papers;
+
+      // Compute (x, y) for each paper
+      var pts = papers.map(function (p) {
+        var px, py;
+        if (mode === 'umap') {
+          px = p.umap_x; py = p.umap_y;
+        } else {
+          var sims = p.concept_sims || {};
+          px = sims[cxId] != null ? sims[cxId] : 0;
+          py = sims[cyId] != null ? sims[cyId] : 0;
+        }
+        return { x: px, y: py, paper: p };
+      });
+
+      // Scales
+      var xExt = d3.extent(pts, function (d) { return d.x; });
+      var yExt = d3.extent(pts, function (d) { return d.y; });
+      var xPad = Math.max((xExt[1] - xExt[0]) * 0.1, 0.05);
+      var yPad = Math.max((yExt[1] - yExt[0]) * 0.1, 0.05);
+      var xScale = d3.scaleLinear().domain([xExt[0] - xPad, xExt[1] + xPad]).range([0, iW]);
+      var yScale = d3.scaleLinear().domain([yExt[0] - yPad, yExt[1] + yPad]).range([iH, 0]);
+
+      if (!semSvgReady) {
+        semSvgReady = true;
+        semSvgSel = d3.select('#sem-svg').attr('height', H);
+        semGSel = semSvgSel.append('g')
+          .attr('transform', 'translate(' + SEM_M.left + ',' + SEM_M.top + ')');
+        semGSel.append('g').attr('class', 'sem-x-axis').attr('transform', 'translate(0,' + iH + ')');
+        semGSel.append('g').attr('class', 'sem-y-axis');
+        semSvgSel.append('text').attr('class', 'sem-xlabel')
+          .attr('text-anchor', 'middle')
+          .attr('y', H - 10)
+          .style('font-size', '12px').style('fill', 'var(--muted)').style('font-family', "'Inter',sans-serif");
+        semSvgSel.append('text').attr('class', 'sem-ylabel')
+          .attr('text-anchor', 'middle')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', 13)
+          .style('font-size', '12px').style('fill', 'var(--muted)').style('font-family', "'Inter',sans-serif");
+        semGSel.append('g').attr('class', 'sem-dots');
+
+        // Tooltip reuse (graph tooltip)
+        var semTooltip = document.getElementById('g-tooltip');
+        semGSel.select('.sem-dots').on('mouseleave', function () {
+          semTooltip.classList.remove('visible');
+        });
+      } else {
+        semSvgSel.attr('height', H);
+        semGSel.select('.sem-x-axis').attr('transform', 'translate(0,' + iH + ')');
+      }
+
+      // Axis labels
+      var xLabel = mode === 'umap' ? 'UMAP Dimension 1' : semConceptLabel(data, cxId) + ' similarity';
+      var yLabel = mode === 'umap' ? 'UMAP Dimension 2' : semConceptLabel(data, cyId) + ' similarity';
+      semSvgSel.select('.sem-xlabel').attr('x', SEM_M.left + iW / 2).text(xLabel);
+      semSvgSel.select('.sem-ylabel').attr('x', -(SEM_M.top + iH / 2)).text(yLabel);
+
+      var xAxisFn = d3.axisBottom(xScale).ticks(5).tickFormat(d3.format('.2f'));
+      var yAxisFn = d3.axisLeft(yScale).ticks(5).tickFormat(d3.format('.2f'));
+      semGSel.select('.sem-x-axis').transition().duration(500).call(xAxisFn);
+      semGSel.select('.sem-y-axis').transition().duration(500).call(yAxisFn);
+
+      // Dots
+      var dotsG = semGSel.select('.sem-dots');
+      var tooltip = document.getElementById('g-tooltip');
+      var ttTitle = document.getElementById('tt-title');
+      var ttType  = document.getElementById('tt-type');
+      var ttDesc  = document.getElementById('tt-desc');
+
+      var circles = dotsG.selectAll('circle').data(pts, function (d) { return d.paper.id; });
+
+      // ENTER: add new circles with handlers, invisible at current position
+      var entered = circles.enter()
+        .append('circle')
+        .attr('r', 7)
+        .attr('fill', function (d) { return semGroupColor(d.paper.group); })
+        .attr('stroke', 'white').attr('stroke-width', 1.5).attr('opacity', 0)
+        .attr('cx', function (d) { return xScale(d.x); })
+        .attr('cy', function (d) { return yScale(d.y); })
+        .style('cursor', function (d) { return d.paper.url ? 'pointer' : 'default'; })
+        .on('mouseover', function (event, d) {
+          var sims = d.paper.concept_sims || {};
+          var entries = Object.keys(sims).map(function (k) { return [k, sims[k]]; });
+          entries.sort(function (a, b) { return b[1] - a[1]; });
+          var topDesc = entries.slice(0, 3).map(function (e) {
+            return semConceptLabel(data, e[0]) + ': ' + e[1].toFixed(2);
+          }).join('  ·  ');
+          var title = d.paper.title.length > 68 ? d.paper.title.slice(0, 67) + '…' : d.paper.title;
+          ttTitle.textContent = title;
+          ttType.textContent  = d.paper.group;
+          ttDesc.textContent  = topDesc || 'Run embed_pipeline.py for similarity scores';
+          tooltip.classList.add('visible');
+          tooltip.style.left = Math.min(event.clientX + 14, window.innerWidth - 260) + 'px';
+          tooltip.style.top  = (event.clientY - 10) + 'px';
+        })
+        .on('mousemove', function (event) {
+          tooltip.style.left = Math.min(event.clientX + 14, window.innerWidth - 260) + 'px';
+          tooltip.style.top  = (event.clientY - 10) + 'px';
+        })
+        .on('mouseout', function () { tooltip.classList.remove('visible'); })
+        .on('click', function (event, d) {
+          if (d.paper.url) window.open(d.paper.url, '_blank', 'noopener');
+        });
+
+      // ENTER + UPDATE: animate all circles to final position
+      entered.merge(circles)
+        .transition().duration(500).ease(d3.easeCubicInOut)
+        .attr('cx', function (d) { return xScale(d.x); })
+        .attr('cy', function (d) { return yScale(d.y); })
+        .attr('fill', function (d) { return semGroupColor(d.paper.group); })
+        .attr('opacity', 0.88);
+
+      circles.exit().transition().duration(300).attr('opacity', 0).remove();
     }
   </script>
 </body>

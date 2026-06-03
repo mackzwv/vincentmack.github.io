@@ -1,0 +1,456 @@
+{
+  "_meta": {
+    "model": "all-MiniLM-L6-v2",
+    "n_papers": 20,
+    "n_concepts": 9,
+    "umap_neighbors": 12,
+    "generated": "2026-06-03T15:10:27.481006Z"
+  },
+  "papers": [
+    {
+      "id": "diss",
+      "title": "Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation",
+      "group": "Doctoral Dissertation",
+      "url": "https://ink.library.smu.edu.sg/etd_coll/615/",
+      "umap_x": -5.5183,
+      "umap_y": 4.3232,
+      "concept_sims": {
+        "neuro": 0.4969,
+        "sysdy": 0.2007,
+        "creat": 0.7645,
+        "cd": 0.2994,
+        "crowdsrc": 0.5936,
+        "netw": 0.6467,
+        "simul": 0.2058,
+        "geo": 0.1635,
+        "policy": 0.119
+      }
+    },
+    {
+      "id": "jmis1",
+      "title": "New Idea Success in Online Platforms: A Knowledge Recombination Perspective",
+      "group": "Journal Articles — Work in Progress",
+      "url": "",
+      "umap_x": -5.873,
+      "umap_y": 4.6404,
+      "concept_sims": {
+        "neuro": 0.2619,
+        "sysdy": 0.145,
+        "creat": 0.6115,
+        "cd": 0.1822,
+        "crowdsrc": 0.7116,
+        "netw": 0.4497,
+        "simul": 0.1032,
+        "geo": 0.0757,
+        "policy": 0.1982
+      }
+    },
+    {
+      "id": "icis22",
+      "title": "Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement: The Moderating Role of Idea Breadth and Depth",
+      "group": "Refereed Conference Proceedings",
+      "url": "",
+      "umap_x": -6.3697,
+      "umap_y": 4.4251,
+      "concept_sims": {
+        "neuro": 0.2176,
+        "sysdy": 0.0879,
+        "creat": 0.5821,
+        "cd": 0.1642,
+        "crowdsrc": 0.5451,
+        "netw": 0.4788,
+        "simul": 0.1195,
+        "geo": 0.116,
+        "policy": 0.1501
+      }
+    },
+    {
+      "id": "icis20",
+      "title": "Semantic and Network Evolution in Crowdsourced Idea Refinement",
+      "group": "Refereed Conference Proceedings",
+      "url": "",
+      "umap_x": -6.1626,
+      "umap_y": 4.1258,
+      "concept_sims": {
+        "neuro": 0.3287,
+        "sysdy": 0.1705,
+        "creat": 0.6111,
+        "cd": 0.2521,
+        "crowdsrc": 0.59,
+        "netw": 0.4678,
+        "simul": 0.1162,
+        "geo": 0.156,
+        "policy": 0.1154
+      }
+    },
+    {
+      "id": "spatial",
+      "title": "Is There Space for Violence: A Data-driven Approach to the Exploration of Spatial-Temporal Dimensions of Conflict",
+      "group": "Refereed Conference Proceedings",
+      "url": "",
+      "umap_x": -4.4549,
+      "umap_y": 5.0686,
+      "concept_sims": {
+        "neuro": 0.1303,
+        "sysdy": 0.1442,
+        "creat": 0.1717,
+        "cd": 0.1292,
+        "crowdsrc": 0.1004,
+        "netw": 0.1553,
+        "simul": 0.1412,
+        "geo": 0.7321,
+        "policy": 0.075
+      }
+    },
+    {
+      "id": "bri",
+      "title": "'Chinese Dream,' Global Ambition: Beijing's Belt and Road Initiative",
+      "group": "Journal Articles — Published",
+      "url": "https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei",
+      "umap_x": -1.9418,
+      "umap_y": 6.0571,
+      "concept_sims": {
+        "neuro": 0.0403,
+        "sysdy": 0.2512,
+        "creat": 0.1022,
+        "cd": 0.1022,
+        "crowdsrc": 0.1355,
+        "netw": 0.0421,
+        "simul": 0.1399,
+        "geo": 0.0645,
+        "policy": 0.4245
+      }
+    },
+    {
+      "id": "digital_hurricane",
+      "title": "A Prolegomenary on the Digital Economy: 'Digital Hurricane' Hits ASEAN",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "",
+      "umap_x": -0.995,
+      "umap_y": 5.3771,
+      "concept_sims": {
+        "neuro": -0.0219,
+        "sysdy": 0.2152,
+        "creat": 0.1375,
+        "cd": 0.0955,
+        "crowdsrc": 0.1952,
+        "netw": 0.0687,
+        "simul": 0.1894,
+        "geo": 0.1475,
+        "policy": 0.6762
+      }
+    },
+    {
+      "id": "labour_migration",
+      "title": "How Emerging Global Trends May Affect Labour Migration in ASEAN",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/",
+      "umap_x": -1.6897,
+      "umap_y": 5.2659,
+      "concept_sims": {
+        "neuro": 0.039,
+        "sysdy": 0.1616,
+        "creat": 0.1256,
+        "cd": 0.0987,
+        "crowdsrc": 0.086,
+        "netw": 0.0033,
+        "simul": 0.073,
+        "geo": 0.1293,
+        "policy": 0.4925
+      }
+    },
+    {
+      "id": "econ_security",
+      "title": "Economic Security Challenges Facing Singapore – 2017 and Beyond",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "",
+      "umap_x": -1.8508,
+      "umap_y": 4.6134,
+      "concept_sims": {
+        "neuro": -0.0355,
+        "sysdy": 0.3532,
+        "creat": 0.0284,
+        "cd": 0.026,
+        "crowdsrc": 0.0501,
+        "netw": -0.0227,
+        "simul": 0.209,
+        "geo": 0.0729,
+        "policy": 0.6256
+      }
+    },
+    {
+      "id": "smartcity",
+      "title": "Science, Technology and Human Security: Getting Singapore Smart City-Ready",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/",
+      "umap_x": -2.7784,
+      "umap_y": 4.7984,
+      "concept_sims": {
+        "neuro": 0.0806,
+        "sysdy": 0.3065,
+        "creat": 0.1897,
+        "cd": 0.1146,
+        "crowdsrc": 0.1868,
+        "netw": 0.0823,
+        "simul": 0.0963,
+        "geo": 0.2148,
+        "policy": 0.4474
+      }
+    },
+    {
+      "id": "amr",
+      "title": "Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/",
+      "umap_x": -2.2084,
+      "umap_y": 5.2212,
+      "concept_sims": {
+        "neuro": 0.042,
+        "sysdy": 0.1616,
+        "creat": 0.0763,
+        "cd": 0.0176,
+        "crowdsrc": 0.1069,
+        "netw": 0.0249,
+        "simul": 0.0571,
+        "geo": 0.1268,
+        "policy": 0.383
+      }
+    },
+    {
+      "id": "shared_economy",
+      "title": "Shared Economy Business: Fixing Its 'Genetic Disorder'",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/",
+      "umap_x": -1.2609,
+      "umap_y": 5.3525,
+      "concept_sims": {
+        "neuro": 0.0562,
+        "sysdy": 0.1807,
+        "creat": 0.1547,
+        "cd": 0.0424,
+        "crowdsrc": 0.1886,
+        "netw": 0.0865,
+        "simul": 0.1656,
+        "geo": 0.0124,
+        "policy": 0.2618
+      }
+    },
+    {
+      "id": "tradewar",
+      "title": "The US-Launched Trade War: Its Wide-Ranging Impact",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/",
+      "umap_x": -1.1948,
+      "umap_y": 4.6693,
+      "concept_sims": {
+        "neuro": -0.053,
+        "sysdy": 0.1506,
+        "creat": -0.0016,
+        "cd": 0.0167,
+        "crowdsrc": -0.0139,
+        "netw": -0.0374,
+        "simul": 0.1667,
+        "geo": 0.0911,
+        "policy": 0.4521
+      }
+    },
+    {
+      "id": "printing3d",
+      "title": "3D Printing vs Gun Control: Navigating the Paradox",
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/",
+      "umap_x": -2.1187,
+      "umap_y": 3.9763,
+      "concept_sims": {
+        "neuro": 0.0251,
+        "sysdy": 0.3322,
+        "creat": 0.1503,
+        "cd": -0.0132,
+        "crowdsrc": 0.1462,
+        "netw": 0.0171,
+        "simul": 0.2056,
+        "geo": 0.0141,
+        "policy": 0.3865
+      }
+    },
+    {
+      "id": "megacity",
+      "title": "Can the World's Megacities Survive the Digital Age?",
+      "group": "Commentaries & Op-Eds (External)",
+      "url": "https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257",
+      "umap_x": -3.2564,
+      "umap_y": 5.3352,
+      "concept_sims": {
+        "neuro": 0.0866,
+        "sysdy": 0.2077,
+        "creat": 0.3181,
+        "cd": 0.0318,
+        "crowdsrc": 0.2976,
+        "netw": 0.2044,
+        "simul": 0.1439,
+        "geo": 0.1558,
+        "policy": 0.2569
+      }
+    },
+    {
+      "id": "island",
+      "title": "Can We Save Low-Lying Island Nations from Rising Seas?",
+      "group": "Commentaries & Op-Eds (External)",
+      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232",
+      "umap_x": -2.4521,
+      "umap_y": 6.4479,
+      "concept_sims": {
+        "neuro": 0.0463,
+        "sysdy": 0.0761,
+        "creat": -0.0329,
+        "cd": 0.0254,
+        "crowdsrc": 0.0331,
+        "netw": -0.0735,
+        "simul": 0.1064,
+        "geo": 0.1732,
+        "policy": 0.2854
+      }
+    },
+    {
+      "id": "brichal",
+      "title": "The Four Challenges of the Belt and Road",
+      "group": "Commentaries & Op-Eds (External)",
+      "url": "https://www.chinausfocus.com/finance-economy/the-four-challenges-of-the-belt-and-road",
+      "umap_x": -1.313,
+      "umap_y": 6.1148,
+      "concept_sims": {
+        "neuro": -0.0241,
+        "sysdy": 0.1877,
+        "creat": 0.0228,
+        "cd": 0.0569,
+        "crowdsrc": 0.0913,
+        "netw": 0.0044,
+        "simul": 0.1429,
+        "geo": 0.0633,
+        "policy": 0.3701
+      }
+    },
+    {
+      "id": "sleep",
+      "title": "How the Global Sleep Deficit is Bankrupting Humanity",
+      "group": "Commentaries & Op-Eds (External)",
+      "url": "https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity",
+      "umap_x": -2.6001,
+      "umap_y": 5.4728,
+      "concept_sims": {
+        "neuro": 0.077,
+        "sysdy": 0.1729,
+        "creat": 0.0613,
+        "cd": 0.1118,
+        "crowdsrc": 0.0759,
+        "netw": 0.0521,
+        "simul": 0.0825,
+        "geo": 0.1067,
+        "policy": 0.4648
+      }
+    },
+    {
+      "id": "sgrid",
+      "title": "A Global Smart Renewable Power Grid: A Radical Proposal",
+      "group": "Commentaries & Op-Eds (External)",
+      "url": "https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal",
+      "umap_x": -2.7007,
+      "umap_y": 5.9611,
+      "concept_sims": {
+        "neuro": 0.0603,
+        "sysdy": 0.1831,
+        "creat": 0.0865,
+        "cd": 0.0466,
+        "crowdsrc": 0.1014,
+        "netw": 0.0813,
+        "simul": 0.1563,
+        "geo": 0.1586,
+        "policy": 0.4463
+      }
+    },
+    {
+      "id": "aisp",
+      "title": "Harnessing AI for Creative Ideation & Combinatorial Systems",
+      "group": "Practitioner Publications",
+      "url": "https://www.aisp.sg/document/newsletter/AISP%20Newsletter%202025/AiSP_Newsletter_2025%20April_v1.pdf",
+      "umap_x": -2.8081,
+      "umap_y": 4.3192,
+      "concept_sims": {
+        "neuro": 0.2012,
+        "sysdy": 0.2808,
+        "creat": 0.2124,
+        "cd": 0.2385,
+        "crowdsrc": 0.261,
+        "netw": 0.0986,
+        "simul": 0.1254,
+        "geo": 0.1287,
+        "policy": 0.3548
+      }
+    }
+  ],
+  "concepts": [
+    {
+      "id": "neuro",
+      "type": "area",
+      "label": "Neurosymbolic AI & Knowledge Representation",
+      "umap_x": -5.0172,
+      "umap_y": 3.8202
+    },
+    {
+      "id": "sysdy",
+      "type": "area",
+      "label": "System Dynamics & Decision Support",
+      "umap_x": -3.3646,
+      "umap_y": 3.8346
+    },
+    {
+      "id": "creat",
+      "type": "area",
+      "label": "Combinatorial Creativity & Networks",
+      "umap_x": -5.5183,
+      "umap_y": 4.7574
+    },
+    {
+      "id": "cd",
+      "type": "concept",
+      "label": "Conceptual Dependency Theory",
+      "umap_x": -4.6445,
+      "umap_y": 3.6786
+    },
+    {
+      "id": "crowdsrc",
+      "type": "concept",
+      "label": "Crowdsourcing Platforms",
+      "umap_x": -6.1704,
+      "umap_y": 4.9656
+    },
+    {
+      "id": "netw",
+      "type": "concept",
+      "label": "Network Theory",
+      "umap_x": -5.6271,
+      "umap_y": 3.7054
+    },
+    {
+      "id": "simul",
+      "type": "concept",
+      "label": "System Dynamics Modelling",
+      "umap_x": -3.9186,
+      "umap_y": 3.6959
+    },
+    {
+      "id": "geo",
+      "type": "concept",
+      "label": "Geospatial Analysis",
+      "umap_x": -4.1245,
+      "umap_y": 4.6829
+    },
+    {
+      "id": "policy",
+      "type": "concept",
+      "label": "Policy & Horizon Scanning",
+      "umap_x": -1.492,
+      "umap_y": 4.2192
+    }
+  ]
+}
