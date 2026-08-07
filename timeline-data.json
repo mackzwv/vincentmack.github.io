@@ -1,9 +1,8 @@
 {
   "_meta": {
-    "last_updated": "2026-06-04",
+    "last_updated": "2026-08-06",
     "note": "Edit this file to update the career timeline. Dates are ISO 8601 (YYYY-MM-DD). Set present:true on the current job and extend its end date generously so the bar fades out at the right edge."
   },
-
   "education": [
     {
       "id": "nus",
@@ -42,7 +41,6 @@
       "detail": "GPA 3.30 / 4.00 · A*STAR ACIS Scholar\nDissertation: Combinatorial Creativity: Knowledge Graphs and Idea Generation in Crowdsourcing Innovation"
     }
   ],
-
   "employment": [
     {
       "id": "mcys",
@@ -100,16 +98,59 @@
       "detail": "Lecturer, School of Information Technology (Current)\nData analytics, AI, application development, data management — PET and CET learners. Curriculum development, internship mentoring, and FYP supervision.\nMember, IRB for Teaching & Learning Research."
     }
   ],
-
   "publications": [
+    {
+      "id": "msc",
+      "type": "journal",
+      "date": "2015-05-01",
+      "label": "Labour Protests & Trade",
+      "venue": "M.Sc. Dissertation, NTU",
+      "full": "International Trade and Labour's Class Struggles: Political Economic Determinants of Labour Protests"
+    },
+    {
+      "id": "trump_us_role",
+      "type": "policy",
+      "date": "2016-11-24",
+      "label": "Re-imagining US Role",
+      "venue": "RSIS Commentary (CO16288)",
+      "full": "Turning Trouble Around: Re-imagining US Role as Global Player",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co16288-the-rise-of-trump-and-its-global-implications-turning-trouble-around-re-imagining-us-role-as-global-player/"
+    },
     {
       "id": "smartcity",
       "type": "policy",
-      "date": "2017-01-14",
+      "date": "2017-01-17",
       "label": "Smart City-Ready",
       "venue": "RSIS Commentary (CO17014)",
       "full": "Science, Technology and Human Security: Getting Singapore Smart City-Ready",
       "url": "https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/"
+    },
+    {
+      "id": "food_security",
+      "type": "policy",
+      "date": "2017-07-20",
+      "label": "Food Security & AMR",
+      "venue": "RSIS Commentary (CO17137)",
+      "full": "Food Security and The “Terrorist Within Us”",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co17137-world-agricultural-forum-2017-food-security-and-the-terrorist-within-us/"
+    },
+    {
+      "id": "tip_labour",
+      "type": "policy",
+      "date": "2017-07-21",
+      "label": "Trafficking & Forced Labour",
+      "venue": "RSIS Commentary (CO17138)",
+      "full": "Trafficking in Persons and Forced Labour: Southeast Asian Scenario",
+      "url": "https://www.rsis.edu.sg/rsis-publication/nts/co17138-trafficking-in-persons-and-forced-labour-southeast-asian-scenario/"
+    },
+    {
+      "id": "island",
+      "type": "opeds",
+      "date": "2017-07-21",
+      "label": "Island Nations & Rising Seas",
+      "venue": "The Conversation",
+      "full": "Can We Save Low-Lying Island Nations from Rising Seas?",
+      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232"
     },
     {
       "id": "labour",
@@ -123,25 +164,16 @@
     {
       "id": "megacity",
       "type": "opeds",
-      "date": "2017-09-15",
+      "date": "2017-09-19",
       "label": "Megacities & Digital Age",
       "venue": "The Conversation",
       "full": "Can the World's Megacities Survive the Digital Age?",
       "url": "https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257"
     },
     {
-      "id": "island",
-      "type": "opeds",
-      "date": "2017-10-10",
-      "label": "Island Nations & Rising Seas",
-      "venue": "The Conversation",
-      "full": "Can We Save Low-Lying Island Nations from Rising Seas?",
-      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232"
-    },
-    {
       "id": "amr",
       "type": "policy",
-      "date": "2018-01-25",
+      "date": "2018-02-12",
       "label": "AMR Superbug",
       "venue": "RSIS Commentary (CO18022)",
       "full": "Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action",
@@ -168,9 +200,9 @@
     {
       "id": "tradewar",
       "type": "policy",
-      "date": "2018-07-12",
+      "date": "2018-07-05",
       "label": "US Trade War",
-      "venue": "RSIS Commentary (CO18114)",
+      "venue": "RSIS Commentary (CO18114) · earlier version AsiaGlobal Online",
       "full": "The US-Launched Trade War: Its Wide-Ranging Impact",
       "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/"
     },
@@ -193,6 +225,15 @@
       "url": "https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei"
     },
     {
+      "id": "qe_overdose",
+      "type": "policy",
+      "date": "2018-10-16",
+      "label": "Quantitative Easing",
+      "venue": "RSIS Commentary (CO18169)",
+      "full": "Overdose of Quantitative Easing: Economic Weather Changing?",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18169-overdose-of-quantitative-easing-economic-weather-changing/"
+    },
+    {
       "id": "spatial",
       "type": "journal",
       "date": "2018-11-06",
@@ -207,6 +248,15 @@
       "label": "\"Digital Hurricane\" ASEAN",
       "venue": "RSIS Policy Paper",
       "full": "A Prolegomenary on the Digital Economy: “Digital Hurricane” Hits ASEAN"
+    },
+    {
+      "id": "vietnam_ict",
+      "type": "policy",
+      "date": "2019-05-13",
+      "label": "Vietnam ICT Growth",
+      "venue": "RSIS Commentary (CO19096)",
+      "full": "ASEAN's New Economic Player — Vietnam: ICT as Engine of Rapid Growth",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/aseans-new-economic-player-vietnam-ict-as-engine-of-rapid-growth/"
     },
     {
       "id": "sleep",
@@ -255,9 +305,9 @@
       "id": "jmis",
       "type": "journal",
       "date": "2025-01-15",
-      "label": "New Idea Success (review)",
-      "venue": "JMIS",
-      "full": "New Idea Success in Online Platforms: A Knowledge Recombination Perspective"
+      "label": "Success of New Ideas (in press)",
+      "venue": "JMIS (in press)",
+      "full": "Success of New Ideas in Online Platforms: An Idea Network Perspective"
     },
     {
       "id": "aisp",

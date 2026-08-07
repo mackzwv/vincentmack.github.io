@@ -391,6 +391,11 @@
       color: #475569
     }
 
+    .b-press {
+      background: #fffbeb;
+      color: #92400e
+    }
+
     .b-prac {
       background: #f0fdf4;
       color: #065f46
@@ -736,6 +741,7 @@
     .sem-btn:hover:not(.active) { background: var(--tag-bg); color: var(--accent) }
     #sem-concept-selects { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center }
     #sem-concept-selects label { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px }
+    #sem-highlight { font-size: 13px; font-family: inherit; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; background: var(--surface); color: var(--text); cursor: pointer; max-width: 320px }
     #sem-concept-selects select { font-size: 13px; font-family: inherit; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; background: var(--surface); color: var(--text); cursor: pointer; max-width: 200px }
     #sem-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 14px }
     .sem-legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted) }
@@ -881,7 +887,7 @@
 
       <!-- ── Career Timeline ── -->
       <div id="tl-pane" class="subtab-pane active">
-        <p class="subtab-desc">Chronological view of education, employment, and all 19 publications. Scroll to zoom in on any period; drag to pan; double-click to reset.</p>
+        <p class="subtab-desc">Chronological view of education, employment, and all 26 publications. Scroll to zoom in on any period; drag to pan; double-click to reset.</p>
         <div id="tl-chart-wrap"><svg id="tl-chart-svg"></svg></div>
         <div class="tl-legend">
           <div class="tl-l-item"><div class="tl-l-rect" style="background:#2563eb"></div>Education</div>
@@ -915,13 +921,19 @@
 
       <!-- ── Semantic Map ── -->
       <div id="sm-pane" class="subtab-pane">
-        <p class="subtab-desc">Embedding-based scatter of my papers by semantic similarity. Switch to <strong>Concept Pair</strong> mode to project onto any two research axes. Requires running <code style="font-family:var(--mono);background:var(--tag-bg);color:var(--tag-fg);padding:1px 4px;border-radius:3px">embed_pipeline.py</code> first.</p>
-        <p class="sem-intro">Each dot is a paper — position reflects semantic similarity, so papers on related topics cluster together. Switch to <strong>Concept Pair</strong> mode to project papers onto any two research axes (x = similarity to concept A, y = concept B).</p>
+        <p class="subtab-desc">Embedding-based scatter of my work by semantic similarity. Each paper is split into ~200-word passages and embedded individually; the faint cloud shows where a paper's passages land and the solid dot is their centroid. Hover a paper to isolate its own passages. Switch to <strong>Concept Pair</strong> mode to project onto any two research axes. Requires running <code style="font-family:var(--mono);background:var(--tag-bg);color:var(--tag-fg);padding:1px 4px;border-radius:3px">embed_pipeline_v2.py</code> first.</p>
+        <p class="sem-intro">Each solid dot is a paper and each faint dot one passage from it — position reflects semantic similarity, so related material clusters together. A widely spread cloud means the work ranges across topics; a tight one means it stays put. Switch to <strong>Concept Pair</strong> mode to project papers onto any two research axes (x = similarity to concept A, y = concept B).</p>
         <div id="sem-controls">
           <div class="sem-mode-toggle" role="group" aria-label="Visualisation mode">
             <button class="sem-btn active" data-mode="umap" type="button">UMAP Layout</button>
             <button class="sem-btn" data-mode="concept" type="button">Concept Pair</button>
           </div>
+          <label id="sem-highlight-wrap" style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:10px">
+            Highlight
+            <select id="sem-highlight" aria-label="Highlight a publication type or discovered topic">
+              <option value="">— nothing —</option>
+            </select>
+          </label>
           <div id="sem-concept-selects" style="display:none" aria-label="Concept axis selectors">
             <label for="sem-cx">X axis:&nbsp;<select id="sem-cx" aria-label="X-axis concept"></select></label>
             <label for="sem-cy">Y axis:&nbsp;<select id="sem-cy" aria-label="Y-axis concept"></select></label>
@@ -1228,7 +1240,7 @@
     }
 
     // Inline fallback data (used when fetch is unavailable, e.g. file:// protocol)
-    var FALLBACK_DATA = {"nodes":[{"id":"neuro","type":"area","r":46,"label":"Neurosymbolic AI\n& Knowledge\nRepresentation","desc":"Integrating symbolic AI with deep learning. Building knowledge graphs from institutional knowledge using Conceptual Dependency Theory."},{"id":"sysdy","type":"area","r":46,"label":"System Dynamics\n& Decision\nSupport","desc":"Automated CLD-to-Stock-and-Flow pipelines. Applied to national food security and industrial operations management."},{"id":"creat","type":"area","r":46,"label":"Combinatorial\nCreativity\n& Networks","desc":"Mapping how ideas combine and recombine across knowledge domains. Grounded in network theory and crowdsourcing research."},{"id":"diss","type":"paper","r":28,"label":"Combinatorial\nCreativity\n(Diss. 2024)","desc":"PhD dissertation: Knowledge graphs and idea generation in crowdsourcing innovation. Singapore Management University, 2024."},{"id":"jmis1","type":"paper","r":22,"label":"New Idea\nSuccess\n(JMIS)","desc":"New Idea Success in Online Platforms: A Knowledge Recombination Perspective. Under review at Journal of Management Information Systems."},{"id":"icis22","type":"paper","r":18,"label":"Citation Network\nEmbeddedness\n(ICIS 2022)","desc":"Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement. ICIS 2022."},{"id":"icis20","type":"paper","r":18,"label":"Semantic &\nNetwork Evol.\n(ICIS 2020)","desc":"Semantic and Network Evolution in Crowdsourced Idea Refinement. ICIS 2020."},{"id":"spatial","type":"paper","r":16,"label":"Space &\nViolence\n(ACM 2018)","desc":"Is There Space for Violence: A Data-driven Approach to Spatial-Temporal Conflict. ACM SIGSPATIAL 2018."},{"id":"bri","type":"paper","r":16,"label":"Belt & Road\n(Global Asia\n2018)","desc":"Chinese Dream, Global Ambition: Beijing Belt and Road Initiative. Global Asia, 13(3), 2018."},{"id":"tradewar","type":"paper","r":16,"label":"US Trade War\n(RSIS CO18114\n2018)","desc":"The US-Launched Trade War: Its Wide-Ranging Impact. RSIS Commentary, July 2018. Analyses global supply chain disruptions and unintended consequences of US tariff policy."},{"id":"megacity","type":"paper","r":14,"label":"Megacities &\nDigital Age\n(2017)","desc":"Can the World's Megacities Survive the Digital Age? The Conversation, 2017. Argues digitisation and crowdsourcing will undermine the economic foundations of megacities."},{"id":"island","type":"paper","r":14,"label":"Island Nations\n& Rising Seas\n(2017)","desc":"Can We Save Low-Lying Island Nations from Rising Seas? The Conversation, 2017. Proposes large-scale land reclamation strategies to preserve threatened small island states."},{"id":"brichal","type":"paper","r":14,"label":"Four Challenges\nBelt & Road\n(2018)","desc":"The Four Challenges of the Belt and Road. China-US Focus, June 2018. Analyses governance, financing, sustainability, and geopolitical risks of the BRI."},{"id":"sleep","type":"paper","r":14,"label":"Global Sleep\nDeficit\n(2019)","desc":"How the Global Sleep Deficit is Bankrupting Humanity. AsiaGlobal Online, July 2019. Argues sleep deprivation is a major public health and economic crisis requiring urgent policy intervention."},{"id":"sgrid","type":"paper","r":14,"label":"Smart Renewable\nPower Grid\n(2019)","desc":"A Global Smart Renewable Power Grid: A Radical Proposal. AsiaGlobal Online, December 2019. Proposes an intercontinental smart grid to achieve >90% global renewable energy coverage."},{"id":"food","type":"project","r":26,"label":"Food Security\nSimulation\n(IMCFS)","desc":"System Dynamics framework modelling national food availability and supply-chain resilience for the Singapore Interministerial Committee on Food Security."},{"id":"japfa","type":"project","r":22,"label":"Livestock Mgmt\nModel\n(JAPFA)","desc":"Operational System Dynamics model for pig farm management. Also included recommender system for B2B commercial performance."},{"id":"nyp","type":"project","r":18,"label":"Enrolment\nAnalytics\n(NYP Power BI)","desc":"Power BI dashboards for NYP Communications and Outreach: tracking secondary school interest in diploma programmes to support resource allocation decisions."},{"id":"rsis","type":"project","r":22,"label":"Policy Research\n(RSIS NTU\n2015-2019)","desc":"Associate Research Fellow. Horizon scanning on emerging tech, digital economy, and regional security policy. Produced 12+ commentaries, op-eds, and policy papers across RSIS, AsiaGlobal Online, China-US Focus, and The Conversation."},{"id":"cd","type":"concept","r":20,"label":"Conceptual\nDependency\nTheory","desc":"Schank CDT: formal framework for representing meaning in natural language. Core methodology for knowledge structuring in neurosymbolic AI work."},{"id":"crowdsrc","type":"concept","r":18,"label":"Crowdsourcing\nPlatforms","desc":"Online innovation platforms as research sites for studying idea generation, refinement, and collaborative knowledge creation."},{"id":"netw","type":"concept","r":18,"label":"Network\nTheory","desc":"Graph-theoretic analysis of knowledge and idea networks. Underpins both creativity research and knowledge graph architecture work."},{"id":"simul","type":"concept","r":20,"label":"System Dynamics\nModelling","desc":"Stock-and-Flow simulation methodology enabling formal, computable representations of qualitative expert causal models."},{"id":"geo","type":"concept","r":16,"label":"Geospatial\nAnalysis","desc":"Spatial-temporal data analysis applied to conflict pattern research during RSIS fellowship."},{"id":"policy","type":"concept","r":16,"label":"Policy &\nHorizon\nScanning","desc":"Anticipatory policy analysis: identifying emerging technology trends and their societal and security implications."}],"links":[{"source":"neuro","target":"diss"},{"source":"neuro","target":"jmis1"},{"source":"neuro","target":"cd"},{"source":"neuro","target":"netw"},{"source":"creat","target":"diss"},{"source":"creat","target":"jmis1"},{"source":"creat","target":"icis22"},{"source":"creat","target":"icis20"},{"source":"creat","target":"crowdsrc"},{"source":"sysdy","target":"food"},{"source":"sysdy","target":"japfa"},{"source":"sysdy","target":"simul"},{"source":"sysdy","target":"nyp"},{"source":"icis20","target":"icis22","prog":true},{"source":"icis22","target":"jmis1","prog":true},{"source":"diss","target":"cd"},{"source":"diss","target":"crowdsrc"},{"source":"diss","target":"netw"},{"source":"icis20","target":"crowdsrc"},{"source":"icis22","target":"crowdsrc"},{"source":"food","target":"simul"},{"source":"japfa","target":"simul"},{"source":"spatial","target":"geo"},{"source":"bri","target":"policy"},{"source":"rsis","target":"bri"},{"source":"rsis","target":"spatial"},{"source":"rsis","target":"policy"},{"source":"rsis","target":"tradewar"},{"source":"tradewar","target":"policy"},{"source":"netw","target":"jmis1"},{"source":"cd","target":"jmis1"},{"source":"netw","target":"diss"},{"source":"policy","target":"rsis"},{"source":"rsis","target":"megacity"},{"source":"megacity","target":"policy"},{"source":"rsis","target":"island"},{"source":"island","target":"policy"},{"source":"rsis","target":"brichal"},{"source":"brichal","target":"bri"},{"source":"brichal","target":"policy"},{"source":"rsis","target":"sleep"},{"source":"sleep","target":"policy"},{"source":"rsis","target":"sgrid"},{"source":"sgrid","target":"policy"}],"publications":[{"group":"Journal Articles — Published","badge":"b-pub","badgeLabel":"Published","title":"'Chinese Dream,' Global Ambition: Beijing's Belt and Road Initiative","authors":"Lim, C.H., & Mack, V.Z.W.","venueJournal":"Global Asia,","venueDetail":" 13(3), 62–71. (2018)","url":"https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei","linkText":"Read →"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ICIS 2022","title":"Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement: The Moderating Role of Idea Breadth and Depth","authors":"Mack, V.Z., Zhou, Y.M., & Tang, Q.","venueJournal":"Proceedings of the International Conference on Information Systems (ICIS 2022)"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ICIS 2020","title":"Semantic and Network Evolution in Crowdsourced Idea Refinement","authors":"Mack, V.Z., & Tang, Q.","venueJournal":"Proceedings of the International Conference on Information Systems (ICIS 2020)","venueDetail":" — Social Media and Digital Collaborations track"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ACM SIGSPATIAL 2018","title":"Is There Space for Violence: A Data-driven Approach to the Exploration of Spatial-Temporal Dimensions of Conflict","authors":"Mack, V.Z.W., & Kam, T.S.","venueJournal":"Proceedings of the 2nd ACM SIGSPATIAL Workshop on Geospatial Humanities.","venueDetail":" Seattle, WA: ACM."},{"group":"Journal Articles — Work in Progress","title":"New Idea Success in Online Platforms: A Knowledge Recombination Perspective","authors":"Mack, V.Z., Zhou, Y.M., & Tang, Q.","venueJournal":"Journal of Management Information Systems"},{"group":"Doctoral Dissertation","isDiss":true,"title":"Combinatorial creativity: Knowledge graphs and idea generation in crowdsourcing innovation","authors":"Mack, V.Z.W. (2024)","venueJournal":"Singapore Management University","dissAbs":"Examines how tacit institutional knowledge can be structured into knowledge graphs using Conceptual Dependency Theory, and investigates how the structural and semantic properties of these graphs shape idea generation and refinement in crowdsourcing environments.","url":"https://ink.library.smu.edu.sg/etd_coll/615/","linkText":"Access via SMU INK →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-pol","badgeLabel":"Policy Paper","title":"A Prolegomenary on the Digital Economy: “Digital Hurricane” Hits ASEAN","authors":"Lim, C.H., Mack, V.Z.W., & Tseng, H.Z. (2019)","venueDetail":"S. Rajaratnam School of International Studies, NTU"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"How Emerging Global Trends May Affect Labour Migration in ASEAN","authors":"Mack, V.Z.W., & Lim, C.H. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-pol","badgeLabel":"Policy Paper","title":"Economic Security Challenges Facing Singapore – 2017 and Beyond","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Science, Technology and Human Security: Getting Singapore Smart City-Ready","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action","authors":"Lim, C.H., Schlundt, J., & Mack, V.Z.W. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Shared Economy Business: Fixing Its “Genetic Disorder”","authors":"Lim, C.H., & Mack, V.Z.W. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"The US-Launched Trade War: Its Wide-Ranging Impact","authors":"Mack, V.Z.W., & Lim, C.H. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"3D Printing vs Gun Control: Navigating the Paradox","authors":"Mack, V.Z.W., & Tan, M.H. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"Can the World's Megacities Survive the Digital Age?","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueJournal":"The Conversation,","venueDetail":" 2017","url":"https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"Can We Save Low-Lying Island Nations from Rising Seas?","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueJournal":"The Conversation,","venueDetail":" 2017","url":"https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"The Four Challenges of the Belt and Road","authors":"Lim, C.H., & Mack, V.Z.W. (2018)","venueJournal":"China-US Focus,","venueDetail":" June 25, 2018","url":"https://www.chinausfocus.com/finance-economy/the-four-challenges-of-the-belt-and-road","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"How the Global Sleep Deficit is Bankrupting Humanity","authors":"Lim, C.H., & Mack, V.Z.W. (2019)","venueJournal":"AsiaGlobal Online,","venueDetail":" July 18, 2019. Asia Global Institute, The University of Hong Kong.","url":"https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"A Global Smart Renewable Power Grid: A Radical Proposal","authors":"Lim, C.H., & Mack, V.Z.W. (2019)","venueJournal":"AsiaGlobal Online,","venueDetail":" December 5, 2019. Asia Global Institute, The University of Hong Kong.","url":"https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal","linkText":"Read →"},{"group":"Practitioner Publications","badge":"b-prac","badgeLabel":"Practitioner","title":"Harnessing AI for Creative Ideation & Combinatorial Systems","authors":"Mack, V.Z.W. (2025)","venueJournal":"AiSP Newsletter,","venueDetail":" April 2025. Association of Information Security Professionals.","url":"https://www.aisp.sg/document/newsletter/AISP%20Newsletter%202025/AiSP_Newsletter_2025%20April_v1.pdf","linkText":"Read →"}]};
+    var FALLBACK_DATA = {"nodes":[{"id":"neuro","type":"area","r":46,"label":"Neurosymbolic AI\n& Knowledge\nRepresentation","desc":"Integrating symbolic AI with deep learning. Building knowledge graphs from institutional knowledge using Conceptual Dependency Theory."},{"id":"sysdy","type":"area","r":46,"label":"System Dynamics\n& Decision\nSupport","desc":"Automated CLD-to-Stock-and-Flow pipelines. Applied to national food security and industrial operations management."},{"id":"creat","type":"area","r":46,"label":"Combinatorial\nCreativity\n& Networks","desc":"Mapping how ideas combine and recombine across knowledge domains. Grounded in network theory and crowdsourcing research."},{"id":"diss","type":"paper","r":28,"label":"Combinatorial\nCreativity\n(Diss. 2024)","desc":"PhD dissertation: Knowledge graphs and idea generation in crowdsourcing innovation. Singapore Management University, 2024."},{"id":"jmis1","type":"paper","r":22,"label":"Success of\nNew Ideas\n(JMIS)","desc":"Success of New Ideas in Online Platforms: An Idea Network Perspective. Zhou, Tang, Mack & Liaw. In press, Journal of Management Information Systems."},{"id":"icis22","type":"paper","r":18,"label":"Citation Network\nEmbeddedness\n(ICIS 2022)","desc":"Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement. ICIS 2022."},{"id":"icis20","type":"paper","r":18,"label":"Semantic &\nNetwork Evol.\n(ICIS 2020)","desc":"Semantic and Network Evolution in Crowdsourced Idea Refinement. ICIS 2020."},{"id":"spatial","type":"paper","r":16,"label":"Space &\nViolence\n(ACM 2018)","desc":"Is There Space for Violence: A Data-driven Approach to Spatial-Temporal Conflict. ACM SIGSPATIAL 2018."},{"id":"bri","type":"paper","r":16,"label":"Belt & Road\n(Global Asia\n2018)","desc":"Chinese Dream, Global Ambition: Beijing Belt and Road Initiative. Global Asia, 13(3), 2018."},{"id":"tradewar","type":"paper","r":16,"label":"US Trade War\n(RSIS CO18114\n2018)","desc":"The US-Launched Trade War: Its Wide-Ranging Impact. RSIS Commentary No. 114, 5 July 2018. Analyses global supply chain disruptions and unintended consequences of US tariff policy. An earlier version appeared in AsiaGlobal Online, 26 April 2018."},{"id":"megacity","type":"paper","r":14,"label":"Megacities &\nDigital Age\n(2017)","desc":"Can the World's Megacities Survive the Digital Age? The Conversation, 2017. Argues digitisation and crowdsourcing will undermine the economic foundations of megacities."},{"id":"island","type":"paper","r":14,"label":"Island Nations\n& Rising Seas\n(2017)","desc":"Can We Save Low-Lying Island Nations from Rising Seas? The Conversation, 2017. Proposes large-scale land reclamation strategies to preserve threatened small island states."},{"id":"brichal","type":"paper","r":14,"label":"Four Challenges\nBelt & Road\n(2018)","desc":"The Four Challenges of the Belt and Road. China-US Focus, June 2018. Analyses governance, financing, sustainability, and geopolitical risks of the BRI."},{"id":"sleep","type":"paper","r":14,"label":"Global Sleep\nDeficit\n(2019)","desc":"How the Global Sleep Deficit is Bankrupting Humanity. AsiaGlobal Online, July 2019. Argues sleep deprivation is a major public health and economic crisis requiring urgent policy intervention."},{"id":"sgrid","type":"paper","r":14,"label":"Smart Renewable\nPower Grid\n(2019)","desc":"A Global Smart Renewable Power Grid: A Radical Proposal. AsiaGlobal Online, December 2019. Proposes an intercontinental smart grid to achieve >90% global renewable energy coverage."},{"id":"food","type":"project","r":26,"label":"Food Security\nSimulation\n(IMCFS)","desc":"System Dynamics framework modelling national food availability and supply-chain resilience for the Singapore Interministerial Committee on Food Security."},{"id":"japfa","type":"project","r":22,"label":"Livestock Mgmt\nModel\n(JAPFA)","desc":"Operational System Dynamics model for pig farm management. Also included recommender system for B2B commercial performance."},{"id":"nyp","type":"project","r":18,"label":"Enrolment\nAnalytics\n(NYP Power BI)","desc":"Power BI dashboards for NYP Communications and Outreach: tracking secondary school interest in diploma programmes to support resource allocation decisions."},{"id":"rsis","type":"project","r":22,"label":"Policy Research\n(RSIS NTU\n2015-2019)","desc":"Associate Research Fellow. Horizon scanning on emerging tech, digital economy, and regional security policy. Produced 18 commentaries, op-eds, and policy papers across RSIS, AsiaGlobal Online, China-US Focus, and The Conversation."},{"id":"cd","type":"concept","r":20,"label":"Conceptual\nDependency\nTheory","desc":"Schank CDT: formal framework for representing meaning in natural language. Core methodology for knowledge structuring in neurosymbolic AI work."},{"id":"crowdsrc","type":"concept","r":18,"label":"Crowdsourcing\nPlatforms","desc":"Online innovation platforms as research sites for studying idea generation, refinement, and collaborative knowledge creation."},{"id":"netw","type":"concept","r":18,"label":"Network\nTheory","desc":"Graph-theoretic analysis of knowledge and idea networks. Underpins both creativity research and knowledge graph architecture work."},{"id":"simul","type":"concept","r":20,"label":"System Dynamics\nModelling","desc":"Stock-and-Flow simulation methodology enabling formal, computable representations of qualitative expert causal models."},{"id":"geo","type":"concept","r":16,"label":"Geospatial\nAnalysis","desc":"Spatial-temporal data analysis applied to conflict pattern research during RSIS fellowship."},{"id":"policy","type":"concept","r":16,"label":"Policy &\nHorizon\nScanning","desc":"Anticipatory policy analysis: identifying emerging technology trends and their societal and security implications."},{"id":"msc","type":"paper","r":18,"label":"Labour Protests\n& Trade\n(MSc 2015)","desc":"International Trade and Labour's Class Struggles. M.Sc. dissertation, NTU, 2015. Political economic determinants of labour protests, 1975-2012."},{"id":"trump_us_role","type":"paper","r":14,"label":"Re-imagining\nUS Role\n(RSIS 2016)","desc":"Turning Trouble Around: Re-imagining US Role as Global Player. RSIS Commentary, November 2016."},{"id":"food_security","type":"paper","r":14,"label":"Food Security\n& AMR\n(RSIS 2017)","desc":"Food Security and The 'Terrorist Within Us'. RSIS Commentary, July 2017. Links food safety and antimicrobial resistance to the food security debate."},{"id":"tip_labour","type":"paper","r":14,"label":"Trafficking\n& Forced Labour\n(RSIS 2017)","desc":"Trafficking in Persons and Forced Labour: Southeast Asian Scenario. RSIS Commentary, July 2017."},{"id":"qe_overdose","type":"paper","r":14,"label":"Quantitative\nEasing\n(RSIS 2018)","desc":"Overdose of Quantitative Easing: Economic Weather Changing? RSIS Commentary, October 2018. Examines reverse capital flows from emerging to developed markets."},{"id":"vietnam_ict","type":"paper","r":14,"label":"Vietnam ICT\nGrowth\n(RSIS 2019)","desc":"Vietnam: ICT as Engine of Rapid Growth. RSIS Commentary, May 2019."}],"links":[{"source":"neuro","target":"diss"},{"source":"neuro","target":"jmis1"},{"source":"neuro","target":"cd"},{"source":"neuro","target":"netw"},{"source":"creat","target":"diss"},{"source":"creat","target":"jmis1"},{"source":"creat","target":"icis22"},{"source":"creat","target":"icis20"},{"source":"creat","target":"crowdsrc"},{"source":"sysdy","target":"food"},{"source":"sysdy","target":"japfa"},{"source":"sysdy","target":"simul"},{"source":"sysdy","target":"nyp"},{"source":"icis20","target":"icis22","prog":true},{"source":"icis22","target":"jmis1","prog":true},{"source":"diss","target":"cd"},{"source":"diss","target":"crowdsrc"},{"source":"diss","target":"netw"},{"source":"icis20","target":"crowdsrc"},{"source":"icis22","target":"crowdsrc"},{"source":"food","target":"simul"},{"source":"japfa","target":"simul"},{"source":"spatial","target":"geo"},{"source":"bri","target":"policy"},{"source":"rsis","target":"bri"},{"source":"rsis","target":"spatial"},{"source":"rsis","target":"policy"},{"source":"rsis","target":"tradewar"},{"source":"tradewar","target":"policy"},{"source":"netw","target":"jmis1"},{"source":"cd","target":"jmis1"},{"source":"netw","target":"diss"},{"source":"policy","target":"rsis"},{"source":"rsis","target":"megacity"},{"source":"megacity","target":"policy"},{"source":"rsis","target":"island"},{"source":"island","target":"policy"},{"source":"rsis","target":"brichal"},{"source":"brichal","target":"bri"},{"source":"brichal","target":"policy"},{"source":"rsis","target":"sleep"},{"source":"sleep","target":"policy"},{"source":"rsis","target":"sgrid"},{"source":"sgrid","target":"policy"},{"source":"rsis","target":"trump_us_role"},{"source":"trump_us_role","target":"policy"},{"source":"rsis","target":"food_security"},{"source":"food_security","target":"policy"},{"source":"rsis","target":"tip_labour"},{"source":"tip_labour","target":"policy"},{"source":"rsis","target":"qe_overdose"},{"source":"qe_overdose","target":"policy"},{"source":"rsis","target":"vietnam_ict"},{"source":"vietnam_ict","target":"policy"},{"source":"msc","target":"policy"}],"publications":[{"group":"Journal Articles — Published","badge":"b-pub","badgeLabel":"Published","title":"'Chinese Dream,' Global Ambition: Beijing's Belt and Road Initiative","authors":"Lim, C.H., & Mack, V.Z.W.","venueJournal":"Global Asia,","venueDetail":" 13(3), 62–71. (2018)","url":"https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei","linkText":"Read →"},{"group":"Journal Articles — In Press","title":"Success of New Ideas in Online Platforms: An Idea Network Perspective","authors":"Zhou, Y., Tang, Q., Mack, V.Z.W., & Liaw, S.Y.","venueJournal":"Journal of Management Information Systems","badge":"b-press","badgeLabel":"In Press","venueDetail":" (in press). doi:10.1080/07421222.2026.2692285"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ICIS 2022","title":"Examining the Impact of Citation Network Embeddedness on Crowdsourced Idea Refinement: The Moderating Role of Idea Breadth and Depth","authors":"Mack, V.Z., Zhou, Y.M., & Tang, Q.","venueJournal":"Proceedings of the International Conference on Information Systems (ICIS 2022)"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ICIS 2020","title":"Semantic and Network Evolution in Crowdsourced Idea Refinement","authors":"Mack, V.Z., & Tang, Q.","venueJournal":"Proceedings of the International Conference on Information Systems (ICIS 2020)","venueDetail":" — Social Media and Digital Collaborations track"},{"group":"Refereed Conference Proceedings","badge":"b-conf","badgeLabel":"ACM SIGSPATIAL 2018","title":"Is There Space for Violence: A Data-driven Approach to the Exploration of Spatial-Temporal Dimensions of Conflict","authors":"Mack, V.Z.W., & Kam, T.S.","venueJournal":"Proceedings of the 2nd ACM SIGSPATIAL Workshop on Geospatial Humanities.","venueDetail":" Seattle, WA: ACM."},{"group":"Doctoral Dissertation","isDiss":true,"title":"Combinatorial creativity: Knowledge graphs and idea generation in crowdsourcing innovation","authors":"Mack, V.Z.W. (2024)","venueJournal":"Singapore Management University","dissAbs":"Examines how tacit institutional knowledge can be structured into knowledge graphs using Conceptual Dependency Theory, and investigates how the structural and semantic properties of these graphs shape idea generation and refinement in crowdsourcing environments.","url":"https://ink.library.smu.edu.sg/etd_coll/615/","linkText":"Access via SMU INK →"},{"group":"Master's Dissertation","isDiss":true,"title":"International Trade and Labour's Class Struggles: Political Economic Determinants of Labour Protests","authors":"Mack, V.Z.W. (2015)","venueJournal":"Nanyang Technological University","venueDetail":" — M.Sc. in International Political Economy","dissAbs":"Argues that exposure to international trade creates the political economic conditions for labour protest by altering labour's access to economic opportunities, moderated by country-specific political opportunity structures. Quantitative regression analysis of cross-national protest data, 1975–2012."},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"ASEAN's New Economic Player — Vietnam: ICT as Engine of Rapid Growth","authors":"Mack, V.Z.W., Oon, B., & Vu, C. (2019)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 096, 13 May 2019","url":"https://www.rsis.edu.sg/rsis-publication/rsis/aseans-new-economic-player-vietnam-ict-as-engine-of-rapid-growth/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-pol","badgeLabel":"Policy Paper","title":"A Prolegomenary on the Digital Economy: “Digital Hurricane” Hits ASEAN","authors":"Lim, C.H., Mack, V.Z.W., & Tseng, H.Z. (2019)","venueDetail":"S. Rajaratnam School of International Studies, NTU"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Overdose of Quantitative Easing: Economic Weather Changing?","authors":"Lim, C.H., & Mack, V.Z.W. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 169, 16 October 2018","url":"https://rsis.edu.sg/rsis-publication/rsis/co18169-overdose-of-quantitative-easing-economic-weather-changing/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"3D Printing vs Gun Control: Navigating the Paradox","authors":"Mack, V.Z.W., & Tan, M.H. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"The US-Launched Trade War: Its Wide-Ranging Impact","authors":"Mack, V.Z.W., & Lim, C.H. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 114, 5 July 2018 · earlier version in AsiaGlobal Online, 26 April 2018","url":"https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Shared Economy Business: Fixing Its “Genetic Disorder”","authors":"Lim, C.H., & Mack, V.Z.W. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action","authors":"Lim, C.H., Schlundt, J., & Mack, V.Z.W. (2018)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"How Emerging Global Trends May Affect Labour Migration in ASEAN","authors":"Mack, V.Z.W., & Lim, C.H. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Trafficking in Persons and Forced Labour: Southeast Asian Scenario","authors":"Huang, H.Y., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 138, 21 July 2017","url":"https://www.rsis.edu.sg/rsis-publication/nts/co17138-trafficking-in-persons-and-forced-labour-southeast-asian-scenario/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Food Security and The “Terrorist Within Us”","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 137, 20 July 2017","url":"https://rsis.edu.sg/rsis-publication/rsis/co17137-world-agricultural-forum-2017-food-security-and-the-terrorist-within-us/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-pol","badgeLabel":"Policy Paper","title":"Economic Security Challenges Facing Singapore – 2017 and Beyond","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Science, Technology and Human Security: Getting Singapore Smart City-Ready","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueDetail":"S. Rajaratnam School of International Studies, NTU","url":"https://rsis.edu.sg/rsis-publication/nts/co17014-science-technology-and-human-security-getting-singapore-smart-city-ready-mrt-disruptions-as-a-spur/","linkText":"Read →"},{"group":"Policy Papers & Commentaries (RSIS, NTU)","badge":"b-com","badgeLabel":"Commentary","title":"Turning Trouble Around: Re-imagining US Role as Global Player","authors":"Lim, C.H., & Mack, V.Z.W. (2016)","venueDetail":"S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 288, November 2016","url":"https://rsis.edu.sg/rsis-publication/rsis/co16288-the-rise-of-trump-and-its-global-implications-turning-trouble-around-re-imagining-us-role-as-global-player/","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"A Global Smart Renewable Power Grid: A Radical Proposal","authors":"Lim, C.H., & Mack, V.Z.W. (2019)","venueJournal":"AsiaGlobal Online,","venueDetail":" 5 December 2019. Asia Global Institute, The University of Hong Kong.","url":"https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"How the Global Sleep Deficit is Bankrupting Humanity","authors":"Lim, C.H., & Mack, V.Z.W. (2019)","venueJournal":"AsiaGlobal Online,","venueDetail":" 18 July 2019. Asia Global Institute, The University of Hong Kong.","url":"https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"The Four Challenges of the Belt and Road","authors":"Lim, C.H., & Mack, V.Z.W. (2018)","venueJournal":"China-US Focus,","venueDetail":" June 25, 2018","url":"https://www.chinausfocus.com/finance-economy/the-four-challenges-of-the-belt-and-road","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"Can the World's Megacities Survive the Digital Age?","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueJournal":"The Conversation,","venueDetail":" 19 September 2017. doi:10.64628/AAL.5yv9kyqnv","url":"https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257","linkText":"Read →"},{"group":"Commentaries & Op-Eds (External)","badge":"b-com","badgeLabel":"Commentary","title":"Can We Save Low-Lying Island Nations from Rising Seas?","authors":"Lim, C.H., & Mack, V.Z.W. (2017)","venueJournal":"The Conversation,","venueDetail":" 21 July 2017. doi:10.64628/AAL.7m9f97gex","url":"https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232","linkText":"Read →"},{"group":"Practitioner Publications","badge":"b-prac","badgeLabel":"Practitioner","title":"Harnessing AI for Creative Ideation & Combinatorial Systems","authors":"Mack, V.Z.W. (2025)","venueJournal":"AiSP Newsletter,","venueDetail":" April 2025. Association of Information Security Professionals.","url":"https://www.aisp.sg/document/newsletter/AISP%20Newsletter%202025/AiSP_Newsletter_2025%20April_v1.pdf","linkText":"Read →"}]};
 
     // Render publications immediately from fallback, then upgrade if fetch succeeds
     siteData = FALLBACK_DATA;
@@ -1674,27 +1686,55 @@
     var semSvgSel, semGSel;
     var SEM_M = { top: 28, right: 24, bottom: 56, left: 52 };
 
-    var SEM_GROUP_COLORS = {
-      'Doctoral Dissertation':                     '#d97706',
-      'Journal Articles — Published':         '#059669',
-      'Journal Articles — Work in Progress':  '#059669',
-      'Refereed Conference Proceedings':           '#2563eb',
-      'Policy Papers & Commentaries (RSIS, NTU)': '#7c3aed',
-      'Commentaries & Op-Eds (External)':         '#9333ea',
-      'Practitioner Publications':                 '#0891b2'
+    // Three categorical hues, not six.
+    //
+    // The Semantic Map is a scatter, which is an "all-pairs" form: any category
+    // can land next to any other, so every pair must be separable — unlike a bar
+    // chart where only neighbours touch. Validated against the six colourblind
+    // and contrast checks, only THREE hues clear the all-pairs floors. The
+    // previous six failed hard: #7c3aed (Policy) vs #2563eb (Conference) were
+    // ΔE 0.4 apart under deuteranopia — the same colour to ~8% of men — and the
+    // two purples were ΔE 4.4 in NORMAL vision.
+    //
+    // Hues are the first three slots of the validated reference palette, in
+    // fixed order (all-pairs: CVD ΔE 9.2, normal-vision ΔE 24.0).
+    // Finer distinctions are available on demand through the highlight
+    // selector rather than by adding hues that readers cannot separate.
+    var SEM_TIER = {
+      'Doctoral Dissertation':                    'theses',
+      "Master's Dissertation":                    'theses',
+      'Journal Articles — Published':             'peer',
+      'Journal Articles — In Press':              'peer',
+      'Refereed Conference Proceedings':          'peer',
+      'Policy Papers & Commentaries (RSIS, NTU)': 'policy',
+      'Commentaries & Op-Eds (External)':         'policy',
+      'Practitioner Publications':                'policy'
     };
+    var SEM_TIER_COLORS = { theses: '#2a78d6', peer: '#eb6834', policy: '#1baf7a' };
+    var SEM_NEUTRAL = '#9aa0a6';   // everything not currently highlighted
 
     var SEM_LEGEND_ITEMS = [
-      { label: 'Dissertation',        color: '#d97706' },
-      { label: 'Journal',             color: '#059669' },
-      { label: 'Conference',          color: '#2563eb' },
-      { label: 'Policy / RSIS',       color: '#7c3aed' },
-      { label: 'External Op-Ed',      color: '#9333ea' },
-      { label: 'Practitioner',        color: '#0891b2' }
+      { label: 'Theses',              color: '#2a78d6' },
+      { label: 'Peer-reviewed',       color: '#eb6834' },
+      { label: 'Policy & commentary', color: '#1baf7a' }
     ];
 
     function semGroupColor(group) {
-      return SEM_GROUP_COLORS[group] || '#94a3b8';
+      return SEM_TIER_COLORS[SEM_TIER[group]] || SEM_NEUTRAL;
+    }
+
+    // Highlight state: null, or {kind:'group'|'topic', value:...}.
+    // Highlighting never introduces a fourth hue — the selection keeps its tier
+    // colour and everything else drops to neutral, so the colour legend stays
+    // true whether or not something is selected.
+    var semHighlight = null;
+    var semTopics = null;
+    var semTopicTried = false;
+
+    function semChunkMatches(pid, topic, group) {
+      if (!semHighlight) return true;
+      if (semHighlight.kind === 'group') return group === semHighlight.value;
+      return String(topic) === String(semHighlight.value);
     }
 
     function semShortTitle(title) {
@@ -1728,7 +1768,102 @@
           + '<span class="sem-legend-dot" style="background:' + SEM_LEGEND_ITEMS[i].color + '"></span>'
           + escH(SEM_LEGEND_ITEMS[i].label) + '</div>';
       }
+      if (semHighlight) {
+        var name = semHighlight.value, extra = '';
+        if (semHighlight.kind === 'topic' && semTopics) {
+          var t = semTopics.filter(function (x) {
+            return String(x.id) === String(semHighlight.value); })[0];
+          if (t) {
+            name = t.label;
+            extra = ' — ' + t.size + ' passages across ' + t.n_works
+                  + (t.n_works === 1 ? ' work' : ' works');
+          }
+        }
+        html += '<div class="sem-legend-item" role="listitem" style="font-weight:600;color:var(--text)">'
+          + '<span class="sem-legend-dot" style="background:' + SEM_NEUTRAL + '"></span>'
+          + 'Dimmed &middot; showing “' + escH(name) + '”' + escH(extra) + '</div>';
+      }
       el.innerHTML = html;
+    }
+
+    // Chunk-level points. Loaded lazily and entirely optionally: if chunks.json
+    // is absent (v1 embeddings, or embed_pipeline_v2.py not yet run) the map
+    // renders exactly as before, one dot per paper.
+    var semChunks = null;
+    var semChunkTried = false;
+
+    function loadSemChunks() {
+      if (semChunkTried) return;
+      semChunkTried = true;
+      fetch('chunks.json')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (cd) {
+          if (!cd || !cd.chunks || !cd.chunks.length) return;
+          semChunks = cd.chunks;
+          // Re-render in whatever mode is currently showing. updateSemScatter
+          // reads the concept selects itself, so no extra state to track.
+          updateSemScatter();
+        })
+        .catch(function () { /* no chunks.json — paper-only map is fine */ });
+    }
+
+    function loadSemTopics() {
+      if (semTopicTried) return;
+      semTopicTried = true;
+      fetch('topics.json')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (td) {
+          if (!td || !td.topics || !td.topics.length) return;
+          semTopics = td.topics;
+          populateHighlight();
+        })
+        .catch(function () { /* no topics.json yet — groups only */ });
+    }
+
+    function populateHighlight() {
+      var sel = document.getElementById('sem-highlight');
+      if (!sel || !semData) return;
+      var cur = sel.value;
+      sel.innerHTML = '<option value="">— nothing —</option>';
+
+      var groups = [];
+      semData.papers.forEach(function (p) {
+        if (p.group && groups.indexOf(p.group) < 0) groups.push(p.group);
+      });
+      if (groups.length) {
+        var og = document.createElement('optgroup');
+        og.label = 'Publication type';
+        groups.forEach(function (g) {
+          var o = document.createElement('option');
+          o.value = 'g:' + g; o.textContent = g;
+          og.appendChild(o);
+        });
+        sel.appendChild(og);
+      }
+      if (semTopics) {
+        var ot = document.createElement('optgroup');
+        ot.label = 'Discovered topic';
+        semTopics.slice().sort(function (a, b) { return b.size - a.size; })
+          .forEach(function (t) {
+            var o = document.createElement('option');
+            o.value = 't:' + t.id;
+            o.textContent = t.label + '  (' + t.size + ' passages, '
+              + t.n_works + (t.n_works === 1 ? ' work)' : ' works)');
+            ot.appendChild(o);
+          });
+        sel.appendChild(ot);
+      }
+      sel.value = cur;
+      if (!sel._wired) {
+        sel._wired = true;
+        sel.addEventListener('change', function () {
+          var v = this.value;
+          semHighlight = !v ? null
+            : { kind: v.slice(0, 1) === 'g' ? 'group' : 'topic', value: v.slice(2) };
+          buildSemanticLegend();
+          updateSemScatter();
+        });
+      }
     }
 
     function buildSemanticMap() {
@@ -1738,6 +1873,9 @@
           semData = data;
           initSemControls(data);
           renderSemScatter(data, 'umap', null, null);
+          loadSemChunks();
+          loadSemTopics();
+          populateHighlight();
         })
         .catch(function () {
           if (FALLBACK_EMBEDDINGS) {
@@ -1828,9 +1966,37 @@
         return { x: px, y: py, paper: p };
       });
 
-      // Scales
-      var xExt = d3.extent(pts, function (d) { return d.x; });
-      var yExt = d3.extent(pts, function (d) { return d.y; });
+      // Chunk cloud. Each chunk is one ~200-token passage; a paper's dot is the
+      // centroid of its chunks, so the cloud shows how far a paper spreads —
+      // whether it sits on one topic or reaches across several.
+      var groupById = {};
+      papers.forEach(function (p) { groupById[p.id] = p.group; });
+      var chunkPts = [];
+      if (semChunks) {
+        for (var ci = 0; ci < semChunks.length; ci++) {
+          var c = semChunks[ci];
+          var cx2, cy2;
+          if (mode === 'umap') {
+            cx2 = c.umap_x; cy2 = c.umap_y;
+          } else {
+            var cs = c.sims || {};
+            cx2 = cs[cxId] != null ? cs[cxId] : null;
+            cy2 = cs[cyId] != null ? cs[cyId] : null;
+          }
+          if (cx2 == null || cy2 == null) continue;
+          chunkPts.push({ x: cx2, y: cy2, id: c.id, pid: c.paper_id,
+                          group: groupById[c.paper_id],
+                          topic: (c.topic === undefined ? -1 : c.topic),
+                          excerpt: c.excerpt || '' });
+        }
+      }
+
+      // Scales must span chunks as well as centroids, or the cloud clips
+      // outside the axes — chunks always spread wider than the points they
+      // average to.
+      var extentPts = chunkPts.length ? pts.concat(chunkPts) : pts;
+      var xExt = d3.extent(extentPts, function (d) { return d.x; });
+      var yExt = d3.extent(extentPts, function (d) { return d.y; });
       var xPad = Math.max((xExt[1] - xExt[0]) * 0.1, 0.05);
       var yPad = Math.max((yExt[1] - yExt[0]) * 0.1, 0.05);
       var xScale = d3.scaleLinear().domain([xExt[0] - xPad, xExt[1] + xPad]).range([0, iW]);
@@ -1852,6 +2018,9 @@
           .attr('transform', 'rotate(-90)')
           .attr('y', 13)
           .style('font-size', '12px').style('fill', 'var(--muted)').style('font-family', "'Inter',sans-serif");
+        // Chunk layer is appended BEFORE the dot layer so it paints behind.
+        semGSel.append('g').attr('class', 'sem-chunk-layer')
+          .style('pointer-events', 'none');
         semGSel.append('g').attr('class', 'sem-dots');
 
         // Tooltip reuse (graph tooltip)
@@ -1874,6 +2043,36 @@
       var yAxisFn = d3.axisLeft(yScale).ticks(5).tickFormat(d3.format('.2f'));
       semGSel.select('.sem-x-axis').transition().duration(500).call(xAxisFn);
       semGSel.select('.sem-y-axis').transition().duration(500).call(yAxisFn);
+
+      // Chunk cloud (behind everything, non-interactive so the centroid
+      // tooltips still work).
+      var chunkG = semGSel.select('.sem-chunk-layer');
+      var cSel = chunkG.selectAll('circle').data(chunkPts, function (d) { return d.id; });
+      cSel.exit().remove();
+      function chunkFill(d) {
+        return semChunkMatches(d.pid, d.topic, d.group)
+          ? semGroupColor(d.group) : SEM_NEUTRAL;
+      }
+      function chunkOpacity(d) {
+        if (!semHighlight) return 0.22;
+        return semChunkMatches(d.pid, d.topic, d.group) ? 0.95 : 0.04;
+      }
+      cSel.enter().append('circle')
+          .attr('r', 2)
+          .attr('cx', function (d) { return xScale(d.x); })
+          .attr('cy', function (d) { return yScale(d.y); })
+          .attr('fill', chunkFill)
+          .attr('opacity', 0)
+        .merge(cSel)
+          .attr('data-pid', function (d) { return d.pid; })
+          .attr('data-topic', function (d) { return d.topic; })
+          .attr('fill', chunkFill)
+          .transition().duration(500).ease(d3.easeCubicInOut)
+          .attr('cx', function (d) { return xScale(d.x); })
+          .attr('cy', function (d) { return yScale(d.y); })
+          .attr('r', function (d) {
+            return (semHighlight && semChunkMatches(d.pid, d.topic, d.group)) ? 4 : 2; })
+          .attr('opacity', chunkOpacity);
 
       // Dots
       var dotsG = semGSel.select('.sem-dots');
@@ -1930,6 +2129,13 @@
           sel.select('.sem-label-bg').attr('opacity', 1);
           sel.select('.sem-label').style('font-weight', '600').style('fill', '#0f172a');
           sel.select('circle').attr('r', 9).attr('stroke-width', 2.5);
+          // Light up this paper's own chunks, dim the rest, so you can see
+          // which region of the map the paper actually occupies.
+          if (semChunks) {
+            chunkG.selectAll('circle')
+              .attr('opacity', function (c) { return c.pid === d.paper.id ? 0.85 : 0.06; })
+              .attr('r', function (c) { return c.pid === d.paper.id ? 3 : 2; });
+          }
           var sims = d.paper.concept_sims || {};
           var entries = Object.keys(sims).map(function (k) { return [k, sims[k]]; });
           entries.sort(function (a, b) { return b[1] - a[1]; });
@@ -1938,8 +2144,27 @@
           }).join('  ·  ');
           var title = d.paper.title.length > 68 ? d.paper.title.slice(0, 67) + '…' : d.paper.title;
           ttTitle.textContent = title;
-          ttType.textContent  = d.paper.group;
-          ttDesc.textContent  = topDesc || 'Run embed_pipeline.py for similarity scores';
+          var topicNote = '';
+          if (semChunks && semTopics) {
+            var counts = {};
+            for (var q = 0; q < semChunks.length; q++) {
+              if (semChunks[q].paper_id !== d.paper.id) continue;
+              var tp = semChunks[q].topic;
+              if (tp === undefined || tp < 0) continue;
+              counts[tp] = (counts[tp] || 0) + 1;
+            }
+            var best = null;
+            for (var k2 in counts) if (!best || counts[k2] > counts[best]) best = k2;
+            if (best !== null) {
+              var tt = semTopics.filter(function (x) {
+                return String(x.id) === String(best); })[0];
+              if (tt) topicNote = '  ·  mostly “' + tt.label + '”';
+            }
+          }
+          ttType.textContent  = d.paper.group
+            + (d.paper.n_chunks ? '  ·  ' + d.paper.n_chunks + ' passages' : '')
+            + topicNote;
+          ttDesc.textContent  = topDesc || 'Run embed_pipeline_v2.py for similarity scores';
           tooltip.classList.add('visible');
           tooltip.style.left = Math.min(event.clientX + 14, window.innerWidth - 260) + 'px';
           tooltip.style.top  = (event.clientY - 10) + 'px';
@@ -1953,6 +2178,9 @@
           sel.select('.sem-label-bg').attr('opacity', 0);
           sel.select('.sem-label').style('font-weight', '400').style('fill', '#1e293b');
           sel.select('circle').attr('r', 7).attr('stroke-width', 1.5);
+          if (semChunks) {
+            chunkG.selectAll('circle').attr('opacity', 0.22).attr('r', 2);
+          }
           tooltip.classList.remove('visible');
         })
         .on('click', function (event, d) {
@@ -1966,13 +2194,37 @@
           return 'translate(' + xScale(d.x) + ',' + yScale(d.y) + ')';
         });
 
-      // Update dot fill for re-renders (e.g. if group data changed)
-      grps.select('circle')
-        .attr('fill', function (d) { return semGroupColor(d.paper.group); });
+      // Paper dots follow the same rule: a group highlight dims non-members;
+      // a TOPIC highlight leaves every dot in place, because a paper is a
+      // centroid over many topics and claiming it "belongs" to one would lie.
+      function dotFill(d) {
+        if (!semHighlight) return semGroupColor(d.paper.group);
+        // Topic highlight recedes EVERY dot uniformly. Dimming them selectively
+        // would assert that a paper "belongs" to one topic, which is false — a
+        // paper is a centroid over many. Receding them all is not a claim, it
+        // just lets the passage layer read; without it 26 large saturated dots
+        // drown the 18 passages you asked to see.
+        if (semHighlight.kind === 'topic') return SEM_NEUTRAL;
+        return d.paper.group === semHighlight.value
+          ? semGroupColor(d.paper.group) : SEM_NEUTRAL;
+      }
+      function dotOpacity(d) {
+        if (!semHighlight) return 0.88;
+        if (semHighlight.kind === 'topic') return 0.3;
+        return d.paper.group === semHighlight.value ? 0.9 : 0.22;
+      }
+      entered.merge(grps).select('circle')
+        .attr('fill', dotFill)
+        .attr('opacity', dotOpacity);
+      entered.merge(grps).select('.sem-label')
+        .style('opacity', function (d) {
+          if (!semHighlight) return 1;
+          if (semHighlight.kind === 'topic') return 0.35;
+          return d.paper.group === semHighlight.value ? 1 : 0.25; });
 
-      // Fade in entering circles
+      // Fade in entering circles (respecting any active highlight)
       entered.select('circle')
-        .transition().duration(400).attr('opacity', 0.88);
+        .transition().duration(400).attr('opacity', dotOpacity);
 
       grps.exit().transition().duration(300).attr('opacity', 0).remove();
     }

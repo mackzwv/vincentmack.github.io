@@ -32,8 +32,8 @@
       "id": "jmis1",
       "type": "paper",
       "r": 22,
-      "label": "New Idea\nSuccess\n(JMIS)",
-      "desc": "New Idea Success in Online Platforms: A Knowledge Recombination Perspective. Under review at Journal of Management Information Systems."
+      "label": "Success of\nNew Ideas\n(JMIS)",
+      "desc": "Success of New Ideas in Online Platforms: An Idea Network Perspective. Zhou, Tang, Mack & Liaw. In press, Journal of Management Information Systems."
     },
     {
       "id": "icis22",
@@ -68,7 +68,7 @@
       "type": "paper",
       "r": 16,
       "label": "US Trade War\n(RSIS CO18114\n2018)",
-      "desc": "The US-Launched Trade War: Its Wide-Ranging Impact. RSIS Commentary, July 2018. Analyses global supply chain disruptions and unintended consequences of US tariff policy."
+      "desc": "The US-Launched Trade War: Its Wide-Ranging Impact. RSIS Commentary No. 114, 5 July 2018. Analyses global supply chain disruptions and unintended consequences of US tariff policy. An earlier version appeared in AsiaGlobal Online, 26 April 2018."
     },
     {
       "id": "megacity",
@@ -131,7 +131,7 @@
       "type": "project",
       "r": 22,
       "label": "Policy Research\n(RSIS NTU\n2015-2019)",
-      "desc": "Associate Research Fellow. Horizon scanning on emerging tech, digital economy, and regional security policy. Produced 12+ commentaries, op-eds, and policy papers across RSIS, AsiaGlobal Online, China-US Focus, and The Conversation."
+      "desc": "Associate Research Fellow. Horizon scanning on emerging tech, digital economy, and regional security policy. Produced 18 commentaries, op-eds, and policy papers across RSIS, AsiaGlobal Online, China-US Focus, and The Conversation."
     },
     {
       "id": "cd",
@@ -174,6 +174,48 @@
       "r": 16,
       "label": "Policy &\nHorizon\nScanning",
       "desc": "Anticipatory policy analysis: identifying emerging technology trends and their societal and security implications."
+    },
+    {
+      "id": "msc",
+      "type": "paper",
+      "r": 18,
+      "label": "Labour Protests\n& Trade\n(MSc 2015)",
+      "desc": "International Trade and Labour's Class Struggles. M.Sc. dissertation, NTU, 2015. Political economic determinants of labour protests, 1975-2012."
+    },
+    {
+      "id": "trump_us_role",
+      "type": "paper",
+      "r": 14,
+      "label": "Re-imagining\nUS Role\n(RSIS 2016)",
+      "desc": "Turning Trouble Around: Re-imagining US Role as Global Player. RSIS Commentary, November 2016."
+    },
+    {
+      "id": "food_security",
+      "type": "paper",
+      "r": 14,
+      "label": "Food Security\n& AMR\n(RSIS 2017)",
+      "desc": "Food Security and The 'Terrorist Within Us'. RSIS Commentary, July 2017. Links food safety and antimicrobial resistance to the food security debate."
+    },
+    {
+      "id": "tip_labour",
+      "type": "paper",
+      "r": 14,
+      "label": "Trafficking\n& Forced Labour\n(RSIS 2017)",
+      "desc": "Trafficking in Persons and Forced Labour: Southeast Asian Scenario. RSIS Commentary, July 2017."
+    },
+    {
+      "id": "qe_overdose",
+      "type": "paper",
+      "r": 14,
+      "label": "Quantitative\nEasing\n(RSIS 2018)",
+      "desc": "Overdose of Quantitative Easing: Economic Weather Changing? RSIS Commentary, October 2018. Examines reverse capital flows from emerging to developed markets."
+    },
+    {
+      "id": "vietnam_ict",
+      "type": "paper",
+      "r": 14,
+      "label": "Vietnam ICT\nGrowth\n(RSIS 2019)",
+      "desc": "Vietnam: ICT as Engine of Rapid Growth. RSIS Commentary, May 2019."
     }
   ],
   "links": [
@@ -354,6 +396,50 @@
     {
       "source": "sgrid",
       "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "trump_us_role"
+    },
+    {
+      "source": "trump_us_role",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "food_security"
+    },
+    {
+      "source": "food_security",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "tip_labour"
+    },
+    {
+      "source": "tip_labour",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "qe_overdose"
+    },
+    {
+      "source": "qe_overdose",
+      "target": "policy"
+    },
+    {
+      "source": "rsis",
+      "target": "vietnam_ict"
+    },
+    {
+      "source": "vietnam_ict",
+      "target": "policy"
+    },
+    {
+      "source": "msc",
+      "target": "policy"
     }
   ],
   "publications": [
@@ -367,6 +453,15 @@
       "venueDetail": " 13(3), 62–71. (2018)",
       "url": "https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei",
       "linkText": "Read →"
+    },
+    {
+      "group": "Journal Articles — In Press",
+      "title": "Success of New Ideas in Online Platforms: An Idea Network Perspective",
+      "authors": "Zhou, Y., Tang, Q., Mack, V.Z.W., & Liaw, S.Y.",
+      "venueJournal": "Journal of Management Information Systems",
+      "badge": "b-press",
+      "badgeLabel": "In Press",
+      "venueDetail": " (in press). doi:10.1080/07421222.2026.2692285"
     },
     {
       "group": "Refereed Conference Proceedings",
@@ -395,12 +490,6 @@
       "venueDetail": " Seattle, WA: ACM."
     },
     {
-      "group": "Journal Articles — Work in Progress",
-      "title": "New Idea Success in Online Platforms: A Knowledge Recombination Perspective",
-      "authors": "Mack, V.Z., Zhou, Y.M., & Tang, Q.",
-      "venueJournal": "Journal of Management Information Systems"
-    },
-    {
       "group": "Doctoral Dissertation",
       "isDiss": true,
       "title": "Combinatorial creativity: Knowledge graphs and idea generation in crowdsourcing innovation",
@@ -409,6 +498,25 @@
       "dissAbs": "Examines how tacit institutional knowledge can be structured into knowledge graphs using Conceptual Dependency Theory, and investigates how the structural and semantic properties of these graphs shape idea generation and refinement in crowdsourcing environments.",
       "url": "https://ink.library.smu.edu.sg/etd_coll/615/",
       "linkText": "Access via SMU INK →"
+    },
+    {
+      "group": "Master's Dissertation",
+      "isDiss": true,
+      "title": "International Trade and Labour's Class Struggles: Political Economic Determinants of Labour Protests",
+      "authors": "Mack, V.Z.W. (2015)",
+      "venueJournal": "Nanyang Technological University",
+      "venueDetail": " — M.Sc. in International Political Economy",
+      "dissAbs": "Argues that exposure to international trade creates the political economic conditions for labour protest by altering labour's access to economic opportunities, moderated by country-specific political opportunity structures. Quantitative regression analysis of cross-national protest data, 1975–2012."
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "ASEAN's New Economic Player — Vietnam: ICT as Engine of Rapid Growth",
+      "authors": "Mack, V.Z.W., Oon, B., & Vu, C. (2019)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 096, 13 May 2019",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/aseans-new-economic-player-vietnam-ict-as-engine-of-rapid-growth/",
+      "linkText": "Read →"
     },
     {
       "group": "Policy Papers & Commentaries (RSIS, NTU)",
@@ -422,10 +530,80 @@
       "group": "Policy Papers & Commentaries (RSIS, NTU)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
+      "title": "Overdose of Quantitative Easing: Economic Weather Changing?",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2018)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 169, 16 October 2018",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18169-overdose-of-quantitative-easing-economic-weather-changing/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "3D Printing vs Gun Control: Navigating the Paradox",
+      "authors": "Mack, V.Z.W., & Tan, M.H. (2018)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "The US-Launched Trade War: Its Wide-Ranging Impact",
+      "authors": "Mack, V.Z.W., & Lim, C.H. (2018)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 114, 5 July 2018 · earlier version in AsiaGlobal Online, 26 April 2018",
+      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "Shared Economy Business: Fixing Its “Genetic Disorder”",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2018)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action",
+      "authors": "Lim, C.H., Schlundt, J., & Mack, V.Z.W. (2018)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
       "title": "How Emerging Global Trends May Affect Labour Migration in ASEAN",
       "authors": "Mack, V.Z.W., & Lim, C.H. (2017)",
       "venueDetail": "S. Rajaratnam School of International Studies, NTU",
       "url": "https://www.rsis.edu.sg/rsis-publication/nts/how-emerging-global-trends-may-affect-labour-migration-in-asean/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "Trafficking in Persons and Forced Labour: Southeast Asian Scenario",
+      "authors": "Huang, H.Y., & Mack, V.Z.W. (2017)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 138, 21 July 2017",
+      "url": "https://www.rsis.edu.sg/rsis-publication/nts/co17138-trafficking-in-persons-and-forced-labour-southeast-asian-scenario/",
+      "linkText": "Read →"
+    },
+    {
+      "group": "Policy Papers & Commentaries (RSIS, NTU)",
+      "badge": "b-com",
+      "badgeLabel": "Commentary",
+      "title": "Food Security and The “Terrorist Within Us”",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2017)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 137, 20 July 2017",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co17137-world-agricultural-forum-2017-food-security-and-the-terrorist-within-us/",
       "linkText": "Read →"
     },
     {
@@ -450,62 +628,32 @@
       "group": "Policy Papers & Commentaries (RSIS, NTU)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
-      "title": "Antimicrobial Resistance (AMR)-Superbug: Time for ASEAN Collective Action",
-      "authors": "Lim, C.H., Schlundt, J., & Mack, V.Z.W. (2018)",
-      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
-      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18022-antimicrobial-resistance-amr-superbug-time-for-asean-collective-action/",
-      "linkText": "Read →"
-    },
-    {
-      "group": "Policy Papers & Commentaries (RSIS, NTU)",
-      "badge": "b-com",
-      "badgeLabel": "Commentary",
-      "title": "Shared Economy Business: Fixing Its “Genetic Disorder”",
-      "authors": "Lim, C.H., & Mack, V.Z.W. (2018)",
-      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
-      "url": "https://rsis.edu.sg/rsis-publication/rsis/co18081-shared-economy-business-fixing-its-genetic-disorder/",
-      "linkText": "Read →"
-    },
-    {
-      "group": "Policy Papers & Commentaries (RSIS, NTU)",
-      "badge": "b-com",
-      "badgeLabel": "Commentary",
-      "title": "The US-Launched Trade War: Its Wide-Ranging Impact",
-      "authors": "Mack, V.Z.W., & Lim, C.H. (2018)",
-      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
-      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18114-the-us-launched-trade-war-its-wide-ranging-impact/",
-      "linkText": "Read →"
-    },
-    {
-      "group": "Policy Papers & Commentaries (RSIS, NTU)",
-      "badge": "b-com",
-      "badgeLabel": "Commentary",
-      "title": "3D Printing vs Gun Control: Navigating the Paradox",
-      "authors": "Mack, V.Z.W., & Tan, M.H. (2018)",
-      "venueDetail": "S. Rajaratnam School of International Studies, NTU",
-      "url": "https://www.rsis.edu.sg/rsis-publication/rsis/co18152-3d-printing-vs-gun-control-navigating-the-paradox/",
+      "title": "Turning Trouble Around: Re-imagining US Role as Global Player",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2016)",
+      "venueDetail": "S. Rajaratnam School of International Studies, NTU · RSIS Commentary No. 288, November 2016",
+      "url": "https://rsis.edu.sg/rsis-publication/rsis/co16288-the-rise-of-trump-and-its-global-implications-turning-trouble-around-re-imagining-us-role-as-global-player/",
       "linkText": "Read →"
     },
     {
       "group": "Commentaries & Op-Eds (External)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
-      "title": "Can the World's Megacities Survive the Digital Age?",
-      "authors": "Lim, C.H., & Mack, V.Z.W. (2017)",
-      "venueJournal": "The Conversation,",
-      "venueDetail": " 2017",
-      "url": "https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257",
+      "title": "A Global Smart Renewable Power Grid: A Radical Proposal",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2019)",
+      "venueJournal": "AsiaGlobal Online,",
+      "venueDetail": " 5 December 2019. Asia Global Institute, The University of Hong Kong.",
+      "url": "https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal",
       "linkText": "Read →"
     },
     {
       "group": "Commentaries & Op-Eds (External)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
-      "title": "Can We Save Low-Lying Island Nations from Rising Seas?",
-      "authors": "Lim, C.H., & Mack, V.Z.W. (2017)",
-      "venueJournal": "The Conversation,",
-      "venueDetail": " 2017",
-      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232",
+      "title": "How the Global Sleep Deficit is Bankrupting Humanity",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2019)",
+      "venueJournal": "AsiaGlobal Online,",
+      "venueDetail": " 18 July 2019. Asia Global Institute, The University of Hong Kong.",
+      "url": "https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity",
       "linkText": "Read →"
     },
     {
@@ -523,22 +671,22 @@
       "group": "Commentaries & Op-Eds (External)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
-      "title": "How the Global Sleep Deficit is Bankrupting Humanity",
-      "authors": "Lim, C.H., & Mack, V.Z.W. (2019)",
-      "venueJournal": "AsiaGlobal Online,",
-      "venueDetail": " July 18, 2019. Asia Global Institute, The University of Hong Kong.",
-      "url": "https://www.asiaglobalonline.hku.hk/how-the-global-sleep-deficit-is-bankrupting-humanity",
+      "title": "Can the World's Megacities Survive the Digital Age?",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2017)",
+      "venueJournal": "The Conversation,",
+      "venueDetail": " 19 September 2017. doi:10.64628/AAL.5yv9kyqnv",
+      "url": "https://theconversation.com/can-the-worlds-megacities-survive-the-digital-age-83257",
       "linkText": "Read →"
     },
     {
       "group": "Commentaries & Op-Eds (External)",
       "badge": "b-com",
       "badgeLabel": "Commentary",
-      "title": "A Global Smart Renewable Power Grid: A Radical Proposal",
-      "authors": "Lim, C.H., & Mack, V.Z.W. (2019)",
-      "venueJournal": "AsiaGlobal Online,",
-      "venueDetail": " December 5, 2019. Asia Global Institute, The University of Hong Kong.",
-      "url": "https://www.asiaglobalonline.hku.hk/a-global-smart-renewable-power-grid-a-radical-proposal",
+      "title": "Can We Save Low-Lying Island Nations from Rising Seas?",
+      "authors": "Lim, C.H., & Mack, V.Z.W. (2017)",
+      "venueJournal": "The Conversation,",
+      "venueDetail": " 21 July 2017. doi:10.64628/AAL.7m9f97gex",
+      "url": "https://theconversation.com/can-we-save-low-lying-island-nations-from-rising-seas-80232",
       "linkText": "Read →"
     },
     {

@@ -1,0 +1,873 @@
+{
+  "_meta": {
+    "n_topics": 16,
+    "n_noise": 176,
+    "n_chunks": 1047,
+    "cluster_dims": 10,
+    "min_cluster_size": 25,
+    "min_samples": 5,
+    "method": "UMAP->HDBSCAN in reduced space; c-TF-IDF labels"
+  },
+  "topics": [
+    {
+      "id": 0,
+      "label": "Spatial-Temporal Conflict Analysis",
+      "auto_label": "moran, spatial, civilians",
+      "terms": [
+        "moran",
+        "spatial",
+        "civilians",
+        "violence civilians",
+        "lisa",
+        "autocorrelation",
+        "violence",
+        "spatial autocorrelation",
+        "geary",
+        "local moran"
+      ],
+      "size": 72,
+      "n_works": 1,
+      "kind": "single-work section",
+      "composition": [
+        {
+          "paper_id": "spatial",
+          "chunks": 72
+        }
+      ],
+      "centroid_x": 2.7398,
+      "centroid_y": 10.205,
+      "contiguity": 0.926,
+      "exemplars": [
+        {
+          "chunk_id": "spatial#27",
+          "paper_id": "spatial",
+          "text": "Thus, in addition to the four categories described in the Moran Scatterplot, the LISA analysis includes an additional category: (5) Insignificant: where there are no spatial autocorrelation or clusters where violence against civilians occurred. 3 DATA METHODS AND TOOLS 3.1 Data Sources The conduct o…"
+        },
+        {
+          "chunk_id": "spatial#15",
+          "paper_id": "spatial",
+          "text": "While these approaches are a step up, they still remain unsatisfactory, as the ellipse method is too coarse to gain any insight, especially if we are interested in how diffusion of violence happens. 2.2 Exploratory Spatial Data Analysis (ESDA) Exploratory Spatial Data Analysis (ESDA) provides a solu…"
+        },
+        {
+          "chunk_id": "spatial#47",
+          "paper_id": "spatial",
+          "text": "As can be seen in Figure 6 below, plotting the choropleth of Admin 1 regions using tmap's \"pretty\" style of creating regular intervals rounded off at the hundreds yields us less information than if we were to plot it using the quantile style of creating intervals, where given that there are more reg…"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "label": "Trade War & Macroeconomic Shocks",
+      "auto_label": "trump, trade war, tax",
+      "terms": [
+        "trump",
+        "trade war",
+        "tax",
+        "trade deficit",
+        "currency",
+        "tariffs",
+        "emerging markets",
+        "war",
+        "qe",
+        "deficit"
+      ],
+      "size": 28,
+      "n_works": 4,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "trump_us_role",
+          "chunks": 9
+        },
+        {
+          "paper_id": "tradewar",
+          "chunks": 9
+        },
+        {
+          "paper_id": "qe_overdose",
+          "chunks": 9
+        },
+        {
+          "paper_id": "bri",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": -5.1489,
+      "centroid_y": -3.43,
+      "contiguity": 0.928,
+      "exemplars": [
+        {
+          "chunk_id": "tradewar#6",
+          "paper_id": "tradewar",
+          "text": "The demand for US debt repayment is unlikely, because trust in the US remains high. Since the Bretton Woods agreement, the US dollar has been a \"reserve currency,\" and companies that engage in transnational business invoice each other in US dollars in order to hedge against currency risk. The US dol…"
+        },
+        {
+          "chunk_id": "tradewar#8",
+          "paper_id": "tradewar",
+          "text": "The effects of tariffs and other restrictions are more severe for developing countries that are trade-dependent. This means social and economic repercussions that hurt people's livelihoods, which could engender societal discord. Last but not least, Trump's embrace of protectionism and his withdrawin…"
+        },
+        {
+          "chunk_id": "trump_us_role#0",
+          "paper_id": "trump_us_role",
+          "text": "www.rsis.edu.sg No. 288 – 24 November 2016 RSIS Commentary is a platform to provide timely and, where appropriate, policy-relevant commentary and analysis of topical issues and contemporary developments. The views of the authors are their own and do not represent the official position of the S. Thes…"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "ASEAN Development & Labour Migration",
+      "auto_label": "asean, migration, southeast",
+      "terms": [
+        "asean",
+        "migration",
+        "southeast",
+        "3d",
+        "southeast asia",
+        "printed",
+        "printing",
+        "labour",
+        "guns",
+        "agriculture"
+      ],
+      "size": 74,
+      "n_works": 6,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "labour_migration",
+          "chunks": 51
+        },
+        {
+          "paper_id": "tip_labour",
+          "chunks": 8
+        },
+        {
+          "paper_id": "printing3d",
+          "chunks": 8
+        },
+        {
+          "paper_id": "food_security",
+          "chunks": 5
+        },
+        {
+          "paper_id": "msc",
+          "chunks": 1
+        },
+        {
+          "paper_id": "megacity",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": -4.0663,
+      "centroid_y": -1.8837,
+      "contiguity": 0.905,
+      "exemplars": [
+        {
+          "chunk_id": "labour_migration#23",
+          "paper_id": "labour_migration",
+          "text": "That means the manufacturing jobs in ASEAN will be reduced compared to the past where 15 The AEC has 4 key pillars: a single market and production base; a competitive economic region; equitable economic development; and integration into the global economy. Please refer to the Declaration on the AEC …"
+        },
+        {
+          "chunk_id": "labour_migration#20",
+          "paper_id": "labour_migration",
+          "text": "Page 3, Figure 3 of the OECD World Migration in Figures report indicates that there are more labour migrants in developing economies than developed ones. The UN 2015 migration report states that between 2000 and 2015, Asia added more international migrants than any other major area. The favourable a…"
+        },
+        {
+          "chunk_id": "labour_migration#42",
+          "paper_id": "labour_migration",
+          "text": "Particularly impacted are women, workers with less education and workers in lower-wage jobs.37 Coupled with the advances of productivity technologies that allow for the further mechanization of labour through Artificial Intelligence and robotics, these may result in lower demand for migrant labour i…"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "China's Ghost Cities & Global Urbanisation",
+      "auto_label": "bri, ghost, megacities",
+      "terms": [
+        "bri",
+        "ghost",
+        "megacities",
+        "ghost cities",
+        "cities",
+        "chinese stock",
+        "city",
+        "economies scale",
+        "china",
+        "stock market"
+      ],
+      "size": 33,
+      "n_works": 6,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "bri",
+          "chunks": 18
+        },
+        {
+          "paper_id": "megacity",
+          "chunks": 7
+        },
+        {
+          "paper_id": "brichal",
+          "chunks": 3
+        },
+        {
+          "paper_id": "labour_migration",
+          "chunks": 2
+        },
+        {
+          "paper_id": "sgrid",
+          "chunks": 2
+        },
+        {
+          "paper_id": "qe_overdose",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": -4.7485,
+      "centroid_y": -4.7806,
+      "contiguity": 0.956,
+      "exemplars": [
+        {
+          "chunk_id": "bri#11",
+          "paper_id": "bri",
+          "text": "In addition, protectionism and the global economic outlook some of the cities could be used as corporate is anything but certain, the pressures of the techtraining centers and retirement towns to cater nology tsunami and the impending effects on for the country's ageing population. employment will b…"
+        },
+        {
+          "chunk_id": "bri#19",
+          "paper_id": "bri",
+          "text": "and mel- ing date in sight. the asian Development Bank bourne in australia are suffering overpriced resi- (aDB) estimates that in the asia-Pacific region dential properties, with price-to-income ratios at alone, infrastructure investments will require historical highs. as a result, many professional…"
+        },
+        {
+          "chunk_id": "bri#12",
+          "paper_id": "bri",
+          "text": "However, the speed and scale of Chiprinting, robotics, artificial intelligence, Big na's massive industrialization and urbanization The BRI will definitely face funding challenges, since it is a long-term initiative with no finishing date in sight. The Asian Development Bank (ADB) estimates that in …"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "label": "Belt & Road Strategy",
+      "auto_label": "bri, compass, compass approach",
+      "terms": [
+        "bri",
+        "compass",
+        "compass approach",
+        "china bri",
+        "bri partners",
+        "anglo saxon",
+        "saxon",
+        "anglo",
+        "chinese dream",
+        "chinese"
+      ],
+      "size": 34,
+      "n_works": 2,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "bri",
+          "chunks": 29
+        },
+        {
+          "paper_id": "brichal",
+          "chunks": 5
+        }
+      ],
+      "centroid_x": -5.2162,
+      "centroid_y": -5.6964,
+      "contiguity": 0.975,
+      "exemplars": [
+        {
+          "chunk_id": "bri#30",
+          "paper_id": "bri",
+          "text": "For example, due to differences in their time orientation, problems arising during project implementation may be perceived as not urgent or immediate by China, but immediate and urgent to its BrI partners. the external nature of the BrI also requires China to examine the initiative from its partners…"
+        },
+        {
+          "chunk_id": "bri#46",
+          "paper_id": "bri",
+          "text": "Just like the operating system of a computer or a mobile device, which interfaces between the software applications and manages the computer hardware and resources, this Chinese operating system could be a clear set of rules or best practices for how China will deal with problems that may arise, so …"
+        },
+        {
+          "chunk_id": "bri#36",
+          "paper_id": "bri",
+          "text": "In contrast, China does not believe nor accept this absolutist philosophical framework. rather, it subscribes to a more relativistic mindset where each country will apply what it deems fit. While China believes its system is robust and flexible, it evitaleR etulosbA figurE 1 poliCy toolkit ChoiCEs: …"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "label": "Feedback, Peers & Semantic Convergence",
+      "auto_label": "feedback, convergence, huang et",
+      "terms": [
+        "feedback",
+        "convergence",
+        "huang et",
+        "peers",
+        "perry smith",
+        "perry",
+        "smith mannucci",
+        "dell",
+        "mannucci 2017",
+        "open innovation"
+      ],
+      "size": 100,
+      "n_works": 3,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 55
+        },
+        {
+          "paper_id": "icis20",
+          "chunks": 37
+        },
+        {
+          "paper_id": "icis22",
+          "chunks": 8
+        }
+      ],
+      "centroid_x": 7.9413,
+      "centroid_y": 0.8406,
+      "contiguity": 0.801,
+      "exemplars": [
+        {
+          "chunk_id": "icis22#12",
+          "paper_id": "icis22",
+          "text": "Our research aims to make several important contributions. First, this paper extends the literature on crowdsourcing ideation by considering the impact of features in the refinement process while most of the previous literature focuses on idea generation or implementation (e.g., Deichmann et al. 202…"
+        },
+        {
+          "chunk_id": "diss#38",
+          "paper_id": "diss",
+          "text": "Given that firms and individuals invest heavily in crowdsourcing knowledge creation through ideation, it is of great practical importance to provide some guidance for the idea elaboration or refinement phase, as ideas do not usually arrive at their finalized form in the first iteration. Furthermore,…"
+        },
+        {
+          "chunk_id": "icis22#13",
+          "paper_id": "icis22",
+          "text": "Literature Review Existing literature on crowdsourcing ideation lags. First, previous literature on crowdsourcing ideation in the management field mainly focuses on idea generation or implementation (e.g., Deichmann et al. 2020; Dennis and Valacich 1997; Huang et al. 2014), ignoring the process of r…"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "label": "Trope Annotation & Inter-Rater Reliability",
+      "auto_label": "raters, idea day, kappa",
+      "terms": [
+        "raters",
+        "idea day",
+        "kappa",
+        "encoder",
+        "annotator",
+        "block",
+        "tlp trope",
+        "launched tropes",
+        "tropes tlp",
+        "trope"
+      ],
+      "size": 80,
+      "n_works": 4,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 53
+        },
+        {
+          "paper_id": "jmis1",
+          "chunks": 17
+        },
+        {
+          "paper_id": "icis22",
+          "chunks": 6
+        },
+        {
+          "paper_id": "icis20",
+          "chunks": 4
+        }
+      ],
+      "centroid_x": 10.3822,
+      "centroid_y": 3.0067,
+      "contiguity": 0.898,
+      "exemplars": [
+        {
+          "chunk_id": "diss#290",
+          "paper_id": "diss",
+          "text": "Considering that the launching of a TLP trope is mainly determined by net positive votes, net positive votes are utilized to measure idea success using the same equation 4.1 in Chapter 4. Moreover, \u0000F eedbackAmt , the amount of peer feedback (i.e., comments proi,t vided by peers (non-idea editors)) …"
+        },
+        {
+          "chunk_id": "diss#206",
+          "paper_id": "diss",
+          "text": "Both \u0000P osV ote and \u0000NegV ote can either be negative or positive, since the users can either cast votes and also withdraw their previous votes. 4.4.2.2 Mediating Variable To validate the mediating role of idea refinement, \u0000Edits , the number of edits TLP trope i received on day t, is use to measure …"
+        },
+        {
+          "chunk_id": "diss#240",
+          "paper_id": "diss",
+          "text": "In the first step, endogenous variables are modeled as functions of instrument variables and other exogenous variables. Specifically, the same variables of the most similar TLP trope are used as instruments for the key independent variables of the focal TLP trope in the main model. In the second ste…"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "label": "Political Opportunity & Social Movement Theory",
+      "auto_label": "labour, political opportunity, social movements",
+      "terms": [
+        "labour",
+        "political opportunity",
+        "social movements",
+        "mobilisation",
+        "opportunity structure",
+        "grievances",
+        "protests",
+        "international trade",
+        "protest",
+        "eisinger"
+      ],
+      "size": 73,
+      "n_works": 1,
+      "kind": "single-work section",
+      "composition": [
+        {
+          "paper_id": "msc",
+          "chunks": 73
+        }
+      ],
+      "centroid_x": -3.774,
+      "centroid_y": 0.933,
+      "contiguity": 0.898,
+      "exemplars": [
+        {
+          "chunk_id": "msc#0",
+          "paper_id": "msc",
+          "text": "Table of contents ACKNOWLEDGEMENTS I TABLE OF CONTENTS II INDEX OF FIGURES III INDEX OF TABLES IV ABSTRACT V CHAPTER 1: INTRODUCTION 1 CHAPTER 2: LITERATURE REVIEW 4 WHAT CAUSES PROTEST? 4 GRIEVANCES 4 RESOURCE MOBILISATION 5 POLITICAL OPPORTUNITY STRUCTURE 7 LATEST DEVELOPMENTS IN EXPLAINING PROTES…"
+        },
+        {
+          "chunk_id": "msc#59",
+          "paper_id": "msc",
+          "text": "Nevertheless, the level of protests would likely be lesser in developed countries compared to less-developed or developing countries as labour's political identity in the former are more likely to be fragmented as compared to the latter. Hence, I present the first hypothesis: Hypothesis 1: If we con…"
+        },
+        {
+          "chunk_id": "msc#56",
+          "paper_id": "msc",
+          "text": "Fairfield (2011) notes that under some circumstances, policy reforms or existing policies that present \"a strong enough threat to common business interests may provoke protest even if encompassing organization, and other factors that facilitate collective action such as homogeneity, concentration, a…"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "label": "Labour Rights & Strike Incidence",
+      "auto_label": "strike, labour rights, strike fund",
+      "terms": [
+        "strike",
+        "labour rights",
+        "strike fund",
+        "labour",
+        "rights",
+        "union strike",
+        "strikes",
+        "level development",
+        "gdp capita",
+        "unions"
+      ],
+      "size": 33,
+      "n_works": 1,
+      "kind": "single-work section",
+      "composition": [
+        {
+          "paper_id": "msc",
+          "chunks": 33
+        }
+      ],
+      "centroid_x": -4.7405,
+      "centroid_y": 1.1863,
+      "contiguity": 0.972,
+      "exemplars": [
+        {
+          "chunk_id": "msc#89",
+          "paper_id": "msc",
+          "text": "Regression Analyses Table 2 shows the relationship between the dependent variable of the level of labor strikes and the various independent variables – GDP per capita, Union Density, Union Strike Funding and Labour Rights. From table 2, we observe under Model 1a that GDP per capita has a negative an…"
+        },
+        {
+          "chunk_id": "msc#91",
+          "paper_id": "msc",
+          "text": "In Model 1e, when all the interaction terms are controlled for, the significance and the magnitude of the moderating effect of both union strike funds' and labour rights' effect on strikes increased in level of significance and magnitude This lends support to hypotheses 3 and 4 and undermines hypoth…"
+        },
+        {
+          "chunk_id": "msc#90",
+          "paper_id": "msc",
+          "text": "This same trend is also seen in models 1b-e, which lends support to Hypothesis 1. Under Model 1b, 1c and 1d (See Table 2; Figure 2 and 3) where the interaction terms are introduced, we see that with the exception of union density, union funding and labour rights have a positive and statistically sig…"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "label": "Citation Network Embeddedness",
+      "auto_label": "network embeddedness, citation network, breadth depth",
+      "terms": [
+        "network embeddedness",
+        "citation network",
+        "breadth depth",
+        "idea topic",
+        "topic breadth",
+        "increasing citation",
+        "centrality",
+        "breadth",
+        "effect increasing",
+        "embeddedness changes"
+      ],
+      "size": 30,
+      "n_works": 3,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "icis22",
+          "chunks": 28
+        },
+        {
+          "paper_id": "diss",
+          "chunks": 1
+        },
+        {
+          "paper_id": "icis20",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": 8.6105,
+      "centroid_y": 3.0539,
+      "contiguity": 0.951,
+      "exemplars": [
+        {
+          "chunk_id": "icis22#4",
+          "paper_id": "icis22",
+          "text": "Given that ideas are embedded within a network of other related ideas, how the network structure fluctuates throughout the idea refinement process may affect its end outcome. Through studying proposed ideas on TVTropes.org, this research seeks to understand how network embeddedness of an idea's cita…"
+        },
+        {
+          "chunk_id": "icis22#26",
+          "paper_id": "icis22",
+          "text": "In short, we hypothesize as follows: Hypothesis 2 (H2): The positive effect of increasing citation network embeddedness (degree centrality, betweenness centrality, and eigenvector centrality) on the idea quality in idea refinement is weaker when the idea topic breadth is greater. Idea topic depth is…"
+        },
+        {
+          "chunk_id": "icis22#22",
+          "paper_id": "icis22",
+          "text": "In short, we hypothesize as follows: Hypothesis 1 (H1): Increasing citation network embeddedness (degree centrality, betweenness centrality, and eigenvector centrality) in idea refinement will positively influence the idea quality. Moderating Effect of Idea Topic Breadth and Depth We then consider t…"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "label": "Panel Estimation & Vote Dynamics",
+      "auto_label": "daily positive, daily, estimation results",
+      "terms": [
+        "daily positive",
+        "daily",
+        "estimation results",
+        "netp osv",
+        "daily negative",
+        "netp",
+        "mediation",
+        "estimation",
+        "votes",
+        "01"
+      ],
+      "size": 66,
+      "n_works": 3,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 49
+        },
+        {
+          "paper_id": "jmis1",
+          "chunks": 13
+        },
+        {
+          "paper_id": "icis20",
+          "chunks": 4
+        }
+      ],
+      "centroid_x": 8.4122,
+      "centroid_y": 4.1708,
+      "contiguity": 0.919,
+      "exemplars": [
+        {
+          "chunk_id": "diss#245",
+          "paper_id": "diss",
+          "text": "As reported in Tables 4.12, 4.13, 4.14, 4.15, the main conclusions regarding mediation effects still hold. Secondly, instead of regressing on daily net positive votes, the effects on total votes are examined. Table 4.12: Estimation Results of Individual Effects Using Edit Words Table 4.13: Estimatio…"
+        },
+        {
+          "chunk_id": "diss#224",
+          "paper_id": "diss",
+          "text": "Figure 4.4: \u0000NetP osV otes Over Structural Embeddedness Figure 4.5: \u0000NetP osV otes Over Structural Bridging 4.5 Empirical Estimation 4.5.1 Main Effects To estimate the impact of network structure (i.e., structural embeddedness and bridging) of the new idea on its success, a two-way fixed effects mod…"
+        },
+        {
+          "chunk_id": "diss#317",
+          "paper_id": "diss",
+          "text": "If 5a, 5b, 6a, and 6b are supported, it is expected that \u0000 to \u0000 , and \u0000 to \u0000 will be statistically significant and positive. ✓ and ⇢ represent idea fixed effects, controlling for unobi i served time-invariant idea-specific confounders. ✓ and ⇢ are the time fixed effects, controlling for unobserved t…"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "label": "Ideator Expertise & Crowd Contribution",
+      "auto_label": "low expertise, ideator expertise, expertise ideators",
+      "terms": [
+        "low expertise",
+        "ideator expertise",
+        "expertise ideators",
+        "oriented ideas",
+        "high expertise",
+        "crowd contributions",
+        "oriented",
+        "collaboration oriented",
+        "diversity",
+        "selective integration"
+      ],
+      "size": 31,
+      "n_works": 2,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "jmis1",
+          "chunks": 29
+        },
+        {
+          "paper_id": "diss",
+          "chunks": 2
+        }
+      ],
+      "centroid_x": 6.8842,
+      "centroid_y": 1.596,
+      "contiguity": 0.958,
+      "exemplars": [
+        {
+          "chunk_id": "jmis1#17",
+          "paper_id": "jmis1",
+          "text": "Crowd contributions expand the pool of ideas available for recombination, increasing embeddedness, bridging, and content diversity, whereas ideator expertise also strengthens embeddedness and bridging but tends to reduce diversity through more selective integration. Supplementary analyses further su…"
+        },
+        {
+          "chunk_id": "jmis1#93",
+          "paper_id": "jmis1",
+          "text": "Consistent with Kim et al. [39], we further uncover asymmetric roles of the crowd and ideators: crowd contributions increase embeddedness and bridging but also raise diversity and integration demands, whereas ideator expertise enables more selective integration of crowd inputs, strengthening network…"
+        },
+        {
+          "chunk_id": "jmis1#87",
+          "paper_id": "jmis1",
+          "text": "This suggests that diversity arises primarily from decentralized crowd contributions that expand the pool of inputs but heighten integration demands, whereas ideators with greater expertise are more selective in curating inputs and produce more cohesive ideas. Supplementary subgroup analyses further…"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "label": "Knowledge Relatedness & Idea Diversity",
+      "auto_label": "86, ahuja 2000, coupling",
+      "terms": [
+        "86",
+        "ahuja 2000",
+        "coupling",
+        "knowledge element",
+        "ties",
+        "actor centric",
+        "diversity",
+        "relatedness",
+        "chi",
+        "chi et"
+      ],
+      "size": 60,
+      "n_works": 4,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "jmis1",
+          "chunks": 30
+        },
+        {
+          "paper_id": "diss",
+          "chunks": 22
+        },
+        {
+          "paper_id": "icis20",
+          "chunks": 7
+        },
+        {
+          "paper_id": "icis22",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": 7.4063,
+      "centroid_y": 2.432,
+      "contiguity": 0.946,
+      "exemplars": [
+        {
+          "chunk_id": "icis20#25",
+          "paper_id": "icis20",
+          "text": "These ideas bridge structural holes by being the broker in relations between otherwise disconnected nodes (Granovetter 1973, Burt 1992). These otherwise disconnected nodes, often coming from different domains or clusters, provide more diverse information and are more likely to lead to innovative ide…"
+        },
+        {
+          "chunk_id": "jmis1#35",
+          "paper_id": "jmis1",
+          "text": "Second, it exposes the idea to unique conceptual elements in disconnected clusters that are unlikely to be reached through embedded ties [15, 20]. As a result, bridging brings together interpretive contexts that would otherwise remain separate, enabling unexpected recombinations and increasing the p…"
+        },
+        {
+          "chunk_id": "jmis1#12",
+          "paper_id": "jmis1",
+          "text": "While structure affects which ideas are more likely to be accessed and connected, content determines the conceptual ingredients available for recombination. Together, they shape the novelty, feasibility, and eventual success of new ideas. Consistent with this view, prior research suggests that idea …"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "label": "AI & Knowledge Management Systems",
+      "auto_label": "ai, management systems, rag",
+      "terms": [
+        "ai",
+        "management systems",
+        "rag",
+        "knowledge management",
+        "rag systems",
+        "creativity",
+        "llms",
+        "genai",
+        "graphs",
+        "cd theory"
+      ],
+      "size": 71,
+      "n_works": 4,
+      "kind": "cross-work theme",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 61
+        },
+        {
+          "paper_id": "aisp",
+          "chunks": 8
+        },
+        {
+          "paper_id": "jmis1",
+          "chunks": 1
+        },
+        {
+          "paper_id": "megacity",
+          "chunks": 1
+        }
+      ],
+      "centroid_x": 9.0817,
+      "centroid_y": 0.167,
+      "contiguity": 0.923,
+      "exemplars": [
+        {
+          "chunk_id": "diss#15",
+          "paper_id": "diss",
+          "text": "For example, successful films such as X-Men and Avatar, often employ distinctive combinations of recurrent storytelling patterns called tropes (Garc ́ıa-Ortega, Sa ́nchez, and Merelo-Guervo ́s 2021). The advance of information systems design and knowledge management tools such as wiki websites and c…"
+        },
+        {
+          "chunk_id": "diss#1",
+          "paper_id": "diss",
+          "text": "Combinatorial creativity: Knowledge graphs and idea generation in crowdsourcing Available at: https://ink.library.smu.edu.sg/etd_coll/615 This PhD Dissertation is brought to you for free and open access by the Dissertations and Theses at Institutional Knowledge at Singapore Management University. It…"
+        },
+        {
+          "chunk_id": "diss#64",
+          "paper_id": "diss",
+          "text": "H. Hwang, Singh, and Argote 2019; Smalheiser 2017), transforming them into new knowledge, concepts, or products (Biscaro and Comacchio 2018; Nijstad and Stroebe 2006; Perry-Smith and Mannucci 2017; Tsoukas 2011). 2.1.2 Role of Knowledge Management Systems in Crowdsourcing Combinatorial Creativity Th…"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "label": "Conceptual Dependency & Triple Extraction",
+      "auto_label": "noun, cd, governor",
+      "terms": [
+        "noun",
+        "cd",
+        "governor",
+        "verb",
+        "pp",
+        "compound",
+        "cd theory",
+        "triples",
+        "triple",
+        "extraction"
+      ],
+      "size": 61,
+      "n_works": 1,
+      "kind": "single-work section",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 61
+        }
+      ],
+      "centroid_x": 11.4247,
+      "centroid_y": 0.8096,
+      "contiguity": 0.927,
+      "exemplars": [
+        {
+          "chunk_id": "diss#113",
+          "paper_id": "diss",
+          "text": "A compounded concept c comprising of a governor concept c or c connected to other subordinate concepts is defined as . Each L C ✓C⇥R⇥C c is a set of connected triples < c , r, c >, where c , c and r . 0 0 subj obj subj obj A KG representation of each ⌧ on a set of relations and a set of compounded c…"
+        },
+        {
+          "chunk_id": "diss#135",
+          "paper_id": "diss",
+          "text": "\"Governor\" concepts manifest as nouns and verbs which are termed as \"Picture Producers\" and \"ACTs\" respectively. Subordinate concept aiders that modify the meaning of the governors are known as \"Picture Aiders\" and \"Action Aiders\" correspond to adjectives and adverbs respectively. These governors an…"
+        },
+        {
+          "chunk_id": "diss#136",
+          "paper_id": "diss",
+          "text": "Jiang 2021; Rajagopal et al. 2013). For a CD-based parser to be efficacious, a deep understanding of \"commonsense\" grammar rules is prerequisite for identifying which concept is the governor and which type of dependency relationships exists between concepts, which seemed to be assumed in Schank's or…"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "label": "TVTropes Wiki Structure & Subwikis",
+      "auto_label": "pmwiki, trope, org pmwiki",
+      "terms": [
+        "pmwiki",
+        "trope",
+        "org pmwiki",
+        "php",
+        "subwikis",
+        "hero",
+        "tropex",
+        "tropey",
+        "story",
+        "pmwiki php"
+      ],
+      "size": 25,
+      "n_works": 2,
+      "kind": "shared between works",
+      "composition": [
+        {
+          "paper_id": "diss",
+          "chunks": 23
+        },
+        {
+          "paper_id": "jmis1",
+          "chunks": 2
+        }
+      ],
+      "centroid_x": 11.516,
+      "centroid_y": 1.9419,
+      "contiguity": 0.963,
+      "exemplars": [
+        {
+          "chunk_id": "diss#118",
+          "paper_id": "diss",
+          "text": "It categorizes the methods of using tropes into several distinct approaches: • Played Straight: The trope is used in its typical manner without alteration. • Justified: A logical in-universe reason is given for the trope's occurrence. • Inverted: The trope is reversed or its expected elements are fl…"
+        },
+        {
+          "chunk_id": "diss#164",
+          "paper_id": "diss",
+          "text": "Table 3.6: A Sample of Tropes and Their Recommendations Trope Recommended Tropes EvilOverlord NotWorthKilling TheDitz AllTakeAndNoGive, MadLove GirlsHaveCooties EvilMentor, HaremSeries RaisedByWolves SoapOperaDisease, JerkAss ScienceHero NonActionGuy, EvilutionaryBiologist BookDumb GeniusBruiser, Se…"
+        },
+        {
+          "chunk_id": "diss#155",
+          "paper_id": "diss",
+          "text": "Other semantically synonymous concepts may be used, such as \"variant\", \"form\", or simply \"trope\" i.e., in the form of \"TropeX is a trope of TropeY\". For similar and dissimilar tropes, the TVTropes community uses phrases such as \"Compare with TropeX\", \"Contrast with TropeY\" or \"See also TropeZ\". For …"
+        }
+      ]
+    }
+  ]
+}
