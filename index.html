@@ -2379,7 +2379,10 @@
         .then(function (res) {
           var d = res.d || {};
           if (d.error) {
-            out.innerHTML = '<div class="ask-error">' + esc(d.error) + '</div>';
+            /* Quota exhaustion is an expected state, not a fault — style it as
+               a notice rather than an error, and don't dump internals. */
+            var cls = d.quota_exceeded ? 'ask-status' : 'ask-error';
+            out.innerHTML = '<div class="' + cls + '">' + esc(d.error) + '</div>';
             return;
           }
           if (d.answer) {
