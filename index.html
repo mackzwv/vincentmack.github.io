@@ -700,6 +700,49 @@
       outline-offset: 2px
     }
 
+
+    /* ── ASK MY RESEARCH ── */
+    #ask-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 22px }
+    #ask-panel h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin: 0 0 4px }
+    .ask-sub { font-size: 12.5px; color: var(--muted); margin: 0 0 14px; max-width: 660px }
+    .ask-row { display: flex; gap: 8px; flex-wrap: wrap }
+    #ask-q { flex: 1 1 260px; min-width: 0; padding: 9px 12px; font: inherit; font-size: 14px; color: var(--text);
+             background: var(--bg); border: 1px solid var(--border); border-radius: 8px }
+    #ask-q:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent) }
+    #ask-go { padding: 9px 22px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+              background: var(--accent); color: #fff; border: none; border-radius: 8px; transition: background .15s }
+    #ask-go:hover:not(:disabled) { background: var(--navy-mid) }
+    #ask-go:disabled { background: var(--light); cursor: default }
+    .ask-egs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px }
+    .ask-eg { background: var(--tag-bg); color: var(--tag-fg); border: none; border-radius: 20px; padding: 5px 12px;
+              font: inherit; font-size: 12px; cursor: pointer; transition: background .15s }
+    .ask-eg:hover { background: #dbeafe }
+    #ask-answer { margin-top: 16px; font-size: 14px; line-height: 1.7 }
+    #ask-answer:empty { margin-top: 0 }
+    #ask-answer p { margin: 0 0 10px }
+    #ask-answer ol, #ask-answer ul { margin: 0 0 10px; padding-left: 22px }
+    #ask-answer li { margin-bottom: 5px }
+    #ask-answer strong { color: var(--navy) }
+    .ask-cite { display: inline-block; background: var(--tag-bg); color: var(--tag-fg); border-radius: 4px;
+                padding: 0 4px; font-size: 11px; font-family: var(--mono); text-decoration: none; margin: 0 1px;
+                vertical-align: super; line-height: 1.4; cursor: pointer }
+    .ask-cite:hover { background: var(--accent); color: #fff }
+    .ask-status { font-size: 13px; color: var(--muted); font-style: italic }
+    .ask-error { font-size: 13px; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca;
+                 border-radius: 8px; padding: 10px 12px }
+    #ask-sources { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px }
+    #ask-sources h4 { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+                      letter-spacing: .04em; margin: 0 0 10px }
+    .ask-src { font-size: 12.5px; margin-bottom: 10px; padding-left: 26px; position: relative; scroll-margin-top: 80px }
+    .ask-src-n { position: absolute; left: 0; top: 1px; background: var(--tag-bg); color: var(--tag-fg);
+                 font-family: var(--mono); font-size: 10.5px; border-radius: 4px; padding: 1px 5px }
+    .ask-src.flash { background: #fefce8; border-radius: 6px }
+    .ask-src a { color: var(--accent); text-decoration: none; font-weight: 500 }
+    .ask-src a:hover { text-decoration: underline }
+    .ask-src-meta { color: var(--light); font-size: 11.5px; font-family: var(--mono) }
+    .ask-src-txt { color: var(--muted); margin-top: 2px }
+    .ask-foot { font-size: 11.5px; color: var(--light); margin-top: 14px; line-height: 1.5 }
+
     /* ── SUBTABS ── */
     .viz-intro { font-size: clamp(13px,1.8vw,14.5px); color: var(--muted); margin-bottom: 18px; max-width: 760px }
     .subtab-bar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 4px }
@@ -877,7 +920,20 @@
 
     <section id="visualizations" class="tab-pane" role="tabpanel">
       <div class="sec">Research &amp; Career Visualizations</div>
-      <p class="viz-intro">Three interactive lenses on the same body of work — a chronological career view, a concept map of how ideas connect, and a semantic scatter of papers by meaning.</p>
+      <p class="viz-intro">Ask the corpus a question directly, or explore it through three interactive lenses — a chronological career view, a concept map of how ideas connect, and a semantic scatter of papers by meaning.</p>
+
+      <div id="ask-panel">
+        <h3>Ask my research</h3>
+        <p class="ask-sub">Put a question to the corpus behind these visualisations — 1,047 passages from 26 works. Answers are assembled from the passages actually retrieved, and every one is listed below the answer so you can check it.</p>
+        <div class="ask-row">
+          <input id="ask-q" type="text" autocomplete="off" placeholder="e.g. What predicts which crowdsourced ideas succeed?" aria-label="Ask a question about this research">
+          <button id="ask-go" type="button">Ask</button>
+        </div>
+        <div class="ask-egs" id="ask-egs"></div>
+        <div id="ask-answer" role="status" aria-live="polite"></div>
+        <div id="ask-sources"></div>
+        <p class="ask-foot">Retrieval runs on embeddings of my own papers; the wording of answers is generated. Passages are extracts, so treat the sources as the record and the summary as a convenience.</p>
+      </div>
 
       <div class="subtab-bar" role="tablist" aria-label="Visualization type">
         <button class="subtab-btn active" data-subtab="tl-pane"  role="tab" aria-selected="true"  type="button">Career Timeline</button>
@@ -2231,6 +2287,145 @@
 
       grps.exit().transition().duration(300).attr('opacity', 0).remove();
     }
+  
+    /* ── ASK MY RESEARCH ──────────────────────────────────────────────────
+       Retrieval + generation run in a Cloudflare Worker; this only renders.
+       Everything from the API is escaped before it touches innerHTML.       */
+    (function () {
+      var API = 'https://ask-my-papers.mackzwv.workers.dev/ask';
+      var EGS = [
+        'What predicts which crowdsourced ideas succeed?',
+        'How is Conceptual Dependency theory used to build knowledge graphs?',
+        'What is the argument about ghost cities and the Belt and Road?',
+        'What determines whether labour protests happen?'
+      ];
+
+      var q = document.getElementById('ask-q');
+      var go = document.getElementById('ask-go');
+      var out = document.getElementById('ask-answer');
+      var src = document.getElementById('ask-sources');
+      var egs = document.getElementById('ask-egs');
+      if (!q || !go) return;                       // panel absent, nothing to do
+
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+        });
+      }
+
+      /* The model answers in a small markdown subset. Render only that subset,
+         always from ALREADY-ESCAPED text, so no markup can survive from the API. */
+      function render(md) {
+        var lines = esc(md).split('\n');
+        var html = '', list = null;
+        function closeList() { if (list) { html += '</' + list + '>'; list = null; } }
+        lines.forEach(function (raw) {
+          var line = raw.trim();
+          if (!line) { closeList(); return; }
+          var ol = line.match(/^(\d+)\.\s+(.*)$/);
+          var ul = line.match(/^[-*]\s+(.*)$/);
+          if (ol)      { if (list !== 'ol') { closeList(); html += '<ol>'; list = 'ol'; } html += '<li>' + inline(ol[2]) + '</li>'; }
+          else if (ul) { if (list !== 'ul') { closeList(); html += '<ul>'; list = 'ul'; } html += '<li>' + inline(ul[1]) + '</li>'; }
+          else         { closeList(); html += '<p>' + inline(line) + '</p>'; }
+        });
+        closeList();
+        return html;
+      }
+
+      function inline(t) {
+        return t
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\[(\d+)\]/g, function (_, n) {
+            return '<a class="ask-cite" href="#ask-src-' + n + '" data-n="' + n + '">' + n + '</a>';
+          });
+      }
+
+      function showSources(sources) {
+        if (!sources || !sources.length) { src.innerHTML = ''; return; }
+        var h = '<h4>Passages retrieved</h4>';
+        sources.forEach(function (s, i) {
+          var n = i + 1;
+          var title = s.url
+            ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a>'
+            : esc(s.title);
+          var sect = s.section && s.section !== 'unknown' ? ' &middot; ' + esc(s.section) : '';
+          var txt = String(s.text || '');
+          if (txt.length > 260) txt = txt.slice(0, 260).replace(/\s+\S*$/, '') + '…';
+          h += '<div class="ask-src" id="ask-src-' + n + '">' +
+               '<span class="ask-src-n">' + n + '</span>' + title +
+               ' <span class="ask-src-meta">' + Number(s.score).toFixed(3) + sect + '</span>' +
+               '<div class="ask-src-txt">' + esc(txt) + '</div></div>';
+        });
+        src.innerHTML = h;
+      }
+
+      var busy = false;
+      function ask(text) {
+        if (busy) return;
+        var question = (text != null ? text : q.value).trim();
+        if (!question) { q.focus(); return; }
+        q.value = question;
+        busy = true;
+        go.disabled = true;
+        src.innerHTML = '';
+        out.innerHTML = '<p class="ask-status">Searching 1,047 passages…</p>';
+
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: question })
+        })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          var d = res.d || {};
+          if (d.error) {
+            out.innerHTML = '<div class="ask-error">' + esc(d.error) + '</div>';
+            return;
+          }
+          if (d.answer) {
+            out.innerHTML = render(d.answer);
+            if (d.truncated) {
+              out.innerHTML += '<p class="ask-status">(answer cut short at the length limit)</p>';
+            }
+          } else {
+            out.innerHTML = '<div class="ask-error">No answer was generated' +
+              (d.generation_error ? ': ' + esc(d.generation_error) : '') +
+              '. The passages found are listed below.</div>';
+          }
+          showSources(d.sources);
+        })
+        .catch(function (e) {
+          out.innerHTML = '<div class="ask-error">Could not reach the service: ' +
+                          esc(e.message) + '</div>';
+        })
+        .finally(function () { busy = false; go.disabled = false; });
+      }
+
+      go.addEventListener('click', function () { ask(); });
+      q.addEventListener('keydown', function (e) { if (e.key === 'Enter') ask(); });
+
+      EGS.forEach(function (t) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ask-eg';
+        b.textContent = t;
+        b.addEventListener('click', function () { ask(t); });
+        egs.appendChild(b);
+      });
+
+      /* Citation click: jump to the passage and flash it. */
+      out.addEventListener('click', function (e) {
+        var a = e.target.closest('.ask-cite');
+        if (!a) return;
+        e.preventDefault();
+        var el = document.getElementById('ask-src-' + a.dataset.n);
+        if (!el) return;
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('flash');
+        setTimeout(function () { el.classList.remove('flash'); }, 1400);
+      });
+    })();
+
   </script>
 </body>
 
