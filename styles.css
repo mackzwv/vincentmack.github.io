@@ -13,6 +13,10 @@
       --navy-mid: #1a3a6e;
       --accent: #2563eb;
       --teal: #0891b2;
+      /* NYP house colours — blue and red on white */
+      --nyp-blue: #0b3f8f;
+      --nyp-red: #d2202e;
+      --nyp-red-deep: #9e131f;
       --bg: #f8fafc;
       --surface: #fff;
       --border: #e2e8f0;
@@ -39,11 +43,12 @@
     }
 
     header {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4d8c 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 55%, var(--nyp-blue) 100%);
       color: #fff;
       padding: clamp(32px, 6vw, 60px) var(--px) clamp(28px, 5vw, 52px);
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      border-bottom: 4px solid var(--nyp-red)
     }
 
     #net-canvas {
@@ -68,6 +73,17 @@
       letter-spacing: -.02em;
       line-height: 1.2;
       margin-bottom: 8px
+    }
+
+    /* red rule under the name — the second half of the blue/red pairing */
+    .hdr-name::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--nyp-red);
+      margin: 10px 0 0
     }
 
     .hdr-title {
@@ -107,8 +123,31 @@
     }
 
     .hdr-link:hover {
-      background: rgba(255, 255, 255, .16);
-      border-color: rgba(255, 255, 255, .5)
+      background: rgba(210, 32, 46, .28);
+      border-color: var(--nyp-red);
+      color: #fff
+    }
+
+    /* inline links to Nanyang Polytechnic — inherit their surroundings, red on hover */
+    .nyp-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(210, 32, 46, .5);
+      transition: color .18s, border-color .18s
+    }
+
+    .nyp-link:hover {
+      color: var(--nyp-red);
+      border-bottom-color: var(--nyp-red)
+    }
+
+    .hdr .nyp-link {
+      border-bottom-color: rgba(255, 255, 255, .45)
+    }
+
+    .hdr .nyp-link:hover {
+      color: #fff;
+      border-bottom-color: var(--nyp-red)
     }
 
     .nav-bar {
@@ -160,8 +199,8 @@
     }
 
     .nav-tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent)
+      color: var(--nyp-blue);
+      border-bottom-color: var(--nyp-red)
     }
 
     main {

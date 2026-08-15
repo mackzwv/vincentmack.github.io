@@ -444,6 +444,15 @@
  ],
  "publications": [
   {
+   "group": "Journal Articles — In Press",
+   "title": "Success of New Ideas in Online Platforms: An Idea Network Perspective",
+   "authors": "Zhou, Y., Tang, Q., Mack, V.Z.W., & Liaw, S.Y.",
+   "venueJournal": "Journal of Management Information Systems",
+   "badge": "b-press",
+   "badgeLabel": "In Press",
+   "venueDetail": " (in press). doi:10.1080/07421222.2026.2692285"
+  },
+  {
    "group": "Journal Articles — Published",
    "badge": "b-pub",
    "badgeLabel": "Published",
@@ -453,15 +462,6 @@
    "venueDetail": " 13(3), 62–71. (2018)",
    "url": "https://www.globalasia.org/v13no3/feature/chinese-dream-global-ambition-beijings-belt-and-road-initiative_christopher-h-limvincent-mack-zhi-wei",
    "linkText": "Read →"
-  },
-  {
-   "group": "Journal Articles — In Press",
-   "title": "Success of New Ideas in Online Platforms: An Idea Network Perspective",
-   "authors": "Zhou, Y., Tang, Q., Mack, V.Z.W., & Liaw, S.Y.",
-   "venueJournal": "Journal of Management Information Systems",
-   "badge": "b-press",
-   "badgeLabel": "In Press",
-   "venueDetail": " (in press). doi:10.1080/07421222.2026.2692285"
   },
   {
    "group": "Refereed Conference Proceedings",
