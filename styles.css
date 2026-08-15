@@ -54,7 +54,9 @@
     #net-canvas {
       position: absolute;
       inset: 0;
-      opacity: .18;
+      /* per-node alpha now lives in site.js so the red can carry more weight
+         than the blue; this only holds the whole network back off the text */
+      opacity: .55;
       pointer-events: none;
       width: 100%;
       height: 100%
