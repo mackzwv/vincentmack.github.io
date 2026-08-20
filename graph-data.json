@@ -33,7 +33,7 @@
    "type": "paper",
    "r": 22,
    "label": "Success of\nNew Ideas\n(JMIS)",
-   "desc": "Success of New Ideas in Online Platforms: An Idea Network Perspective. Zhou, Tang, Mack & Liaw. In press, Journal of Management Information Systems."
+   "desc": "Success of New Ideas in Online Platforms: An Idea Network Perspective. Zhou, Tang, Mack & Liaw. Journal of Management Information Systems, 43(3), 685–715 (2026)."
   },
   {
    "id": "icis22",
@@ -444,13 +444,15 @@
  ],
  "publications": [
   {
-   "group": "Journal Articles — In Press",
+   "group": "Journal Articles — Published",
+   "badge": "b-pub",
+   "badgeLabel": "Published",
    "title": "Success of New Ideas in Online Platforms: An Idea Network Perspective",
    "authors": "Zhou, Y., Tang, Q., Mack, V.Z.W., & Liaw, S.Y.",
-   "venueJournal": "Journal of Management Information Systems",
-   "badge": "b-press",
-   "badgeLabel": "In Press",
-   "venueDetail": " (in press). doi:10.1080/07421222.2026.2692285"
+   "venueJournal": "Journal of Management Information Systems,",
+   "venueDetail": " 43(3), 685–715. (2026). doi:10.1080/07421222.2026.2692285",
+   "url": "https://doi.org/10.1080/07421222.2026.2692285",
+   "linkText": "Read →"
   },
   {
    "group": "Journal Articles — Published",
